@@ -18,6 +18,10 @@ namespace Karen.Types
             this.x = x;
             this.y = y;
         }
+        public override string ToString()
+        {
+            return $"X:{x} Y:{y}";
+        }
 
         public static Vector2 operator +(Vector2 a, Vector2 b) { return new Vector2 { x = a.x + b.x, y = a.y + b.y }; }
         public static Vector2 operator -(Vector2 a, Vector2 b) { return new Vector2 { x = a.x - b.x, y = a.y - b.y }; }

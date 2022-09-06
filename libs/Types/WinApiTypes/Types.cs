@@ -10,19 +10,24 @@ namespace Karen.Types.WinApiTypes
 {
     public struct POINT
     {
-        public long x, y;
+        public int X, Y;
         public static POINT Empty{
             get
             {
                 POINT p;
-                p.x = 0;
-                p.y = 0;
+                p.X = 0;
+                p.Y = 0;
                 return p;
             }
             }
+        public POINT(int x,int y)
+        {
+            X = x;
+            Y = y;
+        }
         public Vector2 ToVector2()
         {
-            return new Vector2(x, y);
+            return new Vector2(X, Y);
         }
     }
 }

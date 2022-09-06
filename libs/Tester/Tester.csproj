@@ -5,4 +5,9 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Types\Types.csproj" />
+    <ProjectReference Include="..\WinApi\WinApi.csproj" />
+  </ItemGroup>
+
 </Project>

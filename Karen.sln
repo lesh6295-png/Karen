@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinApi", "libs\WinApi\WinAp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tester", "libs\Tester\Tester.csproj", "{E56F783D-82AC-47EF-8433-A82A8CCF566F}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libs", "Libs", "{F0571027-1FA0-4E8C-9D99-8D1D011F572C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,6 +32,10 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{4BB48315-1BAC-4F56-8E30-189297FC9D2C} = {F0571027-1FA0-4E8C-9D99-8D1D011F572C}
+		{5411554B-D1B6-4288-A4F0-C17933F59C1A} = {F0571027-1FA0-4E8C-9D99-8D1D011F572C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6509DFC4-21A4-4AFD-B3E9-D62EBBF17653}
