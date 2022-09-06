@@ -6,7 +6,7 @@ namespace Tester
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(Karen.WinApi.Input.GetMouse().ToString());
+            Karen.Registry.RegController.WriteState(Karen.Types.ClientState.Installed);
         }
     }
 }

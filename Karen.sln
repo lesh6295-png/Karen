@@ -3,17 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31321.278
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Types", "libs\Types\Types.csproj", "{4BB48315-1BAC-4F56-8E30-189297FC9D2C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Types", "libs\Types\Types.csproj", "{4BB48315-1BAC-4F56-8E30-189297FC9D2C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinApi", "libs\WinApi\WinApi.csproj", "{5411554B-D1B6-4288-A4F0-C17933F59C1A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WinApi", "libs\WinApi\WinApi.csproj", "{5411554B-D1B6-4288-A4F0-C17933F59C1A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tester", "libs\Tester\Tester.csproj", "{E56F783D-82AC-47EF-8433-A82A8CCF566F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tester", "libs\Tester\Tester.csproj", "{E56F783D-82AC-47EF-8433-A82A8CCF566F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libs", "Libs", "{F0571027-1FA0-4E8C-9D99-8D1D011F572C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{264DB561-196B-4A9E-A4B6-6720117B362E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Installer", "UI\Installer\Installer.csproj", "{B304C147-0C9B-4BBE-9C42-EAAB9FF61124}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Installer", "UI\Installer\Installer.csproj", "{B304C147-0C9B-4BBE-9C42-EAAB9FF61124}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Registry", "libs\Registry\Registry.csproj", "{32777AFE-3CDD-49DF-B206-C08473BA5582}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,6 +39,10 @@ Global
 		{B304C147-0C9B-4BBE-9C42-EAAB9FF61124}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B304C147-0C9B-4BBE-9C42-EAAB9FF61124}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B304C147-0C9B-4BBE-9C42-EAAB9FF61124}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32777AFE-3CDD-49DF-B206-C08473BA5582}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32777AFE-3CDD-49DF-B206-C08473BA5582}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32777AFE-3CDD-49DF-B206-C08473BA5582}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32777AFE-3CDD-49DF-B206-C08473BA5582}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -45,6 +51,7 @@ Global
 		{4BB48315-1BAC-4F56-8E30-189297FC9D2C} = {F0571027-1FA0-4E8C-9D99-8D1D011F572C}
 		{5411554B-D1B6-4288-A4F0-C17933F59C1A} = {F0571027-1FA0-4E8C-9D99-8D1D011F572C}
 		{B304C147-0C9B-4BBE-9C42-EAAB9FF61124} = {264DB561-196B-4A9E-A4B6-6720117B362E}
+		{32777AFE-3CDD-49DF-B206-C08473BA5582} = {F0571027-1FA0-4E8C-9D99-8D1D011F572C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6509DFC4-21A4-4AFD-B3E9-D62EBBF17653}
