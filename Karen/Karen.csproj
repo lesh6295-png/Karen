@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+    <ApplicationIcon />
+    <StartupObject />
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\libs\Registry\Registry.csproj" />
+    <ProjectReference Include="..\libs\Types\Types.csproj" />
+    <ProjectReference Include="..\libs\WinApi\WinApi.csproj" />
+  </ItemGroup>
+
+</Project>
