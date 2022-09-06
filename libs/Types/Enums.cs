@@ -1,8 +1,11 @@
 ﻿using System;
 
-namespace Types
+namespace Karen.Types
 {
-    public class Enums
+    public enum ClientState
     {
+        NotInstalled=0,
+        Installed=1,
+        GameOver=2
     }
 }
