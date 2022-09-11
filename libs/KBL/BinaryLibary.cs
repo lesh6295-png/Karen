@@ -156,6 +156,7 @@ namespace Karen.KBL
     {
         public LibaryBuilder(string[] args)
         {
+            Random r = new Random();
             string libpath = "";
             int libaryid = 0;
             List<InputValue> l = new();
@@ -172,12 +173,32 @@ namespace Karen.KBL
                         libpath =(args[i + 1]);
                         i++;
                         break;
+                    case "-dir":
+                        string[] filn = Directory.GetFiles(args[i + 1]);
+                        i++;
+                        foreach(var q in filn)
+                        {
+                            InputValue iv;
+                            iv.path = q;
+                            iv.id = r.Next();
+                            l.Add(iv);
+                        }
+                        break;
                     default:
                         InputValue inp;
-                        inp.id = Convert.ToInt32(parC);
-                        inp.path = args[i + 1];
+                        inp.path = args[i];
+                        int res = 0;
+                        if(int.TryParse(args[i+1], out res))
+                        {
+                            i++;
+                        }
+                        else
+                        {
+                            res = r.Next();
+                        }
+                        inp.id = res;
                         l.Add(inp);
-                        i++;
+                       
                         break;
                 }
             }

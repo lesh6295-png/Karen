@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="1662838633-trimmy-hihihiyobta.png" />
+    <None Remove="hihihiyobta.png" />
+    <None Remove="Sprite %2862%29.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\libs\Types\Types.csproj" />
+    <ProjectReference Include="..\..\libs\WinApi\WinApi.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="1662838633-trimmy-hihihiyobta.png" />
+    <Resource Include="hihihiyobta.png" />
+    <Resource Include="Sprite (62).png" />
+  </ItemGroup>
+
+</Project>
