@@ -13,5 +13,24 @@ namespace KarenRender
     /// </summary>
     public partial class App : Application
     {
+        public static  int Port { get; private set; }
+        public void ProcessParams(object sender, StartupEventArgs e)
+        {
+            //default port value
+            Port = 1243;
+
+
+            for (int i = 0; i < e.Args.Length; i++)
+            {
+                string com = e.Args[i];
+                switch (com)
+                {
+                    case "-port":
+                        Port = Convert.ToInt32(e.Args[i + 1]);
+                        i++;
+                        break;
+                }
+            }
+        }
     }
 }

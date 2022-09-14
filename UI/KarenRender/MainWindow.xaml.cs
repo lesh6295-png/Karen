@@ -16,6 +16,9 @@ using System.Windows.Shapes;
 
 using Karen.WinApi;
 using System.Threading;
+using System.Net.Http;
+using System.Net;
+
 namespace KarenRender
 {
     /// <summary>
@@ -23,12 +26,43 @@ namespace KarenRender
     /// </summary>
     public partial class MainWindow : Window
     {
+        HttpListener listerner;
         public MainWindow()
         {
             InitializeComponent();
-
+            listerner = new HttpListener();
+            listerner.Prefixes.Add($"http://localhost:{App.Port}/");
+            Task.Run(ProcessInputConnections);
         }
 
+        async Task ProcessInputConnections()
+        {
+            listerner.Start();
+            while (true)
+            {
+                var con = await listerner.GetContextAsync();
+                string type = con.Request.QueryString["type"];
+
+                byte[] responce;
+                switch (type)
+                {
+                    case "online":
+                        responce = Encoding.UTF8.GetBytes($"true");
+                        break;
+                    default:
+                        responce = Encoding.UTF8.GetBytes($"Unknown type.");
+                        break;
+                }
+
+                con.Response.ContentLength64 = responce.Length;
+                con.Response.OutputStream.Write(responce, 0, responce.Length);
+                con.Response.Close();
+            }
+        }
+        public void Write(string str)
+        {
+
+        }
         private void KarenWindow_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left)
