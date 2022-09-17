@@ -32,5 +32,11 @@ namespace Karen.WinApi
         {
             SetWindowPos(handler, new IntPtr(0), (int)position.x, (int)position.y, 0, 0, 0x0001);
         }
+        [DllImport("user32.dll")]
+        static extern bool SetForegroundWindow(IntPtr hWnd);
+        public static void TopWindow(IntPtr handler)
+        {
+            SetForegroundWindow(handler);
+        }
     }
 }

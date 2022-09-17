@@ -7,9 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="1662838633-trimmy-hihihiyobta.png" />
-    <None Remove="hihihiyobta.png" />
-    <None Remove="Sprite %2862%29.png" />
+    <None Remove="1.em.png" />
+    <None Remove="image_part_003.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -18,9 +17,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="1662838633-trimmy-hihihiyobta.png" />
-    <Resource Include="hihihiyobta.png" />
-    <Resource Include="Sprite (62).png" />
+    <Resource Include="1.em.png" />
+    <Resource Include="image_part_003.png" />
   </ItemGroup>
 
 </Project>
