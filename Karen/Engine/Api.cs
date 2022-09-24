@@ -36,9 +36,7 @@ namespace Karen.Engine
         public static async Task var(object?[]? par)
         {
             VariableContext local = (VariableContext)(((object[])par.Last())[0]);
-            Type vt = Type.GetType($"Karen.Types.{par[0]}, Types", true);
-            var vars = Activator.CreateInstance(vt);
-            vt.InvokeMember("SetValue", System.Reflection.BindingFlags.Public|System.Reflection.BindingFlags.Instance|System.Reflection.BindingFlags.CreateInstance, null, vars, new object[] { par[1], par[2] }, System.Globalization.CultureInfo.InvariantCulture);
+            var vars = Karen.Types.TypesFactory.BuildVariable((string)par[0], (string)par[1], par[2]);
             if (par.Length >= 5)
             {
                 string target = (string)par[3];
