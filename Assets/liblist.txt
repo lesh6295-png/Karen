@@ -1,0 +1,2 @@
+﻿-libid 1 -libpath kbl\body.kbl -dir Assets\Sprites\Body\
+-libid 2 -libpath kbl\face.kbl -dir Assets\Sprites\Face\

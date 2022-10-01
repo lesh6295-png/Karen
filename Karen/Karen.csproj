@@ -4,7 +4,8 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net5.0</TargetFramework>
     <ApplicationIcon />
-    <StartupObject />
+    <StartupObject></StartupObject>
+    <PackageProjectUrl>https://github.com/lesh6295-png/Karen/</PackageProjectUrl>
   </PropertyGroup>
 
   <ItemGroup>

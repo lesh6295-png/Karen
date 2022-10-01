@@ -20,7 +20,7 @@ namespace Karen.Engine
         public ScriptContext(VirtualMachine host)
         {
             this.host = host;
-            Guid = StringExtensions.RandomString();
+            Guid = Extensions.RandomString();
             localContext = new VariableContext();
             Logger.Logger.Write($"New Script Context Thread: Guid: {Guid}; local variable context: {localContext.Guid}");
             api = Type.GetType("Karen.Engine.Api", true);
@@ -71,10 +71,29 @@ namespace Karen.Engine
                 {
                     throw new NullReferenceException("Method not found.");
                 }
-                List<object> a = com.Skip(1).Cast<object>().ToList();
+                List<object> a = SVP(com.Skip(1).Cast<object>().ToList());
                 a.Add((object)(new object[] {localContext, Guid, host }));
                 await (Task)apiendpoint.Invoke(null, new object[] { a.ToArray() }) ;
             }
+        }
+        List<object> SVP(List<object> input)
+        {
+            List<object> res = new ();
+            foreach(var q in input)
+            {
+                string s = (string)q;
+                if (s.Contains(":"))
+                {
+                    string[] a = s.Split(":");
+                    if (a[0] == "int")
+                    {
+                        res.Add(Convert.ToInt32(a[1]));
+                        continue;
+                    }
+                }
+                res.Add(q);
+            }
+            return res;
         }
     }
 }

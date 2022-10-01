@@ -30,7 +30,7 @@ namespace Karen.Engine
         }
         public VariableContext()
         {
-            Guid = StringExtensions.RandomString();
+            Guid = Extensions.RandomString();
         }
         /// <summary>
         /// Try to return variable by name. 

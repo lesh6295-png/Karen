@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using Karen.Types;
 namespace Karen.Engine
 {
     internal static class Api
@@ -48,6 +49,12 @@ namespace Karen.Engine
                 
             }
             local.Add(vars);
+        }
+        public static async Task quit(object?[]? par)
+        {
+            int code = par.TryExtractElement<object,int>(0, 0);
+            Logger.Logger.Write($"QUIT: code: {code}");
+            Environment.Exit(code);
         }
     }
 }

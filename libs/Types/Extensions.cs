@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Karen.Types
 {
-    public static class StringExtensions
+    public static class Extensions
     {
         static Random r = new Random();
         public static string RandomString(int min=5, int max = 256)
@@ -19,6 +19,17 @@ namespace Karen.Types
                 bld.Append(lib[r.Next(lib.Length)]);
             }
             return bld.ToString();
+        }
+
+        public static R TryExtractElement<T, R>(this object Arr, R defaultValue,  int index = 0)
+        {
+            var arr = (object[])Arr;
+            if (arr.Length < index)
+                return defaultValue;
+            object q = arr[index];
+            if (q is R r)
+                return r;
+            return defaultValue;
         }
     }
 }
