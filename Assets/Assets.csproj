@@ -12,7 +12,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\libs\KarenLocale\KarenLocale.csproj" />
     <ProjectReference Include="..\libs\KBL\KBL.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="ExcelLibrary">
+      <HintPath>..\..\ExcelLibrary\ExcelLibrary\ExcelLibrary\bin\Release\ExcelLibrary.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
   <ItemGroup>
@@ -94,7 +101,16 @@
     <None Update="Assets\Sprites\Face\3upset.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="ExcelLibrary.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="ExcelLibrary.pdb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="liblist.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="locales.xlsx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

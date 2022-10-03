@@ -1,4 +1,4 @@
-﻿//this need only if you want build KBL by himself
+﻿//this need only if you want build KBL and locales by himself
 using System;
 using System.IO;
 namespace Karen.Assets
@@ -7,9 +7,12 @@ namespace Karen.Assets
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(args[0]);
-            string b = $"\\bin\\{args[0]}\\net5.0\\";
-            Environment.CurrentDirectory += b;
+            if (args.Length >= 1)
+            {
+                Console.WriteLine(args[0]);
+                string b = $"\\bin\\{args[0]}\\net5.0\\";
+                Environment.CurrentDirectory += b;
+            }
             Directory.CreateDirectory("kbl");
             Console.WriteLine(Environment.CurrentDirectory);
             string[] libs = File.ReadAllLines("liblist.txt");
@@ -18,6 +21,10 @@ namespace Karen.Assets
                 Console.WriteLine(s);
                 new Karen.KBL.LibaryBuilder(s.Split(" "));
             }
+
+            ExcelLocale q = new("locales.xlsx");
+            q.ParceLocales();
+
             Console.ReadLine();
         }
     }

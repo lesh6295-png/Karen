@@ -25,7 +25,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "kblb", "Dev\kblb\kblb.cspro
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KarenRender", "UI\KarenRender\KarenRender.csproj", "{D568CCED-31F7-4876-A673-8FB8C880B8D9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assets", "Assets\Assets.csproj", "{021AF6B4-105F-4E40-9384-1D537A1DFDCC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Assets", "Assets\Assets.csproj", "{021AF6B4-105F-4E40-9384-1D537A1DFDCC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KarenLocale", "libs\KarenLocale\KarenLocale.csproj", "{4EF9C717-E2DD-48E4-BD33-50371A58FE42}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -69,6 +71,10 @@ Global
 		{021AF6B4-105F-4E40-9384-1D537A1DFDCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{021AF6B4-105F-4E40-9384-1D537A1DFDCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{021AF6B4-105F-4E40-9384-1D537A1DFDCC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4EF9C717-E2DD-48E4-BD33-50371A58FE42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4EF9C717-E2DD-48E4-BD33-50371A58FE42}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4EF9C717-E2DD-48E4-BD33-50371A58FE42}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4EF9C717-E2DD-48E4-BD33-50371A58FE42}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -82,6 +88,7 @@ Global
 		{F9BB0744-B2AE-430C-8FCE-474D1CED7FB3} = {A61F6B3F-F176-4168-946B-2E64BC2D7DE4}
 		{D568CCED-31F7-4876-A673-8FB8C880B8D9} = {264DB561-196B-4A9E-A4B6-6720117B362E}
 		{021AF6B4-105F-4E40-9384-1D537A1DFDCC} = {A61F6B3F-F176-4168-946B-2E64BC2D7DE4}
+		{4EF9C717-E2DD-48E4-BD33-50371A58FE42} = {F0571027-1FA0-4E8C-9D99-8D1D011F572C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6509DFC4-21A4-4AFD-B3E9-D62EBBF17653}

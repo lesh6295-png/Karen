@@ -7,18 +7,27 @@ namespace Karen.Registry
 {
     public static class RegController
     {
+        static RegistryKey cachedRootKaren = null;
+        static RegistryKey RootKaren()
+        {
+#pragma warning disable CA1416
+            if (cachedRootKaren == null)
+            {
+                RegistryKey key = Microsoft.Win32.Registry.CurrentUser;
+                RegistryKey softwareKey = key.CreateSubKey("Software");
+                cachedRootKaren = softwareKey.CreateSubKey("Karen");
+            }
+            return cachedRootKaren;
+#pragma warning restore
+        }
         /// <summary>
         /// Only on Windows
         /// </summary>
         /// <returns></returns>
         public static ClientState GetState()
         {
-            #pragma warning disable CA1416
-            RegistryKey key = Microsoft.Win32.Registry.LocalMachine;
-            RegistryKey softwareKey = key.CreateSubKey("SOFTWARE");
-            RegistryKey karenKey = softwareKey.CreateSubKey("Karen");
-            object state = karenKey.GetValue("STATE_INT");
-#pragma warning restore
+            RegistryKey karenKey = RootKaren();
+            object state = karenKey.GetValue("stateInt");
             if (state == null)
                 return ClientState.NotInstalled;
             return (ClientState)state;
@@ -31,11 +40,26 @@ namespace Karen.Registry
         public static void WriteState(ClientState state)
         {
 #pragma warning disable CA1416
-            RegistryKey key = Microsoft.Win32.Registry.LocalMachine;
-            RegistryKey softwareKey = key.CreateSubKey("SOFTWARE");
-            RegistryKey karenKey = softwareKey.CreateSubKey("Karen");
-            karenKey.SetValue("STATE_INT", (int)state);
+            RootKaren().SetValue("stateInt", (int)state);
 #pragma warning restore
+        }
+
+        public static string GetInstallPath()
+        {
+            return (string)RootKaren().GetValue("installPath", "not_installed");
+        }
+        public static void SetInstallPath(string path)
+        {
+            RootKaren().SetValue("installPath", path);
+        }
+
+        public static string GetKarenFolderPath()
+        {
+            return (string)RootKaren().GetValue("karenFolder", "not_exsist");
+        }
+        public static void SetKarenFolderPath(string path)
+        {
+            RootKaren().SetValue("karenFolder", path);
         }
     }
 }

@@ -6,6 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\KarenLocale\KarenLocale.csproj" />
+    <ProjectReference Include="..\KBL\KBL.csproj" />
     <ProjectReference Include="..\Registry\Registry.csproj" />
     <ProjectReference Include="..\Types\Types.csproj" />
     <ProjectReference Include="..\WinApi\WinApi.csproj" />
