@@ -13,7 +13,8 @@ namespace Karen.Assets
                 string b = $"\\bin\\{args[0]}\\net5.0\\";
                 Environment.CurrentDirectory += b;
             }
-            Directory.CreateDirectory("kbl");
+            Directory.CreateDirectory("bin\\kbl");
+            Directory.CreateDirectory("bin\\locales");
             Console.WriteLine(Environment.CurrentDirectory);
             string[] libs = File.ReadAllLines("liblist.txt");
             foreach(string s in libs)

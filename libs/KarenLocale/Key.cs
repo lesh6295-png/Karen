@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using Karen.Types;
 using System.Text;
 using System.Linq;
+using System.Collections;
+
 namespace Karen.Locale
 {
     public struct Key
@@ -22,6 +24,15 @@ namespace Karen.Locale
                 return k;
             }
         }
+        public string GetTranslate()
+        {
+            string result;
+            if (translations.TryGetValue(Localization.Culture, out result))
+                return result;
+            if (translations.TryGetValue(Localization.DefaultCulture, out result))
+                return result;
+            return key;
+        }
         public int GetLength()
         {
             return Encoding.UTF8.GetByteCount(ToString());
@@ -32,7 +43,7 @@ namespace Karen.Locale
             bl.Append("{key::");
             bl.Append(key);
             bl.Append(";");
-            foreach(var q in translations.Keys)
+            foreach (var q in translations.Keys)
             {
                 bl.Append($"{q}::{translations[q]};");
             }
@@ -40,6 +51,8 @@ namespace Karen.Locale
             bl.Append("}");
             return bl.ToString();
         }
+
+
         public Key(string text)
         {
             try

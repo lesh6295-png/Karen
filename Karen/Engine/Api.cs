@@ -4,7 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using Karen.Locale;
 using Karen.Types;
+using System.IO;
 namespace Karen.Engine
 {
     internal static class Api
@@ -37,24 +39,55 @@ namespace Karen.Engine
         public static async Task var(object?[]? par)
         {
             VariableContext local = (VariableContext)(((object[])par.Last())[0]);
-            var vars = Karen.Types.TypesFactory.BuildVariable((string)par[0], (string)par[1], par[2]);
+            kvar newvar = new kvar((VariableType)Enum.Parse(typeof(VariableType), par.TryExtractElement<object, string>("Int32",0),true), par.TryExtractElement<object, string>("newvariable",1), par[2]);
             if (par.Length >= 5)
             {
                 string target = (string)par[3];
                 if(target == "global")
                 {
-                    ((VirtualMachine)(((object[])par.Last())[2])).globalHeap.Add(vars);
+                    ((VirtualMachine)(((object[])par.Last())[2])).globalHeap.Add(newvar);
                     return;
                 }
                 
             }
-            local.Add(vars);
+            local.Add(newvar);
         }
         public static async Task quit(object?[]? par)
         {
             int code = par.TryExtractElement<object,int>(0, 0);
             Logger.Logger.Write($"QUIT: code: {code}");
             Environment.Exit(code);
+        }
+        public static async Task locales(object?[]? par)
+        {
+            string mode = par.TryExtractElement<object, string>("unk");
+            switch (mode)
+            {
+                case "load":
+                    string path = par.TryExtractElement<object, string>("unk", 1);
+                    SourceManager.LoadSource(path);
+                    break;
+                case "unload":
+                    int unloadid = par.TryExtractElement<object, int>(-1, 1);
+                    SourceManager.UnloadSource(unloadid);
+                    break;
+                default:
+                    throw new InvalidApiParamsException("Unknown locales mode: " + mode);
+                    break;
+            }
+            Logger.Logger.Write($"SourceManager {mode} {par[1].ToString()}");
+        }
+        public static async Task debug(object?[]? par)
+        {
+            string mode = par.TryExtractElement<object, string>("unk");
+            
+            switch (mode)
+            {
+                case "vm_dump":
+                    string dump = System.Text.Json.JsonSerializer.Serialize(((object[])par.Last()).Last(), typeof(VirtualMachine), new System.Text.Json.JsonSerializerOptions { IncludeFields = true, WriteIndented=true});
+                    File.WriteAllText("vm_dump.json", dump);
+                    break;
+            }
         }
     }
 }

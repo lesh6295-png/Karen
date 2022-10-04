@@ -11,11 +11,18 @@ namespace Karen.Engine
 {
     public class ScriptContext
     {
+        #if DEBUG
+        public
+#endif
         string[] codelines;
         Type api;
+
         bool isLoad = false;
         public string Guid { get; private set; }
         VirtualMachine host;
+#if DEBUG
+        public
+#endif
         VariableContext localContext;
         public ScriptContext(VirtualMachine host)
         {

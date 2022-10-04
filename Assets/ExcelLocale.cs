@@ -94,7 +94,7 @@ namespace Karen.Assets
 
             foreach (var q in keyswithid)
             {
-                KeySourceFactory.CreateKeySource($"{q.Item1}.locale", q.Item1, q.Item2.ToArray());
+                KeySourceFactory.CreateKeySource($"bin\\locales\\{q.Item1}.locale", q.Item1, q.Item2.ToArray());
             }
             qq.Stop();
             Console.WriteLine($"Locales build in {qq.Elapsed}");

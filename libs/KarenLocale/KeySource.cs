@@ -16,12 +16,12 @@ namespace Karen.Locale
         FileStream file;
         int headerlength = 0;
         Key[] keys;
-        public Key? TryExctractTranslate(string key)
+        public string TryExtractTranslate(string key)
         {
             for (int i = 0; i < keys.Length; i++)
             {
                 if (keys[i].key == key)
-                    return keys[i];
+                    return keys[i].GetTranslate();
             }
             return null;
         }

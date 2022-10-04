@@ -6,8 +6,9 @@ namespace Tester
         static void Main(string[] args)
         {
             Karen.Locale.KeySourceFactory.GenerateTestSource("test.locale");
-            var q = new Karen.Locale.KeySource("test.locale");
-            Console.WriteLine(q.sourceid);
+            var q = new Karen.Locale.KeySource("2.locale");
+            Console.WriteLine(Karen.Locale.Localization.Culture);
+            Console.WriteLine(q.TryExtractTranslate("karen_clothes"));
             Console.ReadKey();
         }
     }

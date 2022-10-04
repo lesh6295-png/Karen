@@ -13,4 +13,20 @@ namespace Karen.Types
 
         }
     }
+
+    public class InvalidApiParamsException : Exception
+    {
+        public InvalidApiParamsException(string message) : base(message)
+        {
+
+        }
+    }
+
+    public class ObjectNotFoundException : Exception
+    {
+        public ObjectNotFoundException(string m) : base(m)
+        {
+
+        }
+    }
 }
