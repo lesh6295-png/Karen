@@ -16,6 +16,9 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Registry", "libs\Registry\Registry.csproj", "{32777AFE-3CDD-49DF-B206-C08473BA5582}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Karen", "Karen\Karen.csproj", "{981BD283-1FAA-4628-BD7D-A9CB2F95978B}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D568CCED-31F7-4876-A673-8FB8C880B8D9} = {D568CCED-31F7-4876-A673-8FB8C880B8D9}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KBL", "libs\KBL\KBL.csproj", "{99B5CD97-299C-4329-B93F-B37F8DDBB63B}"
 EndProject

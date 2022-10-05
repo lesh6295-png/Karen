@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.IO;
 namespace Karen.Types
 {
     public static class Extensions
@@ -30,6 +30,17 @@ namespace Karen.Types
             if (q is R r)
                 return r;
             return defaultValue;
+        }
+        public static DirectoryInfo CopyFilesRecursively(DirectoryInfo source, DirectoryInfo target)
+        {
+            var newDirectoryInfo = target.CreateSubdirectory(source.Name);
+            foreach (var fileInfo in source.GetFiles())
+                fileInfo.CopyTo(Path.Combine(newDirectoryInfo.FullName, fileInfo.Name), true);
+
+            foreach (var childDirectoryInfo in source.GetDirectories())
+                CopyFilesRecursively(childDirectoryInfo, newDirectoryInfo);
+
+            return newDirectoryInfo;
         }
     }
 }

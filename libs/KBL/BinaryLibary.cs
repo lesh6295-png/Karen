@@ -209,10 +209,11 @@ namespace Karen.KBL
                         break;
                 }
             }
-
+#if DEBUG
             string kbldecr = $"{libaryid} {libpath}\n\nitems:\n\n";
             l.ForEach(x => kbldecr += x.ToString() + '\n');
             File.WriteAllText(libpath + ".txt", kbldecr);
+#endif
             new BinaryLibary(libpath, l.Count, libaryid, l.ToArray());
 
 

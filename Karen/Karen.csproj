@@ -8,6 +8,15 @@
     <PackageProjectUrl>https://github.com/lesh6295-png/Karen/</PackageProjectUrl>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile></DocumentationFile>
+    <OutputPath>..\bin</OutputPath>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <OutputPath>..\bin</OutputPath>
+  </PropertyGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\libs\KarenLocale\KarenLocale.csproj" />
     <ProjectReference Include="..\libs\KBL\KBL.csproj" />

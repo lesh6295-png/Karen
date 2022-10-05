@@ -16,7 +16,7 @@ namespace Karen.Network
         public static int? GetAvaliblePort(int min=1024,int max = UInt16.MaxValue)
         {
             if (max > UInt16.MaxValue)
-                throw new ArgumentOutOfRangeException("Too big port value");
+                throw new ArgumentOutOfRangeException("Too big port value.");
 
             prop = IPGlobalProperties.GetIPGlobalProperties();
             var usedPorts = Enumerable.Empty<int>()

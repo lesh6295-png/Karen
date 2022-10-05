@@ -14,6 +14,7 @@
   <ItemGroup>
     <ProjectReference Include="..\libs\KarenLocale\KarenLocale.csproj" />
     <ProjectReference Include="..\libs\KBL\KBL.csproj" />
+    <ProjectReference Include="..\libs\Types\Types.csproj" />
   </ItemGroup>
 
   <ItemGroup>
