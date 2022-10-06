@@ -16,10 +16,13 @@ namespace Karen
 
             Logger.Logger.Write("Enter main method.");
             Network.Network.BuildPorts();
+            UIWindow.CreateProcess();
+            UIWindow.Say("Hi!").Wait();
             VirtualMachine vm = new VirtualMachine();
             string guid = vm.AddScriptThread();
             var scr = vm.GetScriptContext(guid);
-            scr.LoadScriptFromDrive("testscr.miku");
+            var ml = new Karen.KBL.BinaryLibary("bin\\kbl\\main.kbl");
+            scr.LoadScriptFromByteArray(ml.Extract(1));
             scr.ExcecuteAsync();
             while (true)
             {

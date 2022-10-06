@@ -47,6 +47,24 @@ namespace Karen.Engine
             codelines = final.ToArray();
             isLoad = true;
         }
+        public void LoadScriptFromByteArray(byte[] arr)
+        {
+            //clear lines from 0x00 bytes, CR and LF. With 0x00 bytes in string, we can`t get correct api endpoint
+            arr = arr.Where(x => { if (x != 0 || x!=0x0d) return true; return false;  }).ToArray();
+
+            string rawcode = Encoding.UTF8.GetString(arr).Replace("\r","")
+                //remove U+FEFF symbol. Dont touch this.
+                .Replace("﻿", "");
+            string[] lines = rawcode.Split("\n");
+            List<string> final = new List<string>();
+            foreach (var line in lines)
+                if (line.StartsWith("~"))
+                    continue;
+                else
+                    final.Add(line);
+            codelines = final.ToArray();
+            isLoad = true;
+        }
         [Obsolete("Use async version")]
         public void Excecute()
         {
@@ -73,7 +91,7 @@ namespace Karen.Engine
             for (int i = 0; i < codelines.Length; i++)
             {
                 string[] com = codelines[i].Split(' ', StringSplitOptions.RemoveEmptyEntries);
-                MethodInfo apiendpoint = api.GetMethod(com[0]);
+                MethodInfo apiendpoint = api.GetMethod(com[0], BindingFlags.Static | BindingFlags.Public);
                 if (apiendpoint == null)
                 {
                     throw new NullReferenceException("Method not found.");

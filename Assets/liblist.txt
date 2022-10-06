@@ -1,2 +1,3 @@
 ﻿-libid 1 -libpath bin\kbl\body.kbl -dir Assets\Sprites\Body\
 -libid 2 -libpath bin\kbl\face.kbl -dir Assets\Sprites\Face\
+-libid 3 -libpath bin\kbl\main.kbl -dir Assets\Scripts\Main\
