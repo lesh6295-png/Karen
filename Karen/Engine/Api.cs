@@ -89,5 +89,12 @@ namespace Karen.Engine
                     break;
             }
         }
+
+        public static async Task say(object?[]? par)
+        {
+            string text = par.TryExtractElement<object, string>("unk");
+
+            UIWindow.Say(text);
+        }
     }
 }

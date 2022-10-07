@@ -44,6 +44,7 @@ namespace KarenRender
         async Task ProcessInputConnections()
         {
             listerner.Start();
+            Task.Run(SendReadyRequest).Wait(6000);
             while (true)
             {
                 var con = await listerner.GetContextAsync();
@@ -112,6 +113,10 @@ namespace KarenRender
         void WindowMax()
         {
             Input.TopWindow(mainHandle);
+        }
+        async Task SendReadyRequest()
+        {
+            await callback.SendAsync(new HttpRequestMessage(HttpMethod.Get, $"http://localhost:{App.CallbackPort}/?type=ready"));
         }
         private void KarenWindow_MouseDown(object sender, MouseButtonEventArgs e)
         {

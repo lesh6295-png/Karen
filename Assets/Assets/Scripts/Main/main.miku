@@ -1,3 +1,4 @@
 ﻿log Main Script Started.
+say Привет!
 wait 5000
 quit
