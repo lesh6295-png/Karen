@@ -5,8 +5,7 @@ namespace Tester
     {
         static void Main(string[] args)
         {
-            var q = Karen.InterProcess.Interprocess.GetKey("testkey");
-            Console.WriteLine(q.Value);
+            Karen.InterProcess.Interprocess.ClearAllKeys();
             Console.ReadKey();
         }
     }

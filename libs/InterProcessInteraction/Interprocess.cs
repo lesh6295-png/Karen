@@ -19,6 +19,19 @@ namespace Karen.InterProcess
             File.Delete(path + "\\0" + key);
             File.WriteAllText(path + "\\0" + key, value);
         }
+        /// <summary>
+        /// This method will be delete all exsicting interprocess keys.
+        /// Your (maybe) dont need this
+        /// </summary>
+        public static void ClearAllKeys()
+        {
+            DirectoryInfo q = new DirectoryInfo(Registry.RegController.GetIPIPath());
+            var e = q.GetFiles();
+            foreach(var w in e)
+            {
+                File.Delete(w.FullName);
+            }
+        }
         static Interprocess()
         {
             Directory.CreateDirectory(Registry.RegController.GetIPIPath());
