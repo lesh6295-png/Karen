@@ -42,5 +42,15 @@ namespace Karen.Types
 
             return newDirectoryInfo;
         }
+
+        /// <summary>
+        /// Rename file to newName
+        /// </summary>
+        /// <param name="fileInfo"></param>
+        /// <param name="newName">New name to file</param>
+        public static void Rename(this FileInfo fileInfo, string newName)
+        {
+            fileInfo.MoveTo(fileInfo.Directory.FullName + "\\" + newName);
+        }
     }
 }

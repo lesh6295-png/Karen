@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\InterProcessInteraction\InterProcessInteraction.csproj" />
     <ProjectReference Include="..\KarenLocale\KarenLocale.csproj" />
     <ProjectReference Include="..\KBL\KBL.csproj" />
     <ProjectReference Include="..\Registry\Registry.csproj" />

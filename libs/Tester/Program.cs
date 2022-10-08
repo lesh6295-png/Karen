@@ -5,10 +5,8 @@ namespace Tester
     {
         static void Main(string[] args)
         {
-            Karen.Locale.KeySourceFactory.GenerateTestSource("test.locale");
-            var q = new Karen.Locale.KeySource("2.locale");
-            Console.WriteLine(Karen.Locale.Localization.Culture);
-            Console.WriteLine(q.TryExtractTranslate("karen_clothes"));
+            var q = Karen.InterProcess.Interprocess.GetKey("testkey");
+            Console.WriteLine(q.Value);
             Console.ReadKey();
         }
     }

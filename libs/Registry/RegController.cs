@@ -61,5 +61,14 @@ namespace Karen.Registry
         {
             RootKaren().SetValue("karenFolder", path);
         }
+
+        public static string GetIPIPath()
+        {
+            return (string)RootKaren().GetValue("interprocess", "C:\\ProgramData\\neraK\\interprocess\\");
+        }
+        public static void SetIPIPath(string path)
+        {
+            RootKaren().SetValue("interprocess", path);
+        }
     }
 }

@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <RootNamespace>Karen.InterProcess</RootNamespace>
+    <AssemblyName>InterProcess</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Registry\Registry.csproj" />
+  </ItemGroup>
+
+</Project>
