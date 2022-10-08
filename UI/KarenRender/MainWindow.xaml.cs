@@ -19,6 +19,7 @@ using Karen.WinApi;
 using System.Threading;
 using System.Net.Http;
 using System.Net;
+using Karen.InterProcess;
 
 namespace KarenRender
 {
@@ -27,53 +28,54 @@ namespace KarenRender
     /// </summary>
     public partial class MainWindow : Window
     {
-        HttpListener listerner;
         IntPtr mainHandle;
-        HttpClient callback;
+
+        InterprocessItem _type, text_path, wait_body;
+
         bool wait = false;
         public MainWindow()
         {
-            callback = new HttpClient();
             InitializeComponent();
-            listerner = new HttpListener();
-            listerner.Prefixes.Add($"http://localhost:{App.Port}/");
             mainHandle = new WindowInteropHelper(this).Handle;
             Task.Run(ProcessInputConnections);
         }
 
         async Task ProcessInputConnections()
         {
-            listerner.Start();
-            Task.Run(SendReadyRequest).Wait(6000);
+            Interprocess.SetKey("ui_start", "ready");
+            _type = Interprocess.GetKey("ui_type");
+            text_path = Interprocess.GetKey("ui_text_path");
+            wait_body = Interprocess.GetKey("ui_wait_body");
             while (true)
             {
-                var con = await listerner.GetContextAsync();
-                string type = con.Request.QueryString["type"];
-
-                byte[] responce;
+                string type = _type.Value;
+                Task[] inputwait = new Task[3];
+                inputwait[0] = Task.Run(_type.WaitUpdate);
+                inputwait[1] = Task.Run(text_path.WaitUpdate);
+                inputwait[2] = Task.Run(wait_body.WaitUpdate);
+                string callback = "";
                 switch (type)
                 {
                     case "online":
-                        responce = Encoding.UTF8.GetBytes($"1");
+                        callback = "online";
                         break;
                     case "write":
                         WindowMax();
-                        Task prtTask = Write(con.Request.QueryString["text"]);
-                        string w = con.Request.QueryString["wait"] ?? "false";
+                        Task prtTask = Write(text_path.Value);
+                        string w = wait_body.Value ?? "false";
                         wait = true;
                         if (w == "true")
                         {
                             prtTask.Wait();
                         }
-                        callback.SendAsync(new HttpRequestMessage(HttpMethod.Get, $"http://localhost:{App.CallbackPort}/"));
-                        responce = Encoding.UTF8.GetBytes($"1");
+                        callback = "write";
                         break;
                     case "sprite":
                         //if body=true we change body component, else - emotion
                         try
                         {
-                            bool isbody = Convert.ToBoolean(con.Request.QueryString["body"]);
-                            string localPath = Encoding.UTF8.GetString(Convert.FromHexString(con.Request.QueryString["path"]));
+                            bool isbody = Convert.ToBoolean(wait_body.Value);
+                            string localPath = text_path.Value;
                             if (isbody)
                             {
                                 Dispatcher.Invoke(() => { body.Source = new BitmapImage(new Uri(localPath)); });
@@ -82,21 +84,19 @@ namespace KarenRender
                             {
                                 Dispatcher.Invoke(() => { emotion.Source = new BitmapImage(new Uri(localPath)); });
                             }
-                            responce = Encoding.UTF8.GetBytes("1");
+                            callback = "sprite";
                         }
                         catch
                         {
-                            responce = Encoding.UTF8.GetBytes("0");
+                            callback = "sprite_fall";
                         }
                         break;
                     default:
-                        responce = Encoding.UTF8.GetBytes($"0");
+                        callback = "unknown";
                         break;
                 }
-
-                con.Response.ContentLength64 = responce.Length;
-                con.Response.OutputStream.Write(responce, 0, responce.Length);
-                con.Response.Close();
+                Interprocess.SetKey("ui_responce", callback);
+                Task.WaitAll(inputwait);
             }
         }
         public async Task Write(string str)
@@ -113,10 +113,6 @@ namespace KarenRender
         void WindowMax()
         {
             Input.TopWindow(mainHandle);
-        }
-        async Task SendReadyRequest()
-        {
-            await callback.SendAsync(new HttpRequestMessage(HttpMethod.Get, $"http://localhost:{App.CallbackPort}/?type=ready"));
         }
         private void KarenWindow_MouseDown(object sender, MouseButtonEventArgs e)
         {

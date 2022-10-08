@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Diagnostics;
 using Karen.Network;
 using System.Net.Http;
+using Karen.InterProcess;
 using System.Net;
 namespace Karen.Engine
 {
@@ -14,41 +15,35 @@ namespace Karen.Engine
     {
         static string path = "bin\\UI\\net5.0-windows\\KarenRender.exe";
         static Process render;
-        static HttpClient client;
-        static HttpListener reciver;
+        static InterprocessItem uistart, uicallback, text_path, type, body_wait;
         public static bool IsReady { get; private set; } = false;
         public static void CreateProcess()
         {
-            client = new HttpClient();
-            reciver = new HttpListener();
-            reciver.Prefixes.Add($"http://localhost:{Network.Network.UICallbackPort}/");
-            reciver.Start();
-
-            Task.Run(ProcessConnections);
+            uistart=Interprocess.GetKey("ui_start");
+            uicallback = Interprocess.GetKey("ui_callback");
+            text_path = Interprocess.GetKey("ui_text_path");
+            type = Interprocess.GetKey("ui_type");
+            body_wait = Interprocess.GetKey("ui_wait_body");
+            var t = Task.Run(ProcessConnections);
             render = new Process();
             render.StartInfo.FileName = path;
             render.StartInfo.Arguments = $"-port {Network.Network.UIInputPort} -callback {Network.Network.UICallbackPort}";
             render.Start();
+            t.Wait();
         }
         static async Task ProcessConnections()
         {
             while (true)
             {
-                var q = await reciver.GetContextAsync();
-                string type = q.Request.QueryString["type"];
-                string responce = "0";
-                switch (type)
+                string st = uistart.Value;
+                Task wait = uistart.WaitUpdate();
+                switch (st)
                 {
                     case "ready":
                         IsReady = true;
-                        responce = "1";
                         break;
                 }
-                byte[] arr = Encoding.UTF8.GetBytes(responce);
-                q.Response.OutputStream.Write(arr, 0, arr.Length);
-                q.Response.ContentLength64 = arr.Length;
-                q.Response.Close();
-                await Task.Delay(100);
+                wait.Wait();
             }
         }
 
@@ -56,12 +51,10 @@ namespace Karen.Engine
         {
             if (render == null || IsReady==false)
                 return;
-            string url = $"http://localhost:{Network.Network.UIInputPort}/?type=write&text={message}&wait={Convert.ToString(wait)}";
-            var q = client.SendAsync(new HttpRequestMessage(HttpMethod.Get, url));
-            if (wait)
-            {
-                q.Wait();
-            }
+            Interprocess.SetKey("ui_type", "write");
+            Interprocess.SetKey("ui_text_path", message);
+            Interprocess.SetKey("ui_wait_body", wait.ToString().ToLower());
+            await uicallback.WaitUpdate();
         }
     }
 }

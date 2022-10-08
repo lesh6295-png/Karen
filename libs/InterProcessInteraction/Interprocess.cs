@@ -16,8 +16,8 @@ namespace Karen.InterProcess
         {
             string path = Registry.RegController.GetIPIPath();
             File.Delete(path + "\\" + key);
-            File.Delete(path + "\\0" + key);
-            File.WriteAllText(path + "\\0" + key, value);
+            File.Delete(path + "0" + key);
+            File.WriteAllText(path + "0" + key, value);
         }
         /// <summary>
         /// This method will be delete all exsicting interprocess keys.

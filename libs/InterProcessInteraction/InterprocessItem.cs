@@ -17,13 +17,24 @@ namespace Karen.InterProcess
                 return get();
             }
         }
+        public async Task WaitUpdate()
+        {
+            await WaitUpdate(50);
+        }
+        public async Task WaitUpdate(int checkTimeout)
+        {
+            while (!File.Exists(path))
+            {
+                await Task.Delay(checkTimeout);
+            }
+        }
         string cached = null;
         string key = "";
         string path
         {
             get
             {
-                return Registry.RegController.GetIPIPath() + "\\0" + key;
+                return Registry.RegController.GetIPIPath() + "0" + key;
             }
         }
         string? get()

@@ -18,6 +18,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\libs\InterProcessInteraction\InterProcessInteraction.csproj" />
     <ProjectReference Include="..\libs\KarenLocale\KarenLocale.csproj" />
     <ProjectReference Include="..\libs\KBL\KBL.csproj" />
     <ProjectReference Include="..\libs\Registry\Registry.csproj" />
