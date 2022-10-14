@@ -17,32 +17,17 @@ namespace Karen.InterProcess
                 return get();
             }
         }
-        public async Task WaitUpdate()
-        {
-            await WaitUpdate(50);
-        }
-        public async Task WaitUpdate(int checkTimeout)
-        {
-            while (!File.Exists(path))
-            {
-                await Task.Delay(checkTimeout);
-            }
-        }
         string cached = null;
-        string key = "";
+        public string key { get; private set; }
         string path
         {
             get
             {
-                return Registry.RegController.GetIPIPath() + "0" + key;
+                return Registry.RegController.GetIPIPath() + "\\" + key;
             }
         }
         string? get()
         {
-            if (File.Exists(path))
-            {
-                CacheToMemory();
-            }
             return cached;
         }
         internal void CacheToMemory()
@@ -50,12 +35,15 @@ namespace Karen.InterProcess
             try
             {
                 cached = File.ReadAllText(path);
-                new FileInfo(path).MarkReaded();
             }
             catch 
             {
             
             }
+        }
+        internal bool Exists()
+        {
+            return File.Exists(path);
         }
         internal InterprocessItem(string key)
         {

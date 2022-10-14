@@ -32,7 +32,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Assets", "Assets\Assets.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KarenLocale", "libs\KarenLocale\KarenLocale.csproj", "{4EF9C717-E2DD-48E4-BD33-50371A58FE42}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InterProcessInteraction", "libs\InterProcessInteraction\InterProcessInteraction.csproj", "{F948E472-9567-4B75-8793-72EFA669FFAF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InterProcessInteraction", "libs\InterProcessInteraction\InterProcessInteraction.csproj", "{F948E472-9567-4B75-8793-72EFA669FFAF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

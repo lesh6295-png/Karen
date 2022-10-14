@@ -52,5 +52,15 @@ namespace Karen.Types
         {
             fileInfo.MoveTo(fileInfo.Directory.FullName + "\\" + newName);
         }
+
+        public static T GetElement<T>(this List<T> list, Predicate<T> condition)
+        {
+            foreach(var q in list)
+            {
+                if (condition(q))
+                    return q;
+            }
+            return default(T);
+        }
     }
 }
