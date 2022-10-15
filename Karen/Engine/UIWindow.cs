@@ -19,7 +19,7 @@ namespace Karen.Engine
         public static bool IsReady { get; private set; } = false;
         public static void CreateProcess()
         {
-            uistart=Interprocess.GetKey("ui_start");
+            uistart = Interprocess.GetKey("ui_start");
             uicallback = Interprocess.GetKey("ui_callback");
             text_path = Interprocess.GetKey("ui_text_path");
             type = Interprocess.GetKey("ui_type");
@@ -33,28 +33,25 @@ namespace Karen.Engine
         }
         static async Task ProcessConnections()
         {
-            while (true)
+            Task wait = uistart.WaitToChange();
+            wait.Wait();
+            Logger.Logger.Write("KarenRender ready for render!");
+            switch (uistart.Value)
             {
-                string st = uistart.Value;
-                Task wait = uistart.WaitUpdate();
-                switch (st)
-                {
-                    case "ready":
-                        IsReady = true;
-                        break;
-                }
-                wait.Wait();
+                case "ready":
+                    IsReady = true;
+                    break;
             }
         }
 
         public static async Task Say(string message, bool wait = false)
         {
-            if (render == null || IsReady==false)
+            if (render == null || IsReady == false)
                 return;
             Interprocess.SetKey("ui_type", "write");
             Interprocess.SetKey("ui_text_path", message);
             Interprocess.SetKey("ui_wait_body", wait.ToString().ToLower());
-            await uicallback.WaitUpdate();
+            await uicallback.WaitToChange();
         }
     }
 }

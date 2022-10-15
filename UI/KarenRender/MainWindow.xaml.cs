@@ -20,7 +20,7 @@ using System.Threading;
 using System.Net.Http;
 using System.Net;
 using Karen.InterProcess;
-
+using System.IO;
 namespace KarenRender
 {
     /// <summary>
@@ -28,6 +28,10 @@ namespace KarenRender
     /// </summary>
     public partial class MainWindow : Window
     {
+        void WriteLog(string message)
+        {
+            File.AppendAllText(Karen.Registry.RegController.GetKarenFolderPath() + "log\\uilog.txt", message);
+        }
         IntPtr mainHandle;
 
         InterprocessItem _type, text_path, wait_body;
@@ -35,6 +39,7 @@ namespace KarenRender
         bool wait = false;
         public MainWindow()
         {
+            WriteLog("Starrted");
             InitializeComponent();
             mainHandle = new WindowInteropHelper(this).Handle;
             Task.Run(ProcessInputConnections);
@@ -42,6 +47,7 @@ namespace KarenRender
 
         async Task ProcessInputConnections()
         {
+            WriteLog("Processing");
             Interprocess.SetKey("ui_start", "ready");
             _type = Interprocess.GetKey("ui_type");
             text_path = Interprocess.GetKey("ui_text_path");
@@ -49,10 +55,7 @@ namespace KarenRender
             while (true)
             {
                 string type = _type.Value;
-                Task[] inputwait = new Task[3];
-                inputwait[0] = Task.Run(_type.WaitUpdate);
-                inputwait[1] = Task.Run(text_path.WaitUpdate);
-                inputwait[2] = Task.Run(wait_body.WaitUpdate);
+                WriteLog(type);
                 string callback = "";
                 switch (type)
                 {
@@ -96,7 +99,6 @@ namespace KarenRender
                         break;
                 }
                 Interprocess.SetKey("ui_responce", callback);
-                Task.WaitAll(inputwait);
             }
         }
         public async Task Write(string str)

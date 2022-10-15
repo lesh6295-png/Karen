@@ -9,7 +9,7 @@ namespace Karen.Logger
 {
     internal static class Logger
     {
-        const string dirname = "log";
+        readonly static string dirname = Karen.Registry.RegController.GetKarenFolderPath()+"\\log";
         const string filename = "last.log";
         const string errorlogname = "lasterror.log";
         static FileStream log;

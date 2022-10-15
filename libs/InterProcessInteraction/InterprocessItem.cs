@@ -19,6 +19,14 @@ namespace Karen.InterProcess
         }
         string cached = null;
         public string key { get; private set; }
+        public async Task WaitToChange()
+        {
+            string local = (string)(cached??"").Clone();
+            while (local == cached)
+            {
+                await Task.Delay(60);
+            }
+        }
         string path
         {
             get

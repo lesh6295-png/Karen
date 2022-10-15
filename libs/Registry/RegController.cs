@@ -55,7 +55,7 @@ namespace Karen.Registry
 
         public static string GetKarenFolderPath()
         {
-            return (string)RootKaren().GetValue("karenFolder", "not_exsist");
+            return (string)RootKaren().GetValue("karenFolder", "C:\\ProgramData\\neraK\\");
         }
         public static void SetKarenFolderPath(string path)
         {

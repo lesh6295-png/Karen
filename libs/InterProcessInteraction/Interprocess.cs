@@ -20,12 +20,13 @@ namespace Karen.InterProcess
                 if (res.Exists())
                 {
                     res.CacheToMemory();
-                    items.Add(res);
                 }
                 else
                 {
-                    throw new Karen.Types.ObjectNotFoundException($"Interprocess item with key {key} don`t exsist.");
+                    //throw new Karen.Types.ObjectNotFoundException($"Interprocess item with key {key} don`t exsist.");
+                    //InterprocessItem will be created without key file, and WaitToChange will be waited for create file
                 }
+                items.Add(res);
             }
             return res;
         }
@@ -45,7 +46,7 @@ namespace Karen.InterProcess
             var e = q.GetFiles();
             foreach(var w in e)
             {
-                File.Delete(w.FullName);
+                //File.Delete(w.FullName);
             }
         }
         static Interprocess()
