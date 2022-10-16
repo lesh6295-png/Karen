@@ -13,11 +13,11 @@ namespace Karen
         {
             //Thread.CurrentThread.Priority = ThreadPriority.Highest;
             AppDomain.CurrentDomain.UnhandledException += Logger.Logger.ExceptionLog;
-
+            Karen.InterProcess.Interprocess.ClearAllKeys(); //clear keys from last start
             Logger.Logger.Write("Enter main method.");
             Network.Network.BuildPorts();
             UIWindow.CreateProcess();
-            UIWindow.Say("Hi!").Wait();
+            //UIWindow.Say("Hi!").Wait();
             VirtualMachine vm = new VirtualMachine();
             string guid = vm.AddScriptThread();
             var scr = vm.GetScriptContext(guid);

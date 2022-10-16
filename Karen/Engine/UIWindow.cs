@@ -15,6 +15,7 @@ namespace Karen.Engine
     {
         static string path = "bin\\UI\\net5.0-windows\\KarenRender.exe";
         static Process render;
+        static Task readyCallback;
         static InterprocessItem uistart, uicallback, text_path, type, body_wait;
         public static bool IsReady { get; private set; } = false;
         public static void CreateProcess()
@@ -24,12 +25,11 @@ namespace Karen.Engine
             text_path = Interprocess.GetKey("ui_text_path");
             type = Interprocess.GetKey("ui_type");
             body_wait = Interprocess.GetKey("ui_wait_body");
-            var t = Task.Run(ProcessConnections);
+            readyCallback = Task.Run(ProcessConnections);
             render = new Process();
             render.StartInfo.FileName = path;
             render.StartInfo.Arguments = $"-port {Network.Network.UIInputPort} -callback {Network.Network.UICallbackPort}";
             render.Start();
-            t.Wait();
         }
         static async Task ProcessConnections()
         {
@@ -45,9 +45,11 @@ namespace Karen.Engine
         }
 
         public static async Task Say(string message, bool wait = false)
-        {
-            if (render == null || IsReady == false)
+        {///*
+            if (render == null)
                 return;
+            if (IsReady == false)
+                await readyCallback;//*/
             Interprocess.SetKey("ui_type", "write");
             Interprocess.SetKey("ui_text_path", message);
             Interprocess.SetKey("ui_wait_body", wait.ToString().ToLower());

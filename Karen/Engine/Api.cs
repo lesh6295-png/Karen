@@ -94,7 +94,7 @@ namespace Karen.Engine
         {
             string text = par.TryExtractElement<object, string>("unk");
 
-            UIWindow.Say(text);
+            await UIWindow.Say(text);
         }
     }
 }

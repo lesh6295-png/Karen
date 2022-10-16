@@ -46,7 +46,7 @@ namespace Karen.InterProcess
             var e = q.GetFiles();
             foreach(var w in e)
             {
-                //File.Delete(w.FullName);
+                File.Delete(w.FullName);
             }
         }
         static Interprocess()
@@ -55,6 +55,7 @@ namespace Karen.InterProcess
             kuh = new FileSystemWatcher(Karen.Registry.RegController.GetIPIPath());
             kuh.EnableRaisingEvents = true;
             kuh.Changed += UpdateKey;
+            kuh.Created+=UpdateKey;
             kuh.InternalBufferSize = 1024 * 64;
         }
 
@@ -62,7 +63,7 @@ namespace Karen.InterProcess
         private static void UpdateKey(object sender, FileSystemEventArgs e)
         {
             //i take this condition from MDSN
-            if (e.ChangeType != WatcherChangeTypes.Changed)
+            if (e.ChangeType != WatcherChangeTypes.Changed && e.ChangeType!=WatcherChangeTypes.Created)
                 return;
 
             InterprocessItem change = items.GetElement((x) => x.key == e.Name);

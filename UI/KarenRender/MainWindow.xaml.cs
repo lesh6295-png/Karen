@@ -30,7 +30,7 @@ namespace KarenRender
     {
         void WriteLog(string message)
         {
-            File.AppendAllText(Karen.Registry.RegController.GetKarenFolderPath() + "log\\uilog.txt", message);
+            File.AppendAllText(Karen.Registry.RegController.GetKarenFolderPath() + "log\\uilog.txt", message+'\n');
         }
         IntPtr mainHandle;
 
@@ -99,6 +99,10 @@ namespace KarenRender
                         break;
                 }
                 Interprocess.SetKey("ui_responce", callback);
+                Task[] recall = new Task[2];
+                recall[0] = _type.WaitToChange();
+                recall[1] = text_path.WaitToChange();
+                Task.WaitAny(recall);
             }
         }
         public async Task Write(string str)

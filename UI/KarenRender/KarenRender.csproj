@@ -4,15 +4,9 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net5.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU||'">
     <OutputPath>../../bin/net5.0/bin/UI</OutputPath>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <OutputPath>../../bin/net5.0/bin/UI</OutputPath>
-  </PropertyGroup>
 
   <ItemGroup>
     <None Remove="1.em.png" />
@@ -21,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\libs\InterProcessInteraction\InterProcessInteraction.csproj" />
+    <ProjectReference Include="..\..\libs\Registry\Registry.csproj" />
     <ProjectReference Include="..\..\libs\Types\Types.csproj" />
     <ProjectReference Include="..\..\libs\WinApi\WinApi.csproj" />
   </ItemGroup>
