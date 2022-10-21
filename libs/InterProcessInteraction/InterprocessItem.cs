@@ -46,7 +46,8 @@ namespace Karen.InterProcess
             }
             catch 
             {
-            
+                //Set null if file deleting
+                cached = null;
             }
         }
         internal bool Exists()
