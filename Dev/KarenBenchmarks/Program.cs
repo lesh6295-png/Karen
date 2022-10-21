@@ -7,6 +7,7 @@ namespace Karen.Benchmarks
         static void Main(string[] args)
         {
             Console.WriteLine("KarenBenchmark");
+            //new Benchmarks().PipesConnectToServer();
             BenchmarkRunner.Run<Benchmarks>();
             Console.ReadKey();
         }
