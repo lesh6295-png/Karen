@@ -32,6 +32,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Assets", "Assets\Assets.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KarenLocale", "libs\KarenLocale\KarenLocale.csproj", "{4EF9C717-E2DD-48E4-BD33-50371A58FE42}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KarenBenchmarks", "Dev\KarenBenchmarks\KarenBenchmarks.csproj", "{87B9F794-7735-4AD0-A97C-6B81CF5441D2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -78,6 +80,10 @@ Global
 		{4EF9C717-E2DD-48E4-BD33-50371A58FE42}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4EF9C717-E2DD-48E4-BD33-50371A58FE42}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4EF9C717-E2DD-48E4-BD33-50371A58FE42}.Release|Any CPU.Build.0 = Release|Any CPU
+		{87B9F794-7735-4AD0-A97C-6B81CF5441D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87B9F794-7735-4AD0-A97C-6B81CF5441D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87B9F794-7735-4AD0-A97C-6B81CF5441D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87B9F794-7735-4AD0-A97C-6B81CF5441D2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -92,6 +98,7 @@ Global
 		{D568CCED-31F7-4876-A673-8FB8C880B8D9} = {264DB561-196B-4A9E-A4B6-6720117B362E}
 		{021AF6B4-105F-4E40-9384-1D537A1DFDCC} = {A61F6B3F-F176-4168-946B-2E64BC2D7DE4}
 		{4EF9C717-E2DD-48E4-BD33-50371A58FE42} = {F0571027-1FA0-4E8C-9D99-8D1D011F572C}
+		{87B9F794-7735-4AD0-A97C-6B81CF5441D2} = {A61F6B3F-F176-4168-946B-2E64BC2D7DE4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6509DFC4-21A4-4AFD-B3E9-D62EBBF17653}
