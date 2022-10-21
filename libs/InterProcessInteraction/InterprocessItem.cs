@@ -5,6 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 using System.IO;
+
+using System.IO.Pipes;
+
 using Karen.Registry;
 namespace Karen.InterProcess
 {
