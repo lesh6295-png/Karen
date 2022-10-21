@@ -12,9 +12,9 @@ namespace Karen.Types
     /// </summary>
     public class IPCData
     {
-        public string Type { get; private set; }
-        public object FirstParam { get; private set; }
-        public object SecondParam { get; private set; }
+        public string Type { get; set; }
+        public object FirstParam { get; set; }
+        public object SecondParam { get; set; }
 
         public override string ToString()
         {
