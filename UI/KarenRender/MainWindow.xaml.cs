@@ -19,7 +19,9 @@ using Karen.WinApi;
 using System.Threading;
 using System.Net.Http;
 using System.Net;
-
+using Karen.Types;
+using System.IO;
+using System.IO.Pipes;
 namespace KarenRender
 {
     /// <summary>
@@ -30,10 +32,18 @@ namespace KarenRender
         HttpListener listerner;
         IntPtr mainHandle;
         HttpClient callback;
+
+        NamedPipeServerStream server;
+
+        StreamReader reader;
+        StreamWriter writer;
+
         bool wait = false;
         public MainWindow()
         {
-            callback = new HttpClient();
+            server = new NamedPipeServerStream("nerakuipipe");
+            reader = new StreamReader(server);
+            writer = new StreamWriter(server);
             InitializeComponent();
             listerner = new HttpListener();
             listerner.Prefixes.Add($"http://localhost:{App.Port}/");
@@ -43,36 +53,35 @@ namespace KarenRender
 
         async Task ProcessInputConnections()
         {
-            listerner.Start();
+            server.WaitForConnection();
             while (true)
             {
-                var con = await listerner.GetContextAsync();
-                string type = con.Request.QueryString["type"];
+                var con = IPCData.FromString(reader.ReadLine());
+                string type = con.Type;
 
-                byte[] responce;
+                string responce;
                 switch (type)
                 {
                     case "online":
-                        responce = Encoding.UTF8.GetBytes($"1");
+                        responce = "online";
                         break;
                     case "write":
                         WindowMax();
-                        Task prtTask = Write(con.Request.QueryString["text"]);
-                        string w = con.Request.QueryString["wait"] ?? "false";
+                        Task prtTask = Write((string)con.FirstParam);
+                        string w = (string)con.SecondParam ?? "false";
                         wait = true;
                         if (w == "true")
                         {
                             prtTask.Wait();
                         }
-                        callback.SendAsync(new HttpRequestMessage(HttpMethod.Get, $"http://localhost:{App.CallbackPort}/"));
-                        responce = Encoding.UTF8.GetBytes($"1");
+                        responce = "write";
                         break;
                     case "sprite":
                         //if body=true we change body component, else - emotion
                         try
                         {
-                            bool isbody = Convert.ToBoolean(con.Request.QueryString["body"]);
-                            string localPath = Encoding.UTF8.GetString(Convert.FromHexString(con.Request.QueryString["path"]));
+                            bool isbody = Convert.ToBoolean((string)con.SecondParam);
+                            string localPath = Encoding.UTF8.GetString(Convert.FromHexString((string)con.FirstParam));
                             if (isbody)
                             {
                                 Dispatcher.Invoke(() => { body.Source = new BitmapImage(new Uri(localPath)); });
@@ -81,21 +90,18 @@ namespace KarenRender
                             {
                                 Dispatcher.Invoke(() => { emotion.Source = new BitmapImage(new Uri(localPath)); });
                             }
-                            responce = Encoding.UTF8.GetBytes("1");
+                            responce = "sprite";
                         }
                         catch
                         {
-                            responce = Encoding.UTF8.GetBytes("0");
+                            responce = "fall";
                         }
                         break;
                     default:
-                        responce = Encoding.UTF8.GetBytes($"0");
+                        responce = "fall";
                         break;
                 }
-
-                con.Response.ContentLength64 = responce.Length;
-                con.Response.OutputStream.Write(responce, 0, responce.Length);
-                con.Response.Close();
+                writer.WriteLine(responce);
             }
         }
         public async Task Write(string str)
