@@ -36,7 +36,7 @@ namespace Karen.Engine
                 throw new ProcessNotRunningException("KarenRender process not started.");
             if (!client.IsConnected)
             {
-                await client.ConnectAsync(5000);
+                await client.ConnectAsync(4*5000);
                 if (!client.IsConnected)
                     throw new ProcessNotRunningException("KarenRender process not started.");
             }
