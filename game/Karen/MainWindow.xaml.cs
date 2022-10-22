@@ -24,5 +24,12 @@ namespace Karen
         {
             InitializeComponent();
         }
+        private void KarenWindow_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+            {
+                this.DragMove();
+            }
+        }
     }
 }
