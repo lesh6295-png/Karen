@@ -1,5 +1,5 @@
 ﻿log Main Script Started.
 wait 5000
-say Ятвоюмамуебал
-wait 5000
-say Соси у Босса, чмо!
+say Привет!
+say Пока!
+quit

@@ -5,11 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Karen"
         mc:Ignorable="d"
-        Title="Karen" Height="600" Width="400" ResizeMode="NoResize" AllowsTransparency="True" WindowStyle="None" Background="#00000000" Foreground="{x:Null}" WindowStartupLocation="CenterScreen"  Topmost="True" MouseDown="KarenWindow_MouseDown">
+        Title="Karen" Height="600" Width="400" ResizeMode="NoResize" AllowsTransparency="True" WindowStyle="None" Background="#00000000" Foreground="{x:Null}" WindowStartupLocation="CenterScreen"  Topmost="True"  ShowInTaskbar="False" >
     <Grid>
-        <Image x:Name="body" Margin="-10,-152,10,-274" Source="DefaultSprites/body.png" Stretch="Fill" StretchDirection="Both" RenderTransformOrigin="0.5,0.5" ScrollViewer.VerticalScrollBarVisibility="Disabled" OpacityMask="White" />
-        <Image x:Name="emotion" Margin="-10,-152,10,-274" Source="DefaultSprites/emotion.png" Stretch="Fill" StretchDirection="Both" RenderTransformOrigin="0.5,0.5" ScrollViewer.VerticalScrollBarVisibility="Disabled"/>
-        <Rectangle HorizontalAlignment="Center" Height="218" Margin="0,382,0,0" Stroke="Black" VerticalAlignment="Top" Width="400" Fill="#7FFFFFFF"/>
+        <Image x:Name="body" Margin="-10,-152,10,-274" Source="DefaultSprites/body.png"  Stretch="Fill" StretchDirection="Both" RenderTransformOrigin="0.5,0.5" ScrollViewer.VerticalScrollBarVisibility="Disabled" OpacityMask="White" />
+        <Image x:Name="emotion" Margin="-10,-152,10,-274" Source="DefaultSprites/emotion.png" MouseDown="Move_MouseDown" Stretch="Fill" StretchDirection="Both" RenderTransformOrigin="0.5,0.5" ScrollViewer.VerticalScrollBarVisibility="Disabled"/>
+        <Rectangle x:Name="textBackground" HorizontalAlignment="Center" Height="218" Margin="0,382,0,0" Stroke="Black" VerticalAlignment="Top" Width="400" Fill="#7FFFFFFF"/>
         <TextBlock x:Name="textBox" Margin="0,382,0,0" Text="Sample Text!" TextWrapping="Wrap" VerticalAlignment="Top" Height="218" Foreground="Black" FontFamily="Comic Sans MS" />
+        <Button Margin="0,382,0,0" Opacity="0" Click="Button_Click"></Button>
     </Grid>
 </Window>

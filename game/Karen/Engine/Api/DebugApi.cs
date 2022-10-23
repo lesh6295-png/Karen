@@ -6,22 +6,15 @@ using System.Text;
 using Karen.Engine.Scripting;
 using Karen.Engine;
 using System.Linq;
-
+using System.Diagnostics;
 namespace Karen.Engine.Api
 {
     internal  static partial class Api
     {
-        public static async Task debug(object?[]? par)
+        public static async Task dump(object?[]? par)
         {
-            string mode = par.TryExtractElement<object, string>("unk");
-
-            switch (mode)
-            {
-                case "vm_dump":
                     string dump = System.Text.Json.JsonSerializer.Serialize(((object[])par.Last()).Last(), typeof(VirtualMachine), new System.Text.Json.JsonSerializerOptions { IncludeFields = true, WriteIndented = true });
                     File.WriteAllText("vm_dump.json", dump);
-                    break;
-            }
         }
         public static async Task log(object?[]? message)
         {
@@ -33,6 +26,17 @@ namespace Karen.Engine.Api
                         sb.Append(w + " ");
             }
             Logger.Write(sb.ToString());
+        }
+
+        public static async Task ram(object?[]? par)
+        {
+            var th = Process.GetCurrentProcess().Threads;
+            var process = Process.GetCurrentProcess();
+            StringBuilder bld = new();
+            bld.Append($"vmem64:{process.VirtualMemorySize64};");
+            bld.Append($"pmem64:{process.PrivateMemorySize64};");
+            bld.Append($"treads:{th.Count};");
+            Logger.Write(bld.ToString());
         }
     }
 }
