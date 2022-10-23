@@ -67,11 +67,5 @@ namespace Karen.Engine.Api
             }
             Logger.Write($"SourceManager {mode} {par[1].ToString()}");
         }
-
-        public static async Task say(object?[]? par)
-        {
-            string text = par.TryExtractElement<object, string>("unk");
-
-        }
     }
 }

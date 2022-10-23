@@ -20,10 +20,27 @@ namespace Karen
     /// </summary>
     public partial class MainWindow : Window
     {
+        public static MainWindow Singelton;
         public MainWindow()
         {
+            Singelton = this;
             InitializeComponent();
         }
+
+        public async Task WriteText(string text, bool wait = true, bool clear = true, int delay = 20)
+        {
+            if (clear)
+            {
+                Dispatcher.Invoke(() => { textBox.Text = ""; });
+            }
+            foreach (char sym in text)
+            {
+                Dispatcher.Invoke(() => { textBox.Text += sym; });
+                if (wait)
+                    await Task.Delay(delay);
+            }
+        }
+
         private void KarenWindow_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left)

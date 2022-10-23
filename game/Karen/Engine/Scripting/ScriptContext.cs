@@ -30,7 +30,7 @@ namespace Karen.Engine.Scripting
             Guid = Extensions.RandomString();
             localContext = new VariableContext();
             Logger.Write($"New Script Context Thread: Guid: {Guid}; local variable context: {localContext.Guid}");
-            api = Type.GetType("Karen.Engine.Api", true);
+            api = Type.GetType("Karen.Engine.Api.Api", true);
             
         }
         [Obsolete]

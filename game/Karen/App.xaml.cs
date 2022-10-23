@@ -6,6 +6,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Threading;
+
+using Karen.Engine;
 namespace Karen
 {
     /// <summary>
@@ -17,7 +19,7 @@ namespace Karen
         protected override void OnStartup(StartupEventArgs e)
         {
             //Create dedicated thread to engine
-            Engine = new Thread(()=> { });
+            Engine = new Thread(()=> { EngineStarter.Start(); });
             Engine.Start();
 
             base.OnStartup(e);
