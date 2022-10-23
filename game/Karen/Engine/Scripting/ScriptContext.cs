@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Karen.Types;
 using System.IO;
 using System.Reflection;
-namespace Karen.Engine
+namespace Karen.Engine.Scripting
 {
     public class ScriptContext
     {
@@ -29,8 +29,8 @@ namespace Karen.Engine
             this.host = host;
             Guid = Extensions.RandomString();
             localContext = new VariableContext();
-            Logger.Logger.Write($"New Script Context Thread: Guid: {Guid}; local variable context: {localContext.Guid}");
-            api = Type.GetType("Karen.Engine.Api", true);
+            Logger.Write($"New Script Context Thread: Guid: {Guid}; local variable context: {localContext.Guid}");
+            api = Type.GetType("Karen.Engine.Api.Api", true);
             
         }
         [Obsolete]

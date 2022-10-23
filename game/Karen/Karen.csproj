@@ -1,0 +1,35 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>../../bin/$(Configuration)/</OutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="DefaultSprites\body.png" />
+    <None Remove="DefaultSprites\emotion.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\libs\KarenLocale\KarenLocale.csproj" />
+    <ProjectReference Include="..\..\libs\KBL\KBL.csproj" />
+    <ProjectReference Include="..\..\libs\Registry\Registry.csproj" />
+    <ProjectReference Include="..\..\libs\Types\Types.csproj" />
+    <ProjectReference Include="..\..\libs\WinApi\WinApi.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="DefaultSprites\body.png" />
+    <Resource Include="DefaultSprites\emotion.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Engine\Api\" />
+  </ItemGroup>
+
+</Project>

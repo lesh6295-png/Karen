@@ -8,8 +8,7 @@ using System.Threading.Tasks;
 
 
 using Karen.Types;
-using Karen.Logger;
-namespace Karen.Engine
+namespace Karen.Engine.Scripting
 {
     public class VariableContext
     {

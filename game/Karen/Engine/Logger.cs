@@ -5,11 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 
 using System.IO;
-namespace Karen.Logger
+namespace Karen.Engine
 {
     internal static class Logger
     {
-        const string dirname = "log";
+        readonly static string dirname = Karen.Registry.RegController.GetKarenFolderPath() + "\\log";
         const string filename = "last.log";
         const string errorlogname = "lasterror.log";
         static FileStream log;
@@ -17,7 +17,7 @@ namespace Karen.Logger
         {
             Directory.CreateDirectory(dirname);
             log = File.Open(dirname + '/' + filename, FileMode.Create);
-            
+
         }
 
         public async static void Write(string message)
@@ -32,7 +32,7 @@ namespace Karen.Logger
         {
             Exception e = (Exception)args.ExceptionObject;
             Write(e.Message);
-            File.WriteAllText(dirname+"/" + errorlogname, e.ToString());
+            File.WriteAllText(dirname + "/" + errorlogname, e.ToString());
             log.Close();
             Environment.Exit(e.HResult);
         }
