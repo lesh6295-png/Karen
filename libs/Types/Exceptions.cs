@@ -29,4 +29,11 @@ namespace Karen.Types
 
         }
     }
+    public class ProcessNotRunningException : Exception
+    {
+        public ProcessNotRunningException(string m) : base(m)
+        {
+
+        }
+    }
 }

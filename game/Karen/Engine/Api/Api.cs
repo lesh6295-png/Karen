@@ -5,23 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Karen.Locale;
+using Karen.Engine.Scripting;
 using Karen.Types;
 using System.IO;
-namespace Karen.Engine
+namespace Karen.Engine.Api
 {
-    internal static class Api
+    internal static partial class Api
     {
-        public static async Task log(object?[]? message)
-        {
-            StringBuilder sb = new StringBuilder();
-            foreach(var q in message)
-            {
-                if (q != null)
-                    if (q is string w)
-                        sb.Append(w + " ");
-            }
-            Logger.Logger.Write(sb.ToString());
-        }
         public static async Task newsc(object?[]? par)
         {
             ScriptContext nsc = new ScriptContext((VirtualMachine)(((object[])par.Last())[2]));
@@ -55,7 +45,7 @@ namespace Karen.Engine
         public static async Task quit(object?[]? par)
         {
             int code = par.TryExtractElement<object,int>(0, 0);
-            Logger.Logger.Write($"QUIT: code: {code}");
+            Logger.Write($"QUIT: code: {code}");
             Environment.Exit(code);
         }
         public static async Task locales(object?[]? par)
@@ -75,19 +65,7 @@ namespace Karen.Engine
                     throw new InvalidApiParamsException("Unknown locales mode: " + mode);
                     break;
             }
-            Logger.Logger.Write($"SourceManager {mode} {par[1].ToString()}");
-        }
-        public static async Task debug(object?[]? par)
-        {
-            string mode = par.TryExtractElement<object, string>("unk");
-            
-            switch (mode)
-            {
-                case "vm_dump":
-                    string dump = System.Text.Json.JsonSerializer.Serialize(((object[])par.Last()).Last(), typeof(VirtualMachine), new System.Text.Json.JsonSerializerOptions { IncludeFields = true, WriteIndented=true});
-                    File.WriteAllText("vm_dump.json", dump);
-                    break;
-            }
+            Logger.Write($"SourceManager {mode} {par[1].ToString()}");
         }
     }
 }

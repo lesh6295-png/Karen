@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Karen.Engine
+namespace Karen.Engine.Scripting
 {
     public class VirtualMachine
     {
@@ -12,9 +12,9 @@ namespace Karen.Engine
         public List<ScriptContext> threads;
         public VirtualMachine()
         {
-            Logger.Logger.Write("Create virtual script machine...");
+            Logger.Write("Create virtual script machine...");
             globalHeap = new VariableContext();
-            Logger.Logger.Write($"Global Heap Guid: {globalHeap.Guid}");
+            Logger.Write($"Global Heap Guid: {globalHeap.Guid}");
             threads = new List<ScriptContext>();
         }
         /// <summary>
