@@ -15,8 +15,8 @@ namespace Karen.Engine
         {
             AppDomain.CurrentDomain.UnhandledException += Logger.ExceptionLog;
             VM = new VirtualMachine();
-            BinaryLibary mainLib = new BinaryLibary("bin\\kbl\\main.kbl");
-            byte[] main = mainLib.Extract(1);
+            int mainid = BinaryManager.LoadKBL("bin\\kbl\\main.kbl");
+            byte[] main = BinaryManager.Extract(mainid,1);
             string mainthreadguid = VM.AddScriptThread();
             ScriptContext maincon = VM.GetScriptContext(mainthreadguid);
             maincon.LoadScriptFromByteArray(main);

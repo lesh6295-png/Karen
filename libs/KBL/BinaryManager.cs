@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.IO;
 namespace Karen.KBL
 {
     /// <summary>
@@ -15,7 +15,29 @@ namespace Karen.KBL
 
         public static int LoadKBL(string path)
         {
-            BinaryLibary news = new BinaryLibary(path);
+            //get short and absolute file name
+            // if path="dir\main.miku"
+            string shortpath = path.Replace(@"\\", "\\").Split('\\').LastOrDefault();
+            //shortpath="main.miku"
+            string absolutepath = "";
+            try
+            {
+                absolutepath = Path.GetFullPath(path);
+            }
+            catch
+            {
+                absolutepath = null;
+            }
+            //absolutepath="C:\ProjectFolder\dir222\dir\main.miku"
+
+            //select which path will be used
+            string endpoint = path;
+            if (absolutepath != null && File.Exists(absolutepath))
+                endpoint = absolutepath;
+            if (shortpath != null && File.Exists(shortpath))
+                endpoint = shortpath;
+
+            BinaryLibary news = new BinaryLibary(endpoint);
             sources.Add(news);
             return news.LibaryId;
         }
