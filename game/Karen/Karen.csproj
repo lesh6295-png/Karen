@@ -28,8 +28,4 @@
     <Resource Include="DefaultSprites\emotion.png" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Engine\Api\" />
-  </ItemGroup>
-
 </Project>

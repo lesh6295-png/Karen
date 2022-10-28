@@ -1,5 +1,13 @@
 ﻿log Main Script Started.
-wait 5000
+waitui
+kbl load bin\kbl\body.kbl
+sprite body int:1 int:5
+say Ко-ле-со
+wait 1000
+sprite body int:1 int:6
+wait 1000
+sprite body int:1 int:4
+wait 10000
 say Привет!
 say Пока!
 quit

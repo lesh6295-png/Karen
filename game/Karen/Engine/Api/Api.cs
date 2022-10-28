@@ -48,24 +48,6 @@ namespace Karen.Engine.Api
             Logger.Write($"QUIT: code: {code}");
             Environment.Exit(code);
         }
-        public static async Task locales(object?[]? par)
-        {
-            string mode = par.TryExtractElement<object, string>("unk");
-            switch (mode)
-            {
-                case "load":
-                    string path = par.TryExtractElement<object, string>("unk", 1);
-                    SourceManager.LoadSource(path);
-                    break;
-                case "unload":
-                    int unloadid = par.TryExtractElement<object, int>(-1, 1);
-                    SourceManager.UnloadSource(unloadid);
-                    break;
-                default:
-                    throw new InvalidApiParamsException("Unknown locales mode: " + mode);
-                    break;
-            }
-            Logger.Write($"SourceManager {mode} {par[1].ToString()}");
-        }
+        
     }
 }
