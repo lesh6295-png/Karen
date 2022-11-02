@@ -33,6 +33,11 @@ namespace Karen.Registry
             return (ClientState)state;
         }
 
+        public static bool IsInstalled()
+        {
+            return GetState() != ClientState.NotInstalled;
+        }
+
         /// <summary>
         /// Only on Windws
         /// </summary>
