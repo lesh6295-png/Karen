@@ -1,5 +1,6 @@
 ﻿log Main Script Started.
 waitui
+var int32 x 5678
 kbl load bin\kbl\body.kbl
 sprite body int:1 int:5
 say Ко-ле-со

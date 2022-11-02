@@ -8,28 +8,17 @@ using System.Threading.Tasks;
 
 namespace Karen.Types
 {
-    public enum VariableType
-    {
-        Int16=0,
-        Int32=1,
-        Int64=2,
-        Uint16=4,
-        Uint32=8,
-        Uint64=16,
-        Boolean=32,
-        String=64,
-        Double=128,
-        Decimal=256
-    }
 
-    public struct kvar
+    public abstract class Variable
     {
-        public VariableType Type { get; private set; }
         public string name;
-        public object value;
-        public kvar(VariableType type, string name, object value)
+    }
+    public class Int32 : Variable
+    {
+        public int value;
+        const string typename = "int32";
+        public Int32(string name, int value)
         {
-            Type = type;
             this.name = name;
             this.value = value;
         }

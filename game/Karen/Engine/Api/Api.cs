@@ -26,22 +26,7 @@ namespace Karen.Engine.Api
             int time = Convert.ToInt32((string)par[0]);
             await Task.Delay(time);
         }
-        public static async Task var(object?[]? par)
-        {
-            VariableContext local = (VariableContext)(((object[])par.Last())[0]);
-            kvar newvar = new kvar((VariableType)Enum.Parse(typeof(VariableType), par.TryExtractElement<object, string>("Int32",0),true), par.TryExtractElement<object, string>("newvariable",1), par[2]);
-            if (par.Length >= 5)
-            {
-                string target = (string)par[3];
-                if(target == "global")
-                {
-                    ((VirtualMachine)(((object[])par.Last())[2])).globalHeap.Add(newvar);
-                    return;
-                }
-                
-            }
-            local.Add(newvar);
-        }
+
         public static async Task quit(object?[]? par)
         {
             int code = par.TryExtractElement<object,int>(0, 0);
