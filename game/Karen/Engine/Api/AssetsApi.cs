@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Karen.Engine.Api
 {
-    static partial class Api
+    public static partial class Api
     {
         public static async Task locales(object?[]? par)
         {
