@@ -27,7 +27,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KarenLocale", "libs\KarenLo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Karen", "game\Karen\Karen.csproj", "{27551497-A0E1-4E1E-94B1-3E848CA4B3C3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Karen.Tests", "game\Karen.Tests\Karen.Tests.csproj", "{8F8A411F-04BF-49D0-81ED-0A20454C9291}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Karen.Tests", "game\Karen.Tests\Karen.Tests.csproj", "{8F8A411F-04BF-49D0-81ED-0A20454C9291}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Workflows", "Workflows", "{E5E50A5F-F2F1-4E5A-A4C8-2A2D4C6510F7}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\build.yml = .github\workflows\build.yml
+		.github\workflows\tests.yml = .github\workflows\tests.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
