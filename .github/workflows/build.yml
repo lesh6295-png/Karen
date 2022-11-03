@@ -30,8 +30,6 @@ jobs:
     - name: Build Release Version
       run: dotnet build --no-restore -c Release
       
-    - name: Files
-      run: dir -s
     - name: Zipping builds
       uses: vimtor/action-zip@v1
       with:
