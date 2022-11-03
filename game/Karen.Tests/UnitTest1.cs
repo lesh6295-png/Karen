@@ -16,9 +16,11 @@ namespace Karen.Tests
         }
 
         [Test]
-        public void FallTest()
+        public void EventManager_AddAndCallEvent()
         {
-            Assert.Fail();
+            Karen.Engine.EventManager.AddEvent("test", () => { Assert.Pass(); });
+            Karen.Engine.EventManager.CallEvent("test");
         }
+
     }
 }

@@ -10,7 +10,7 @@ using Karen.Types;
 using System.IO;
 namespace Karen.Engine.Api
 {
-    internal static partial class Api
+    public static partial class Api
     {
         public static async Task newsc(object?[]? par)
         {
@@ -23,7 +23,7 @@ namespace Karen.Engine.Api
         }
         public static async Task wait(object?[]? par)
         {
-            int time = Convert.ToInt32((string)par[0]);
+            int time = Convert.ToInt32(par[0]);
             await Task.Delay(time);
         }
 
