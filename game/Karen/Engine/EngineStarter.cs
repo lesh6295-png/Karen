@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Karen.Registry;
 using System.Threading.Tasks;
+using System.Diagnostics;
 using System.Threading;
 using Karen.Engine.Scripting;
 using Karen.KBL;
@@ -14,6 +15,12 @@ namespace Karen.Engine
         public static VirtualMachine VM;
         public static void Start()
         {
+            //allow only one instance
+            if (OneInstance())
+            {
+                Environment.Exit(-2);
+            }
+
             AppDomain.CurrentDomain.UnhandledException += Logger.ExceptionLog;
             WriteRegistry();
             VM = new VirtualMachine();
@@ -37,6 +44,10 @@ namespace Karen.Engine
                 RegController.SetKarenFolderPath($"C:\\ProgramData\\neraK\\");
                 RegController.WriteState(Types.ClientState.Installed);
             }
+        }
+        static bool OneInstance()
+        {
+            return Process.GetProcessesByName("Karen").Length > 1;
         }
     }
 }
