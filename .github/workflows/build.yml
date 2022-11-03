@@ -24,6 +24,8 @@ jobs:
       run: dotnet restore
     - name: Build
       run: dotnet build --no-restore --verbosity quiet
+    - name: Try to tests
+      run: dotnet test --no-restore
     - name: Look on dir
       run: |
         echo "123"
