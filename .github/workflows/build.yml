@@ -27,7 +27,7 @@ jobs:
     - name: .NET versions
       run: dotnet --list-sdks
     - name: Version
-      run: echo ${{matrix.ver}}
+      run: echo ${{matrix.ver}} && mkdir ${{matrix.ver}}
     - name: Build Debug Version
       run: dotnet build --no-restore -c Debug
     - name: Build Release Version
