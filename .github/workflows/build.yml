@@ -29,9 +29,9 @@ jobs:
     - name: Version
       run: echo ${{matrix.ver}} && mkdir ${{matrix.ver}}
     - name: Build Debug Version
-      run: dotnet build --no-restore -c Debug -f ${{matrix.ver}}
+      run: dotnet build --no-restore -c Debug -f net${{matrix.ver}}
     - name: Build Release Version
-      run: dotnet build --no-restore -c Release -f ${{matrix.ver}} 
+      run: dotnet build --no-restore -c Release -f net${{matrix.ver}} 
       
     - name: Print Directorys
       run: dir
