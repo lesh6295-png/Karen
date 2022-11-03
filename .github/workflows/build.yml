@@ -25,7 +25,7 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
     - name: .NET versions
-      run: dotnet --version
+      run: dotnet --list-sdks
     - name: Build Debug Version
       run: dotnet build --no-restore -c Debug
     - name: Build Release Version
