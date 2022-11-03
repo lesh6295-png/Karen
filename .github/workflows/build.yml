@@ -24,7 +24,8 @@ jobs:
         dotnet-version: ${{matrix.ver}}
     - name: Restore dependencies
       run: dotnet restore
-      
+    - name: .NET versions
+      run: dotnet --version
     - name: Build Debug Version
       run: dotnet build --no-restore -c Debug
     - name: Build Release Version
