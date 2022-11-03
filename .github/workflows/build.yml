@@ -27,10 +27,12 @@ jobs:
     - name: .NET versions
       run: dotnet --list-sdks
     - name: Build Debug Version
-      run: dotnet build --no-restore -c Debug
+      run: dotnet build --no-restore -c Debug -o ${{matrix.ver}}/
     - name: Build Release Version
-      run: dotnet build --no-restore -c Release
+      run: dotnet build --no-restore -c Release -o ${{matrix.ver}}/
       
+    - name: Print Directorys
+      run: dir
     
     - name: Upload
       uses: actions/upload-artifact@v1
