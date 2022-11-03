@@ -14,5 +14,11 @@ namespace Karen.Tests
         {
             Assert.Pass();
         }
+
+        [Test]
+        public void FallTest()
+        {
+            Assert.Fail();
+        }
     }
 }
