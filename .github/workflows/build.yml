@@ -28,5 +28,5 @@ jobs:
       run: dotnet test --no-restore
     - name: Look on dir
       run: |
-        echo "123"
+        cd bin\
         dir
