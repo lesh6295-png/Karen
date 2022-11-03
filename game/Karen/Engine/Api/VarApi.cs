@@ -5,7 +5,7 @@ using System.Linq;
 using System;
 namespace Karen.Engine.Api
 {
-    internal static partial class Api
+    public static partial class Api
     {
         public static async Task var(object?[]? par)
         {
