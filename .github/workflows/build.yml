@@ -13,21 +13,24 @@ jobs:
   build:
 
     runs-on: windows-latest
-    strategy:
-      matrix:
-        ver: ['5.0','6.0']
+
     steps:
+
     - uses: actions/checkout@v3
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: ${{matrix.ver}}
+        dotnet-version: |
+            3.0.x
+            3.1.x
+            5.x
+            6.x
+            7.x
+
     - name: Restore dependencies
       run: dotnet restore
     - name: .NET versions
       run: dotnet --list-sdks
-    - name: Version
-      run: echo ${{matrix.ver}} && mkdir ${{matrix.ver}}
     - name: Build Debug Version
       run: dotnet build --no-restore -c Debug
     - name: Build Release Version
@@ -39,5 +42,5 @@ jobs:
     - name: Upload
       uses: actions/upload-artifact@v1
       with:
-        name: Build_${{matrix.ver}}
+        name: Build_${{github.sha}}
         path: bin/
