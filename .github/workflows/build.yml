@@ -26,6 +26,7 @@ jobs:
             5.x
             6.x
             7.x
+    
 
     - uses: actions/cache@v3
       with:
@@ -52,3 +53,9 @@ jobs:
       with:
         name: Build_${{github.sha}}
         path: bin/
+
+    - name: Try switch for C:\
+      run: |
+        cd ../../../../../../..
+        cd 'C:'
+        dir
