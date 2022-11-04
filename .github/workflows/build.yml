@@ -89,3 +89,6 @@ jobs:
       with:
         name: Karen_Testing_Net7.0_${{github.sha}}
         path: bin/Testing/net7.0-windows
+
+    - run: |
+        echo "::remove-matcher owner=csc::"
