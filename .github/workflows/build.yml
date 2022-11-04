@@ -36,8 +36,10 @@ jobs:
     - name: Build Release Version
       run: dotnet build --no-restore -c Release
       
-    - name: Print Directorys
-      run: dir -s
+    - name: Delete .pdb files
+      run: |
+        cd bin/Debug/
+        (for %i in (*.pdb) do @del '%i')
     
     - name: Upload
       uses: actions/upload-artifact@v1
