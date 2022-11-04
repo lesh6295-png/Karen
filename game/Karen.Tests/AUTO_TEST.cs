@@ -12,7 +12,7 @@ namespace Karen.Tests
         [Test]
         public void Auto()
         {
-            TestContext.Out.WriteLine($"Start AUTO_TEST\nWorking path: {Environment.CurrentDirectory}");
+            TestContext.Progress.WriteLine($"Start AUTO_TEST\nWorking path: {Environment.CurrentDirectory}");
         }
     }
 }
