@@ -37,7 +37,7 @@ jobs:
     
 
     - name: Restore dependencies
-      run: dotnet restore
+      run: dotnet restore /ConsoleLoggerParameters:Verbosity=Quiet
     - name: .NET versions
       run: dotnet --list-sdks
     - name: Build Debug Version
