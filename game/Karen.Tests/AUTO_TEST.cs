@@ -24,7 +24,7 @@ namespace Karen.Tests
 #endif
 
             TestContext.Progress.WriteLine($"Start AUTO_TEST\nWorking path: {Environment.CurrentDirectory}");
-            string exepath = $"../../../../../bin/Testing/{Environment.CurrentDirectory.Split("\\").Last()}";
+            string exepath = $"\\..\\..\\..\\..\\..\\bin\\Testing\\{Environment.CurrentDirectory.Split("\\").Last()}";
             Environment.CurrentDirectory += exepath;
             TestContext.Progress.WriteLine($"Karen path: {Environment.CurrentDirectory}");
             Process karenGame = new Process();
