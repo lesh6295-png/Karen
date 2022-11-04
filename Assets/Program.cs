@@ -7,10 +7,12 @@ namespace Karen.Assets
     {
         static void Main(string[] args)
         {
+            string netver = $"{Environment.Version.Major}.{Environment.Version.Minor}";
+            Console.WriteLine("Net version: " + netver);
             if (args.Length >= 1)
             {
                 Console.WriteLine(args[0]);
-                string b = $"\\bin\\{args[0]}\\net5.0\\";
+                string b = $"\\bin\\{args[0]}\\net{netver}-windows\\";
                 Environment.CurrentDirectory += b;
             }
             Directory.CreateDirectory("bin\\kbl");
@@ -25,7 +27,8 @@ namespace Karen.Assets
 
             ExcelLocale q = new("locales.xlsx");
             q.ParceLocales();
-            Karen.Types.Extensions.CopyFilesRecursively(new DirectoryInfo("bin"), new DirectoryInfo($"../../../../bin/{args[0]}/net5.0-windows"));
+            
+            Karen.Types.Extensions.CopyFilesRecursively(new DirectoryInfo("bin"), new DirectoryInfo($"../../../../bin/{args[0]}/net{netver}-windows"));
             Console.ReadLine();
         }
     }

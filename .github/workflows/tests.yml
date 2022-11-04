@@ -11,18 +11,22 @@ jobs:
   build:
 
     runs-on: windows-latest
-    strategy:
-      matrix:
-        ver: ['5.0.x','6.0.x']
     steps:
     - uses: actions/checkout@v3
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: ${{matrix.ver}}
+        dotnet-version:  |
+            3.0.x
+            3.1.x
+            5.x
+            6.x
+            7.x
+
+
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
-      run: dotnet build --no-restore --verbosity quiet
+      run: dotnet build --no-restore --verbosity quiet -c Testing
     - name: Tests
       run: dotnet test --no-restore
