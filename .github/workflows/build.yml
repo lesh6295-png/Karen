@@ -29,12 +29,12 @@ jobs:
     - name: Version
       run: echo ${{matrix.ver}} && mkdir ${{matrix.ver}}
     - name: Build Debug Version
-      run: dotnet build --no-restore -c Debug -f net${{matrix.ver}}-windows
+      run: dotnet build --no-restore -c Debug
     - name: Build Release Version
-      run: dotnet build --no-restore -c Release -f net${{matrix.ver}}-windows 
+      run: dotnet build --no-restore -c Release
       
     - name: Print Directorys
-      run: dir
+      run: dir -c
     
     - name: Upload
       uses: actions/upload-artifact@v1
