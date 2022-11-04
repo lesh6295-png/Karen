@@ -15,6 +15,12 @@ jobs:
     runs-on: windows-latest
 
     steps:
+    - uses: actions/cache@v3
+      with:
+        path: ~/.nuget/packages
+        key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
+        restore-keys: |
+            ${{ runner.os }}-nuget
 
     - uses: actions/checkout@v3
     - name: Setup .NET
@@ -28,12 +34,7 @@ jobs:
             7.x
     
 
-    - uses: actions/cache@v3
-      with:
-        path: ~/.nuget/packages
-        key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
-        restore-keys: |
-            ${{ runner.os }}-nuget
+    
 
     - name: Restore dependencies
       run: dotnet restore
@@ -89,6 +90,4 @@ jobs:
       with:
         name: Karen_Testing_Net7.0_${{github.sha}}
         path: bin/Testing/net7.0-windows
-
-    - run: |
-        echo "::remove-matcher owner=csc::"
+        
