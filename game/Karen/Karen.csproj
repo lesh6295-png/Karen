@@ -4,6 +4,7 @@
     <OutputType>WinExe</OutputType>
     
     <UseWPF>true</UseWPF>
+    <Configurations>Debug;Release;Testing</Configurations>
   </PropertyGroup>
 
 	<PropertyGroup Condition="'$(MSBuildAssemblyVersion)'=='17.0'">

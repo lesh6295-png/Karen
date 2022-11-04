@@ -3,6 +3,7 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <RunPostBuildEvent>Always</RunPostBuildEvent>
+    <Configurations>Debug;Release;Testing</Configurations>
   </PropertyGroup>
 
 	<PropertyGroup Condition="'$(MSBuildAssemblyVersion)'=='17.0'">
