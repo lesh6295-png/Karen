@@ -28,8 +28,18 @@ namespace Karen.Engine.Scripting
                     return q;
             throw new ObjectNotFoundException($"In {Guid} context variable with {name} dont exist.");
         }
-        public void Add(Variable variable)
+        public void Add(Variable variable, bool checkname=false)
         {
+            if (checkname)
+            {
+                for(int i = 0; i < variables.Count; i++)
+                {
+                    if (variables[i].name == variable.name)
+                    {
+                        throw new DublicateObjectException($"Variable with {variable.name} alredy exists in {Guid} context.");
+                    }
+                }
+            }
             variables.Add(variable);
         }
     }

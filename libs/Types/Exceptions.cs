@@ -36,4 +36,12 @@ namespace Karen.Types
 
         }
     }
+
+    public class DublicateObjectException : Exception
+    {
+        public DublicateObjectException(string m) : base(m)
+        {
+
+        }
+    }
 }
