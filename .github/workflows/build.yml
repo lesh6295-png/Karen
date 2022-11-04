@@ -39,7 +39,7 @@ jobs:
     - name: Delete .pdb files
       run: |
         cd bin/Debug/
-        (for %i in (*.pdb) do @del '%i')
+        del -s *.pdb
     
     - name: Upload
       uses: actions/upload-artifact@v1
