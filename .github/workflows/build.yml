@@ -39,14 +39,11 @@ jobs:
     - name: .NET versions
       run: dotnet --list-sdks
     - name: Build Debug Version
-      run: dotnet build --no-restore -c Debug
+      run: dotnet build --no-restore -c Debug /p:DebugType=None
     - name: Build Release Version
       run: dotnet build --no-restore -c Release
       
-    - name: Delete .pdb files
-      run: |
-        cd bin/Debug/
-        del /s *.pdb
+    
     
     - name: Upload
       uses: actions/upload-artifact@v1
