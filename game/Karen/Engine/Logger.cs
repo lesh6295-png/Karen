@@ -15,6 +15,11 @@ namespace Karen.Engine
         static FileStream log;
         static Logger()
         {
+            if (!App.LeaveLogs)
+            {
+                File.Delete(dirname + '/' + filename);
+                File.Delete(dirname + '/' + errorlogname);
+            }
             Directory.CreateDirectory(dirname);
             log = File.Open(dirname + '/' + filename, FileMode.Create);
 

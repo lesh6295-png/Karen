@@ -11,6 +11,6 @@ namespace Karen.Types
 {
     public static class TypesFactory
     {
-        
+
     }
 }

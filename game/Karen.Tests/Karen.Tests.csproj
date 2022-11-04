@@ -1,12 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>WinExe</OutputType>
-    
-    <UseWPF>true</UseWPF>
+
+    <IsPackable>false</IsPackable>
+
     <Configurations>Debug;Release;Testing</Configurations>
   </PropertyGroup>
-
+	
 	<PropertyGroup Condition="'$(MSBuildAssemblyVersion)'=='17.0'">
 		<TargetFrameworks>net5.0-windows;net6.0-windows;net7.0-windows</TargetFrameworks>
 	</PropertyGroup>
@@ -14,18 +14,12 @@
 	<PropertyGroup Condition="'$(MSBuildAssemblyVersion)'=='16.0'">
 		<TargetFrameworks>net5.0-windows</TargetFrameworks>
 	</PropertyGroup>
-	
-  <PropertyGroup>
-    <OutputPath>../../bin/$(Configuration)/</OutputPath>
-  </PropertyGroup>
-	
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Testing|net5.0-windows|AnyCPU'">
-    <NoWarn>1701;1702;CS1998;CS8632</NoWarn>
-  </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="DefaultSprites\body.png" />
-    <None Remove="DefaultSprites\emotion.png" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.9.4" />
+    <PackageReference Include="NUnit" Version="3.13.1" />
+    <PackageReference Include="NUnit3TestAdapter" Version="3.17.0" />
+    <PackageReference Include="coverlet.collector" Version="3.0.2" />
   </ItemGroup>
 
   <ItemGroup>
@@ -34,11 +28,7 @@
     <ProjectReference Include="..\..\libs\Registry\Registry.csproj" />
     <ProjectReference Include="..\..\libs\Types\Types.csproj" />
     <ProjectReference Include="..\..\libs\WinApi\WinApi.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Resource Include="DefaultSprites\body.png" />
-    <Resource Include="DefaultSprites\emotion.png" />
+    <ProjectReference Include="..\Karen\Karen.csproj" />
   </ItemGroup>
 
 </Project>

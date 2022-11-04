@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -24,7 +25,8 @@ namespace Karen
         public static MainWindow Singelton;
         bool _hide = false;
         public bool Next { get; private set; }
-        public bool Hide
+        public bool IsReady { get; private set; } = false;
+        public bool HideWindow
         {
             get
             {
@@ -48,6 +50,7 @@ namespace Karen
             Hide();
             Singelton = this;
             InitializeComponent();
+            IsReady = true;
         }
 
         public async Task WriteText(string text, bool wait = true, bool clear = true, int delay = 20)
@@ -60,6 +63,10 @@ namespace Karen
             foreach (char sym in text)
             {
                 Dispatcher.Invoke(() => { textBox.Text += sym; });
+#if TESTING
+                if (App.AUTO_TEST)
+                    continue;
+#endif
                 if (wait)
                     await Task.Delay(delay);
             }
@@ -83,6 +90,31 @@ namespace Karen
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Next = false;
+        }
+        public void SetBodySprite(byte[] arr)
+        {
+            Dispatcher.Invoke(() => { body.Source = LoadImage(arr); });
+        }
+        public void SetEmotionSprite(byte[] arr)
+        {
+            Dispatcher.Invoke(() => { emotion.Source = LoadImage(arr); });
+        }
+        static BitmapImage LoadImage(byte[] arr)
+        {
+            if (arr == null || arr.Length == 0) return null;
+            var image = new BitmapImage();
+            using (var mem = new MemoryStream(arr))
+            {
+                mem.Position = 0;
+                image.BeginInit();
+                image.CreateOptions = BitmapCreateOptions.PreservePixelFormat;
+                image.CacheOption = BitmapCacheOption.OnLoad;
+                image.UriSource = null;
+                image.StreamSource = mem;
+                image.EndInit();
+            }
+            image.Freeze();
+            return image;
         }
     }
 }
