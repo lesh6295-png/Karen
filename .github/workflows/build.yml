@@ -27,6 +27,13 @@ jobs:
             6.x
             7.x
 
+    - uses: actions/cache@v3
+      with:
+        path: ~/.nuget/packages
+        key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
+        restore-keys: |
+            ${{ runner.os }}-nuget
+
     - name: Restore dependencies
       run: dotnet restore
     - name: .NET versions
@@ -39,7 +46,7 @@ jobs:
     - name: Delete .pdb files
       run: |
         cd bin/Debug/
-        del -s *.pdb
+        del /s *.pdb
     
     - name: Upload
       uses: actions/upload-artifact@v1
