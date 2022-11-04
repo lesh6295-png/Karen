@@ -39,11 +39,11 @@ jobs:
     - name: .NET versions
       run: dotnet --list-sdks
     - name: Build Debug Version
-      run: dotnet build --no-restore -c Debug
+      run: dotnet build --no-restore -c Debug /nowarm
     - name: Build Release Version
-      run: dotnet build --no-restore -c Release /p:DebugType=None
+      run: dotnet build --no-restore -c Release /p:DebugType=None /nowarm
     - name: Build Testing Version
-      run: dotnet build --no-restore -c Testing
+      run: dotnet build --no-restore -c Testing /nowarm
       
     
     
