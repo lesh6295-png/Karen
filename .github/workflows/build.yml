@@ -34,7 +34,7 @@ jobs:
       run: dotnet build --no-restore -c Release
       
     - name: Print Directorys
-      run: dir -c
+      run: dir -s
     
     - name: Upload
       uses: actions/upload-artifact@v1
