@@ -40,11 +40,11 @@ jobs:
     - name: .NET versions
       run: dotnet --list-sdks
     - name: Build Debug Version
-      run: dotnet build --no-restore -c Debug -v:q
+      run: dotnet build --no-restore -c Debug /ConsoleLoggerParameters:Verbosity=Quiet
     - name: Build Release Version
-      run: dotnet build --no-restore -c Release /p:DebugType=None -v:q
+      run: dotnet build --no-restore -c Release /p:DebugType=None /ConsoleLoggerParameters:Verbosity=Quiet
     - name: Build Testing Version
-      run: dotnet build --no-restore -c Testing -v:q
+      run: dotnet build --no-restore -c Testing /ConsoleLoggerParameters:Verbosity=Quiet
       
     
     
