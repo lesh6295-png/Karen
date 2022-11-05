@@ -23,5 +23,15 @@ namespace Karen.Engine.Api
             }
             local.Add(newvar);
         }
+
+        public static async Task set(object?[]? par)
+        {
+            //TODO: implemetation
+        }
+
+        public static async Task math(object?[]? par)
+        {
+            //TODO: implementation
+        }
     }
 }
