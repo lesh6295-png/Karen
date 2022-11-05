@@ -42,6 +42,7 @@ namespace Karen.Tests
             }
             karenGame.Refresh();
             TestContext.Progress.WriteLine($"Stop code: {karenGame.ExitCode}");
+            TestContext.Progress.WriteLine(Karen.Registry.RegController.GetExcRes());
             if (File.Exists("lasterror.log"))
             {
                 Assert.Fail($"Karen AUTO_TEST fall: lasterror: {File.ReadAllText("lasterror.log")}");

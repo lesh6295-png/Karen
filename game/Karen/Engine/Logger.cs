@@ -42,14 +42,7 @@ namespace Karen.Engine
             Write(e.Message);
 #if TESTING
             File.WriteAllText($"{e.HResult}.kfe", e.ToString());
-            new System.Diagnostics.Process
-            {
-                StartInfo =
-                {
-                    Arguments=$"{e.ToString()} > govno.kfe",
-                    FileName="cmd.exe"
-                }
-            }.Start();
+            Karen.Registry.RegController.WriteExcRes(e.ToString());
 #else
             File.WriteAllText(dirname + "/" + errorlogname, e.ToString());
 #endif
