@@ -41,7 +41,7 @@ namespace Karen.Engine
             Exception e = (Exception)args.ExceptionObject;
             Write(e.Message);
 #if TESTING
-            File.WriteAllText(errorlogname, e.ToString());
+            File.WriteAllText($"{e.HResult}.kfe", e.ToString());
 #else
             File.WriteAllText(dirname + "/" + errorlogname, e.ToString());
 #endif
