@@ -45,9 +45,14 @@ namespace Karen.Tests
 #if TESTING
             TestContext.Progress.WriteLine(Karen.Registry.RegController.GetExcRes());
 #endif
-            if (File.Exists("lasterror.log"))
+            //TODO: import lasterror.log
+            /* if (File.Exists("lasterror.log"))
+             {
+                 Assert.Fail($"Karen AUTO_TEST fall: lasterror: {File.ReadAllText("lasterror.log")}");
+             }*/
+            if (karenGame.ExitCode != 0)
             {
-                Assert.Fail($"Karen AUTO_TEST fall: lasterror: {File.ReadAllText("lasterror.log")}");
+                Assert.Fail($"Unknown fall: Exit code: {karenGame.ExitCode}");
             }
             Assert.Pass("Karen AUTO_TEST pass!");
         }
