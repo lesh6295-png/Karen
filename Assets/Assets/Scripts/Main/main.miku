@@ -11,5 +11,4 @@ sprite body int:1 int:4
 wait 10000
 say Привет!
 say Пока!
-badcommand
 quit
