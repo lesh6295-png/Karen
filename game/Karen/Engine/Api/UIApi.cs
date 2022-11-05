@@ -23,6 +23,10 @@ namespace Karen.Engine.Api
             string text = par.TryExtractElement<object, string>("unk");
             MainWindow.Singelton.HideWindow = false;
             await MainWindow.Singelton.WriteText(text);
+#if TESTING
+            if (App.AUTO_TEST)
+                return;
+#endif
             while (MainWindow.Singelton.Next)
             {
                 await Task.Delay(100);

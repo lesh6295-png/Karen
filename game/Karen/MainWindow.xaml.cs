@@ -63,6 +63,10 @@ namespace Karen
             foreach (char sym in text)
             {
                 Dispatcher.Invoke(() => { textBox.Text += sym; });
+#if TESTING
+                if (App.AUTO_TEST)
+                    continue;
+#endif
                 if (wait)
                     await Task.Delay(delay);
             }

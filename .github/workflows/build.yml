@@ -15,6 +15,12 @@ jobs:
     runs-on: windows-latest
 
     steps:
+    - uses: actions/cache@v3
+      with:
+        path: ~/.nuget/packages
+        key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
+        restore-keys: |
+            ${{ runner.os }}-nuget
 
     - uses: actions/checkout@v3
     - name: Setup .NET
@@ -26,27 +32,62 @@ jobs:
             5.x
             6.x
             7.x
+    
 
-    - uses: actions/cache@v3
-      with:
-        path: ~/.nuget/packages
-        key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
-        restore-keys: |
-            ${{ runner.os }}-nuget
+    
 
     - name: Restore dependencies
-      run: dotnet restore
+      run: dotnet restore /ConsoleLoggerParameters:Verbosity=Quiet
     - name: .NET versions
       run: dotnet --list-sdks
     - name: Build Debug Version
-      run: dotnet build --no-restore -c Debug
+      run: dotnet build --no-restore -c Debug /ConsoleLoggerParameters:Verbosity=Quiet
     - name: Build Release Version
-      run: dotnet build --no-restore -c Release /p:DebugType=None
+      run: dotnet build --no-restore -c Release /p:DebugType=None /ConsoleLoggerParameters:Verbosity=Quiet
+    - name: Build Testing Version
+      run: dotnet build --no-restore -c Testing /ConsoleLoggerParameters:Verbosity=Quiet
       
     
     
-    - name: Upload
+    - name: Upload Debug
       uses: actions/upload-artifact@v1
       with:
-        name: Build_${{github.sha}}
-        path: bin/
+        name: Karen_Debug_Net5.0_${{github.sha}}
+        path: bin/Debug/net5.0-windows
+    - uses: actions/upload-artifact@v1
+      with:
+        name: Karen_Debug_Net6.0_${{github.sha}}
+        path: bin/Debug/net6.0-windows
+    - uses: actions/upload-artifact@v1
+      with:
+        name: Karen_Debug_Net7.0_${{github.sha}}
+        path: bin/Debug/net7.0-windows
+
+    - name: Upload Release
+      uses: actions/upload-artifact@v1
+      with:
+        name: Karen_Release_Net5.0_${{github.sha}}
+        path: bin/Release/net5.0-windows
+    - uses: actions/upload-artifact@v1
+      with:
+        name: Karen_Release_Net6.0_${{github.sha}}
+        path: bin/Release/net6.0-windows
+    - uses: actions/upload-artifact@v1
+      with:
+        name: Karen_Release_Net7.0_${{github.sha}}
+        path: bin/Release/net7.0-windows
+
+    - name: Upload Testing
+      uses: actions/upload-artifact@v1
+      with:
+        name: Karen_Testing_Net5.0_${{github.sha}}
+        path: bin/Testing/net5.0-windows
+    - uses: actions/upload-artifact@v1
+      with:
+        name: Karen_Testing_Net6.0_${{github.sha}}
+        path: bin/Testing/net6.0-windows
+    - uses: actions/upload-artifact@v1
+      with:
+        name: Karen_Testing_Net7.0_${{github.sha}}
+        path: bin/Testing/net7.0-windows
+        
