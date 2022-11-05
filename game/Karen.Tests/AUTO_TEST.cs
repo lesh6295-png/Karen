@@ -33,11 +33,12 @@ namespace Karen.Tests
             karenGame.StartInfo.Arguments = "--testing";
             karenGame.Start();
             TestContext.Progress.WriteLine($"Process started with {karenGame.Id} id.");
-            while (!karenGame.HasExited)
+            while (!karenGame.WaitForExit(750))
             {
                 karenGame.Refresh();
                 Task.Delay(50).Wait();
             }
+            karenGame.Refresh();
             TestContext.Progress.WriteLine($"Stop code: {karenGame.ExitCode}");
             if (File.Exists("lasterror.log"))
             {
