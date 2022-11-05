@@ -22,7 +22,6 @@ namespace Karen.Engine
             }
 
             AppDomain.CurrentDomain.UnhandledException += Logger.ExceptionLog;
-            throw new System.Exception();
             WriteRegistry();
             VM = new VirtualMachine();
             int mainid = BinaryManager.LoadKBL("bin\\kbl\\main.kbl");
