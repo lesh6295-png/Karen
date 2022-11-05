@@ -27,6 +27,7 @@ namespace Karen.Tests
             string exepath = $"\\..\\..\\..\\..\\..\\bin\\Testing\\{Environment.CurrentDirectory.Split("\\").Last()}";
             Environment.CurrentDirectory += exepath;
             TestContext.Progress.WriteLine($"Karen path: {Environment.CurrentDirectory}");
+            File.Delete("lasterror.log");
             Process karenGame = new Process();
             karenGame.StartInfo.FileName = "Karen.exe";
             karenGame.StartInfo.Arguments = "--testing";
@@ -37,10 +38,10 @@ namespace Karen.Tests
                 karenGame.Refresh();
                 Task.Delay(50).Wait();
             }
-
-            if (File.Exists(Karen.Registry.RegController.GetKarenFolderPath() + "/log/lasterror.log"))
+            TestContext.Progress.WriteLine($"Stop code: {karenGame.ExitCode}");
+            if (File.Exists("lasterror.log"))
             {
-                Assert.Fail($"Karen AUTO_TEST fall: lasterror: {File.ReadAllText(Karen.Registry.RegController.GetKarenFolderPath() + "/log/lasterror.log")}");
+                Assert.Fail($"Karen AUTO_TEST fall: lasterror: {File.ReadAllText("lasterror.log")}");
             }
             Assert.Pass("Karen AUTO_TEST pass!");
         }

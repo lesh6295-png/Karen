@@ -22,6 +22,7 @@ namespace Karen
         public static bool LeaveLogs = false;
         protected override void OnStartup(StartupEventArgs e)
         {
+            AppDomain.CurrentDomain.UnhandledException += Logger.ExceptionLog;
 #if TESTING
             if (e.Args.Contains("--testing"))
                 AUTO_TEST = true;
