@@ -32,5 +32,4 @@ jobs:
       run: dotnet test --no-restore -c Testing
     - name: Print files
       run: |
-        cd ../../../..
-        dir -s *.kfe
+        dir -s
