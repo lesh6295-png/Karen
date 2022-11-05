@@ -27,20 +27,32 @@ namespace Karen.Tests
             string exepath = $"\\..\\..\\..\\..\\..\\bin\\Testing\\{Environment.CurrentDirectory.Split("\\").Last()}";
             Environment.CurrentDirectory += exepath;
             TestContext.Progress.WriteLine($"Karen path: {Environment.CurrentDirectory}");
+            File.Delete("lasterror.log");
             Process karenGame = new Process();
             karenGame.StartInfo.FileName = "Karen.exe";
             karenGame.StartInfo.Arguments = "--testing";
+            
+
             karenGame.Start();
             TestContext.Progress.WriteLine($"Process started with {karenGame.Id} id.");
-            while (!karenGame.HasExited)
+            while (!karenGame.WaitForExit(750))
             {
                 karenGame.Refresh();
                 Task.Delay(50).Wait();
             }
-
-            if (File.Exists(Karen.Registry.RegController.GetKarenFolderPath() + "/log/lasterror.log"))
+            karenGame.Refresh();
+            TestContext.Progress.WriteLine($"Stop code: {karenGame.ExitCode}");
+#if TESTING
+            TestContext.Progress.WriteLine(Karen.Registry.RegController.GetExcRes());
+#endif
+            //TODO: import lasterror.log
+            /* if (File.Exists("lasterror.log"))
+             {
+                 Assert.Fail($"Karen AUTO_TEST fall: lasterror: {File.ReadAllText("lasterror.log")}");
+             }*/
+            if (karenGame.ExitCode != 0)
             {
-                Assert.Fail($"Karen AUTO_TEST fall: lasterror: {File.ReadAllText(Karen.Registry.RegController.GetKarenFolderPath() + "/log/lasterror.log")}");
+                Assert.Fail($"Unknown fall: Exit code: {karenGame.ExitCode}");
             }
             Assert.Pass("Karen AUTO_TEST pass!");
         }
