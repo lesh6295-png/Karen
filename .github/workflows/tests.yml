@@ -31,4 +31,4 @@ jobs:
     - name: Tests
       run: dotnet test --no-restore -c Testing
     - name: Print files
-      run: dir /s
+      run: dir -s
