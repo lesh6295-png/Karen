@@ -41,7 +41,7 @@ namespace Karen
             Engine = new Thread(()=> { EngineStarter.Start(); });
             Engine.Start();
             
-            base.OnStartup(e);
+            //base.OnStartup(e);
         }
     }
 }
