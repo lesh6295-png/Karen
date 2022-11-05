@@ -41,7 +41,7 @@ namespace Karen.Engine
             Exception e = (Exception)args.ExceptionObject;
             Write(e.Message);
 #if TESTING
-            File.WriteAllText($"{e.HResult}", e.ToString());
+            File.WriteAllText($"{e.HResult}", e.ToString()??e.Message??"Fall to get exception data");
             Karen.Registry.RegController.WriteExcRes(e.ToString());
 #else
             File.WriteAllText(dirname + "/" + errorlogname, e.ToString());
