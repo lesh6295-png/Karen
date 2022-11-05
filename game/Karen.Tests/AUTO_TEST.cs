@@ -27,6 +27,7 @@ namespace Karen.Tests
             string exepath = $"\\..\\..\\..\\..\\..\\bin\\Testing\\{Environment.CurrentDirectory.Split("\\").Last()}";
             Environment.CurrentDirectory += exepath;
             TestContext.Progress.WriteLine($"Karen path: {Environment.CurrentDirectory}");
+            File.Delete("lasterror.log");
             Process karenGame = new Process();
             karenGame.StartInfo.FileName = "Karen.exe";
             karenGame.StartInfo.Arguments = "--testing";
