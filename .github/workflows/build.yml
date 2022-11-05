@@ -49,10 +49,10 @@ jobs:
       
     
     
-    - name: Upload Debug
+    - name: Upload Debug Net5.0
       uses: actions/upload-artifact@v1
       with:
-        name: Karen_Debug_Net5.0_${{github.sha}}
+        name: Karen_Debug_Net5.0_${{github.run_number}}_${{github.sha}}
         path: bin/Debug/net5.0-windows
     - uses: actions/upload-artifact@v1
       with:
