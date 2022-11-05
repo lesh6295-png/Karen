@@ -38,7 +38,7 @@ namespace Karen.Tests
                 Task.Delay(50).Wait();
             }
 
-            if (File.Exists(Karen.Registry.RegController.GetKarenFolderPath() + "/log/lasterror.log"))
+            if (File.Exists("lasterror.log"))
             {
                 Assert.Fail($"Karen AUTO_TEST fall: lasterror: {File.ReadAllText(Karen.Registry.RegController.GetKarenFolderPath() + "/log/lasterror.log")}");
             }
