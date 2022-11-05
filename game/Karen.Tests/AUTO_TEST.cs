@@ -40,7 +40,7 @@ namespace Karen.Tests
             TestContext.Progress.WriteLine($"Stop code: {karenGame.ExitCode}");
             if (File.Exists("lasterror.log"))
             {
-                Assert.Fail($"Karen AUTO_TEST fall: lasterror: {File.ReadAllText(Karen.Registry.RegController.GetKarenFolderPath() + "/log/lasterror.log")}");
+                Assert.Fail($"Karen AUTO_TEST fall: lasterror: {File.ReadAllText("lasterror.log")}");
             }
             Assert.Pass("Karen AUTO_TEST pass!");
         }
