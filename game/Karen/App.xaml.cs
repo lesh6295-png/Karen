@@ -31,7 +31,7 @@ namespace Karen
             //Create dedicated thread to engine
             Engine = new Thread(()=> { EngineStarter.Start(); });
             Engine.Start();
-            
+            throw new System.Exception();
             base.OnStartup(e);
         }
     }
