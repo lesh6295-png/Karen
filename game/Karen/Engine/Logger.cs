@@ -17,8 +17,13 @@ namespace Karen.Engine
         {
             if (!App.LeaveLogs)
             {
-                File.Delete(dirname + '/' + filename);
-                File.Delete(dirname + '/' + errorlogname);
+                //TODO: REWRITE TO File.Exists
+                try
+                {
+                    File.Delete(dirname + '/' + filename);
+                    File.Delete(dirname + '/' + errorlogname);
+                }
+                catch { }
             }
             Directory.CreateDirectory(dirname); 
 #if TESTING
