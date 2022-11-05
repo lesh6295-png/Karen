@@ -12,6 +12,14 @@ jobs:
 
     runs-on: windows-latest
     steps:
+    - uses: actions/cache@v3
+      with:
+        path: ~/.nuget/packages
+        key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
+        restore-keys: |
+            ${{ runner.os }}-nuget
+
+
     - uses: actions/checkout@v3
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
@@ -30,5 +38,3 @@ jobs:
       run: dotnet build --no-restore --verbosity quiet -c Testing
     - name: Tests
       run: dotnet test --no-restore -c Testing
-    - name: Print files
-      run: dir -s

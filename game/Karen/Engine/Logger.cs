@@ -17,8 +17,13 @@ namespace Karen.Engine
         {
             if (!App.LeaveLogs)
             {
-                File.Delete(dirname + '/' + filename);
-                File.Delete(dirname + '/' + errorlogname);
+                //TODO: REWRITE TO File.Exists
+                try
+                {
+                    File.Delete(dirname + '/' + filename);
+                    File.Delete(dirname + '/' + errorlogname);
+                }
+                catch { }
             }
             Directory.CreateDirectory(dirname); 
 #if TESTING
@@ -41,7 +46,8 @@ namespace Karen.Engine
             Exception e = (Exception)args.ExceptionObject;
             Write(e.Message);
 #if TESTING
-            File.WriteAllText(errorlogname, e.ToString());
+            File.WriteAllText($"{e.HResult}", e.ToString()??e.Message??"Fall to get exception data");
+            Karen.Registry.RegController.WriteExcRes(e.ToString());
 #else
             File.WriteAllText(dirname + "/" + errorlogname, e.ToString());
 #endif

@@ -66,5 +66,15 @@ namespace Karen.Registry
         {
             RootKaren().SetValue("karenFolder", path);
         }
+#if TESTING
+        public static void WriteExcRes(string result)
+        {
+            RootKaren().SetValue("FATAL_EXCEPTION", result);
+        }
+        public static string GetExcRes()
+        {
+            return (string)RootKaren().GetValue("FATAL_EXCEPTION");
+        }
+#endif
     }
 }

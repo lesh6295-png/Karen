@@ -16,5 +16,15 @@ namespace Karen.Tests
             Console.WriteLine("Wait time: 0.500 seconds.");
             Assert.Pass();
         }
+        [Test]
+        public void WriteRegistry()
+        {
+            Karen.Registry.RegController.WriteState(Types.ClientState.Installed);
+        }
+        [Test]
+        public void ReadRegistry()
+        {
+            var q = Karen.Registry.RegController.GetState();
+        }
     }
 }
