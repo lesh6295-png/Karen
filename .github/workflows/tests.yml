@@ -29,6 +29,6 @@ jobs:
     - name: Build
       run: dotnet build --no-restore --verbosity quiet -c Testing
     - name: Tests
-      run: dotnet test --no-restore -c Testing
+      run: dotnet test --no-restore 
     - name: Print files
       run: dir -s
