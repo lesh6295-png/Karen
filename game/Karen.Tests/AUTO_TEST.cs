@@ -31,6 +31,8 @@ namespace Karen.Tests
             Process karenGame = new Process();
             karenGame.StartInfo.FileName = "Karen.exe";
             karenGame.StartInfo.Arguments = "--testing";
+            
+
             karenGame.Start();
             TestContext.Progress.WriteLine($"Process started with {karenGame.Id} id.");
             while (!karenGame.WaitForExit(750))
