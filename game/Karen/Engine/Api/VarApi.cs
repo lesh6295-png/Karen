@@ -16,7 +16,7 @@ namespace Karen.Engine.Api
                 string target = (string)par[2];
                 if (target == "global")
                 {
-                    ((VirtualMachine)(((object[])par.Last())[3])).globalHeap.Add(newvar);
+                    ((VirtualMachine)(((object[])par.Last())[2])).globalHeap.Add(newvar);
                     return;
                 }
 
