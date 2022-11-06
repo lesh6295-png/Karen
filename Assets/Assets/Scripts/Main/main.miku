@@ -1,6 +1,7 @@
 ﻿log Main Script Started.
 waitui
 say Привет!
+
 var x 5678
 var y 32 global
 to skipq

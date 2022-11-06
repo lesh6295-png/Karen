@@ -54,6 +54,8 @@ namespace Karen.Engine.Scripting
             //find labels
             for(int i = 0; i < codelines.Length; i++)
             {
+                if (codelines[i] == "")
+                    continue;
                 if (codelines[i][0] == '@')
                 {
                     Label l;
@@ -120,7 +122,10 @@ namespace Karen.Engine.Scripting
             PreExcecute();
             for (; activeline < codelines.Length; activeline++)
             {
+                if (codelines[activeline] == "")
+                    continue;
                 string[] com = codelines[activeline].Split(' ', StringSplitOptions.RemoveEmptyEntries);
+                
                 if (com[0].StartsWith('@'))
                 {
                     //check if this is a label
