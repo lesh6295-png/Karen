@@ -32,6 +32,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Assets\Scripts\Main\async.miku">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Assets\Scripts\Main\main.miku">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

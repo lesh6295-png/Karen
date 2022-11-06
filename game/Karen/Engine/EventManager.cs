@@ -24,7 +24,12 @@ namespace Karen.Engine
         }
         public static async Task Wait(string name)
         {
-            await events.GetValueOrDefault(name).Wait();
+            var w = events.GetValueOrDefault(name);
+            while (w == null)
+            {
+                events.GetValueOrDefault(name);
+            }
+            await w.Wait();
         }
     }
 }
