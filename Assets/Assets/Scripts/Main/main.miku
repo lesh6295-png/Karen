@@ -2,6 +2,7 @@
 waitui
 say Привет!
 var int32 x 5678
-set _x 32
+var хуй y 32 global
+set _x _y
 dump
 quit

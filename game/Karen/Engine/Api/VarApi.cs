@@ -43,7 +43,7 @@ namespace Karen.Engine.Api
                 {
                     throw new InvalidApiParamsException("Source variable name invalid.");
                 }
-                target.value += vsource.value;
+                target.value = vsource.value;
             }
             else
             {
