@@ -10,7 +10,7 @@ namespace Karen.Engine.Api
         public static async Task var(object?[]? par)
         {
             VariableContext local = (VariableContext)(((object[])par.Last())[0]);
-            Variable newvar = new Karen.Types.Int32((string)par[1], Convert.ToInt32(par[2]));
+            Variable newvar = new Karen.Types.Variable((string)par[1], Convert.ToInt32(par[2]));
             if (par.Length >= 5)
             {
                 string target = (string)par[3];
@@ -28,6 +28,27 @@ namespace Karen.Engine.Api
         {
             string resultvar = (string)par[0];
             string source = (string)par[1];
+
+            if (!resultvar.StartsWith("_"))
+            {
+                throw new InvalidApiParamsException("Target variable name invalid.");
+            }
+
+            Variable target = ((VariableContext)(((object[])par.Last())[0])).Get(resultvar.Substring(1), false) ?? ((VirtualMachine)(((object[])par.Last())[2])).globalHeap.Get(resultvar.Substring(1), false) ?? ((VariableContext)(((object[])par.Last())[0])).Get(resultvar.Substring(1), false, true);
+
+            if (source.StartsWith("_"))
+            {
+                Variable vsource = ((VariableContext)(((object[])par.Last())[0])).Get(source.Substring(1), false) ?? ((VirtualMachine)(((object[])par.Last())[2])).globalHeap.Get(source.Substring(1), false);
+                if (vsource == null)
+                {
+                    throw new InvalidApiParamsException("Source variable name invalid.");
+                }
+                target.value += vsource.value;
+            }
+            else
+            {
+                target.value += Convert.ToInt32(source);
+            }
         }
 
         public static async Task math(object?[]? par)
