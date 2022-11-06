@@ -1,8 +1,8 @@
 ﻿log Main Script Started.
 waitui
 say Привет!
-var int32 x 5678
-var хуй y 32 global
+var x 5678
+var y 32 global
 set _x _y
 dump
 quit

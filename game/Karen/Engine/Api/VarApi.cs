@@ -10,13 +10,13 @@ namespace Karen.Engine.Api
         public static async Task var(object?[]? par)
         {
             VariableContext local = (VariableContext)(((object[])par.Last())[0]);
-            Variable newvar = new Karen.Types.Variable((string)par[1], Convert.ToInt32(par[2]));
-            if (par.Length >= 5)
+            Variable newvar = new Karen.Types.Variable((string)par[0], Convert.ToInt32(par[1]));
+            if (par.Length >= 4)
             {
-                string target = (string)par[3];
+                string target = (string)par[2];
                 if (target == "global")
                 {
-                    ((VirtualMachine)(((object[])par.Last())[2])).globalHeap.Add(newvar);
+                    ((VirtualMachine)(((object[])par.Last())[3])).globalHeap.Add(newvar);
                     return;
                 }
 
