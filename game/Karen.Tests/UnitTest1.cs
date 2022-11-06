@@ -18,7 +18,8 @@ namespace Karen.Tests
         [Test]
         public void EventManager_AddAndCallEvent()
         {
-            Karen.Engine.EventManager.AddEvent("test", () => { Assert.Pass(); });
+            Karen.Engine.EventManager.AddEvent("test");
+            Karen.Engine.EventManager.AddListerner("test", () => { Assert.Pass(); });
             Karen.Engine.EventManager.CallEvent("test");
         }
 
