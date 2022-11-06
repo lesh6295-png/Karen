@@ -47,7 +47,7 @@ namespace Karen.Engine.Api
             }
             else
             {
-                target.value += Convert.ToInt32(source);
+                target.value = Convert.ToInt32(source);
             }
         }
 
