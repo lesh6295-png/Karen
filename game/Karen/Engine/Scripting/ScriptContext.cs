@@ -26,6 +26,8 @@ namespace Karen.Engine.Scripting
         public
 #endif
         VariableContext localContext;
+        int activeline = 0;
+        public List<Label> labels = new List<Label>();
         public ScriptContext(VirtualMachine host)
         {
             this.host = host;
@@ -34,6 +36,32 @@ namespace Karen.Engine.Scripting
             Logger.Write($"New Script Context Thread: Guid: {Guid}; local variable context: {localContext.Guid}");
             api = Type.GetType("Karen.Engine.Api.Api", true);
             
+        }
+        public void ToLabel(string labelname)
+        {
+            for(int i = 0; i < labels.Count; i++)
+            {
+                if (labels[i].name == labelname)
+                {
+                    activeline = labels[i].position;
+                    return;
+                }
+            }
+            throw new Karen.Types.ObjectNotFoundException("Label not found.");
+        }
+        public void PreExcecute()
+        {
+            //find labels
+            for(int i = 0; i < codelines.Length; i++)
+            {
+                if (codelines[i][0] == '@')
+                {
+                    Label l;
+                    l.position = i;
+                    l.name = codelines[i].Substring(1);
+                    labels.Add(l);
+                }
+            }
         }
         [Obsolete]
         public void LoadScriptFromDrive(string path)
@@ -72,7 +100,7 @@ namespace Karen.Engine.Scripting
         {
             if (!isLoad)
                 return;
-
+           
             for(int i = 0; i < codelines.Length; i++)
             {
                 string[] com = codelines[i].Split(' ', StringSplitOptions.RemoveEmptyEntries);
@@ -89,17 +117,22 @@ namespace Karen.Engine.Scripting
         {
             if(!isLoad)
                 return;
-
-            for (int i = 0; i < codelines.Length; i++)
+            PreExcecute();
+            for (; activeline < codelines.Length; activeline++)
             {
-                string[] com = codelines[i].Split(' ', StringSplitOptions.RemoveEmptyEntries);
+                string[] com = codelines[activeline].Split(' ', StringSplitOptions.RemoveEmptyEntries);
+                if (com[0].StartsWith('@'))
+                {
+                    //check if this is a label
+                    continue;
+                }
                 MethodInfo apiendpoint = api.GetMethod(com[0], BindingFlags.Static | BindingFlags.Public);
                 if (apiendpoint == null)
                 {
                     throw new NullReferenceException("Method not found.");
                 }
                 List<object> a = SVP(com.Skip(1).Cast<object>().ToList());
-                a.Add((object)(new object[] {localContext, Guid, host }));
+                a.Add((object)(new object[] {localContext, Guid, host, this }));
                 await (Task)apiendpoint.Invoke(null, new object[] { a.ToArray() }) ;
             }
         }

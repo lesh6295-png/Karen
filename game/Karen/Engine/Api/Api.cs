@@ -21,6 +21,10 @@ namespace Karen.Engine.Api
                 nsc.ExcecuteAsync();
             }
         }
+        public static async Task to(object?[]? par)
+        {
+            ((ScriptContext)(((object[])par.Last())[3])).ToLabel((string)par[0]);
+        }
         public static async Task wait(object?[]? par)
         {
 #if TESTING

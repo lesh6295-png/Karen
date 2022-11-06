@@ -1,4 +1,5 @@
-﻿// yes this code is bad
+﻿
+// yes this code is bad
 
 using System;
 using System.Collections.Generic;
@@ -27,7 +28,7 @@ namespace Karen.Engine.Scripting
             foreach (var q in variables)
                 if (q.name == name)
                     return q;
-            if(throwifnull)
+            if (throwifnull)
                 throw new ObjectNotFoundException($"In {Guid} context variable with {name} dont exist.");
             if (create)
             {
@@ -37,11 +38,11 @@ namespace Karen.Engine.Scripting
             }
             return null;
         }
-        public void Add(Variable variable, bool checkname=false)
+        public void Add(Variable variable, bool checkname = false)
         {
             if (checkname)
             {
-                for(int i = 0; i < variables.Count; i++)
+                for (int i = 0; i < variables.Count; i++)
                 {
                     if (variables[i].name == variable.name)
                     {
