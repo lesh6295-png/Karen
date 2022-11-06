@@ -9,11 +9,17 @@ using System.Threading.Tasks;
 namespace Karen.Types
 {
 
-    public abstract class Variable
+    public class Variable
     {
         public string name;
+        public dynamic value;
+        public Variable(string name, dynamic value)
+        {
+            this.name = name;
+            this.value = value;
+        }
     }
-    public class Int32 : Variable
+    /*public class Int32 : Variable
     {
         public int value;
         const string typename = "int32";
@@ -22,5 +28,5 @@ namespace Karen.Types
             this.name = name;
             this.value = value;
         }
-    }
+    }*/
 }

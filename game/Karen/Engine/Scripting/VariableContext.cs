@@ -12,7 +12,8 @@ namespace Karen.Engine.Scripting
 {
     public class VariableContext
     {
-#if DEBUG
+#if RELEASE
+#else
         public
 #endif
         List<Variable> variables = new();
@@ -21,12 +22,20 @@ namespace Karen.Engine.Scripting
         {
             Guid = Extensions.RandomString();
         }
-        public Variable Get(string name)
+        public Variable Get(string name, bool throwifnull = true, bool create = false)
         {
             foreach (var q in variables)
                 if (q.name == name)
                     return q;
-            throw new ObjectNotFoundException($"In {Guid} context variable with {name} dont exist.");
+            if(throwifnull)
+                throw new ObjectNotFoundException($"In {Guid} context variable with {name} dont exist.");
+            if (create)
+            {
+                Variable newv = new Variable(name, null);
+                Add(newv);
+                return newv;
+            }
+            return null;
         }
         public void Add(Variable variable, bool checkname=false)
         {

@@ -8,6 +8,8 @@ on:
     #branches: [ "master" ]
   pull_request:
     #branches: [ "master" ]
+  workflow_dispatch:
+  
 
 jobs:
   build:
@@ -49,45 +51,51 @@ jobs:
       
     
     
-    - name: Upload Debug
+    - name: Upload Debug Net5.0
       uses: actions/upload-artifact@v1
       with:
-        name: Karen_Debug_Net5.0_${{github.sha}}
+        name: Karen_Debug_Net5.0_${{github.run_number}}_${{github.sha}}
         path: bin/Debug/net5.0-windows
-    - uses: actions/upload-artifact@v1
+    - name: Upload Debug Net6.0
+      uses: actions/upload-artifact@v1
       with:
-        name: Karen_Debug_Net6.0_${{github.sha}}
+        name: Karen_Debug_Net6.0_${{github.run_number}}_${{github.sha}}
         path: bin/Debug/net6.0-windows
-    - uses: actions/upload-artifact@v1
+    - name: Upload Debug Net7.0
+      uses: actions/upload-artifact@v1
       with:
-        name: Karen_Debug_Net7.0_${{github.sha}}
+        name: Karen_Debug_Net7.0_${{github.run_number}}_${{github.sha}}
         path: bin/Debug/net7.0-windows
 
-    - name: Upload Release
+    - name: Upload Release Net5.0
       uses: actions/upload-artifact@v1
       with:
-        name: Karen_Release_Net5.0_${{github.sha}}
+        name: Karen_Release_Net5.0_${{github.run_number}}_${{github.sha}}
         path: bin/Release/net5.0-windows
-    - uses: actions/upload-artifact@v1
+    - name: Upload Release Net6.0
+      uses: actions/upload-artifact@v1
       with:
-        name: Karen_Release_Net6.0_${{github.sha}}
+        name: Karen_Release_Net6.0_${{github.run_number}}_${{github.sha}}
         path: bin/Release/net6.0-windows
-    - uses: actions/upload-artifact@v1
+    - name: Upload Release Net7.0
+      uses: actions/upload-artifact@v1
       with:
-        name: Karen_Release_Net7.0_${{github.sha}}
+        name: Karen_Release_Net7.0_${{github.run_number}}_${{github.sha}}
         path: bin/Release/net7.0-windows
 
-    - name: Upload Testing
+    - name: Upload Testing Net5.0
       uses: actions/upload-artifact@v1
       with:
-        name: Karen_Testing_Net5.0_${{github.sha}}
+        name: Karen_Testing_Net5.0_${{github.run_number}}_${{github.sha}}
         path: bin/Testing/net5.0-windows
-    - uses: actions/upload-artifact@v1
+    - name: Upload Testing Net6.0
+      uses: actions/upload-artifact@v1
       with:
-        name: Karen_Testing_Net6.0_${{github.sha}}
+        name: Karen_Testing_Net6.0_${{github.run_number}}_${{github.sha}}
         path: bin/Testing/net6.0-windows
-    - uses: actions/upload-artifact@v1
+    - name: Upload Testing Net7.0
+      uses: actions/upload-artifact@v1
       with:
-        name: Karen_Testing_Net7.0_${{github.sha}}
+        name: Karen_Testing_Net7.0_${{github.run_number}}_${{github.sha}}
         path: bin/Testing/net7.0-windows
         
