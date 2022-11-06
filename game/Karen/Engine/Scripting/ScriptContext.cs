@@ -11,7 +11,8 @@ namespace Karen.Engine.Scripting
 {
     public class ScriptContext
     {
-        #if DEBUG
+#if RELEASE
+#else
         public
 #endif
         string[] codelines;
@@ -20,7 +21,8 @@ namespace Karen.Engine.Scripting
         bool isLoad = false;
         public string Guid { get; private set; }
         VirtualMachine host;
-#if DEBUG
+#if RELEASE
+#else
         public
 #endif
         VariableContext localContext;

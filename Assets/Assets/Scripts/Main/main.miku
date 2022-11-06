@@ -1,5 +1,6 @@
 ﻿log Main Script Started.
 waitui
+say Привет!
 var int32 x 5678
 set _x 32
 dump
