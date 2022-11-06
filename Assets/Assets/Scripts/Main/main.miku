@@ -8,7 +8,7 @@ addevent q
 log  Event Created
 wait 500
 wait 1000
-newsc 3 1
+newsc 3 2
 
 log  Event Created
 wait 500

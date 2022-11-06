@@ -151,7 +151,13 @@ namespace Karen.KBL
         public string path;
         public override string ToString()
         {
-            return $"{id} {path}";
+            return $"{id}:{path}";
+        }
+        public void FromString(string s)
+        {
+            var q = s.Split(":");
+            id = Convert.ToInt32(q[0]);
+            path = q[1];
         }
     }
     public class LibaryBuilder
@@ -164,6 +170,11 @@ namespace Karen.KBL
             bool randomid = args.Contains("-randomid");
             int itemnumber = 0;
             List<InputValue> l = new();
+            List<InputValue> config = new();
+            List<int> used = new();
+
+            
+
             for (int i = 0; i < args.Length; i++)
             {
                 string parC = args[i];
@@ -179,15 +190,32 @@ namespace Karen.KBL
                         break;
                     case "-dir":
                         string[] filn = Directory.GetFiles(args[i + 1]);
+                        
                         i++;
                         foreach (var q in filn)
                         {
+                            if (q.Split("\\").Last() == "buildconfig")
+                                continue;
                             InputValue iv;
                             iv.path = q;
-                            iv.id = GetId();
+                            iv.id = GetId(q.Split("\\").Last());
                             l.Add(iv);
                         }
                         break;
+
+                    case "-config":
+                        string[] reserved = File.ReadAllLines(args[i + 1]);
+                        i++;
+                        foreach (var q in reserved)
+                        {
+                            if (q == "")
+                                continue;
+                            var w = new InputValue();
+                            w.FromString(q);
+                            config.Add(w);
+                        }
+                        break;
+
                     case "-randomid":
 
                         break;
@@ -201,7 +229,7 @@ namespace Karen.KBL
                         }
                         else
                         {
-                            res = GetId();
+                            res = GetId(args[i]);
                         }
                         inp.id = res;
                         l.Add(inp);
@@ -218,12 +246,25 @@ namespace Karen.KBL
 
 
 
-            int GetId()
+            int GetId(string path)
             {
-                if (randomid)
-                    return r.Next();
-                itemnumber++;
-                return itemnumber;
+                foreach (var q in config)
+                {
+                    if (q.path == path)
+                    {
+                        used.Add(q.id);
+                        return q.id;
+                    }
+                }
+                int res;
+                do
+                {
+                    if (randomid)
+                        res = r.Next();
+                    itemnumber++;
+                    res = itemnumber;
+                } while (used.Contains(res));
+                return res;
             }
         }
     }

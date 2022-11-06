@@ -25,7 +25,7 @@ namespace Karen.Engine
             WriteRegistry();
             VM = new VirtualMachine();
             int mainid = BinaryManager.LoadKBL("bin\\kbl\\main.kbl");
-            byte[] main = BinaryManager.Extract(mainid,2);
+            byte[] main = BinaryManager.Extract(mainid,1);
             string mainthreadguid = VM.AddScriptThread();
             ScriptContext maincon = VM.GetScriptContext(mainthreadguid);
             maincon.LoadScriptFromByteArray(main);
