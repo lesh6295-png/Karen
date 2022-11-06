@@ -3,6 +3,6 @@ waitui
 say Привет!
 var x 5678
 var y 32 global
-set _x _y
+math _result = _x * _y
 dump
 quit

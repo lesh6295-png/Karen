@@ -53,7 +53,68 @@ namespace Karen.Engine.Api
 
         public static async Task math(object?[]? par)
         {
-            //TODO: implementation
+            string resultvar = (string)par[0];
+            string source1 = (string)par[2];
+            string source2 = (string)par[4];
+            string operand = (string)par[3];
+
+            if (((string)par[1]) != "=")
+            {
+                throw new InvalidApiParamsException("Equals symbol dont found.");
+            }
+
+            if (!resultvar.StartsWith("_"))
+            {
+                throw new InvalidApiParamsException("Target variable name invalid.");
+            }
+
+            Variable target = ((VariableContext)(((object[])par.Last())[0])).Get(resultvar.Substring(1), false) ?? ((VirtualMachine)(((object[])par.Last())[2])).globalHeap.Get(resultvar.Substring(1), false) ?? ((VariableContext)(((object[])par.Last())[0])).Get(resultvar.Substring(1), false, true);
+            Variable a, b;
+
+            if (source1.StartsWith("_"))
+            {
+                a = ((VariableContext)(((object[])par.Last())[0])).Get(source1.Substring(1), false) ?? ((VirtualMachine)(((object[])par.Last())[2])).globalHeap.Get(source1.Substring(1), false);
+                if (a == null)
+                {
+                    throw new InvalidApiParamsException("Source variable name invalid.");
+                }
+            }
+            else
+            {
+                a = new Variable(Extensions.RandomString(),Convert.ToInt32(source1));
+            }
+
+            if (source2.StartsWith("_"))
+            {
+                b = ((VariableContext)(((object[])par.Last())[0])).Get(source2.Substring(1), false) ?? ((VirtualMachine)(((object[])par.Last())[2])).globalHeap.Get(source2.Substring(1), false);
+                if (b == null)
+                {
+                    throw new InvalidApiParamsException("Source variable name invalid.");
+                }
+            }
+            else
+            {
+                b = new Variable(Extensions.RandomString(), Convert.ToInt32(source1));
+            }
+
+            switch (operand)
+            {
+                case "+":
+                    target.value = a.value + b.value;
+                    break;
+                case "-":
+                    target.value = a.value - b.value;
+                    break;
+                case "*":
+                    target.value = a.value * b.value;
+                    break;
+                case "/":
+                    target.value = a.value / b.value;
+                    break;
+                case "%":
+                    target.value = a.value % b.value;
+                    break;
+            }
         }
     }
 }
