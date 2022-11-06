@@ -2,6 +2,15 @@
 waitui
 say Привет!
 
+newsc 1 2
+
+addevent q
+log  Event Created
+wait 500
+callevent q
+wait 250
+log Event End?
+
 var x 5678
 var y 32 global
 to skipq
