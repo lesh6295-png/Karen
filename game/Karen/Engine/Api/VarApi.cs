@@ -26,7 +26,8 @@ namespace Karen.Engine.Api
 
         public static async Task set(object?[]? par)
         {
-            //TODO: implemetation
+            string resultvar = (string)par[0];
+            string source = (string)par[1];
         }
 
         public static async Task math(object?[]? par)
