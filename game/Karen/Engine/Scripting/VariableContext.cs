@@ -12,7 +12,8 @@ namespace Karen.Engine.Scripting
 {
     public class VariableContext
     {
-#if DEBUG
+#if RELEASE
+#else
         public
 #endif
         List<Variable> variables = new();
