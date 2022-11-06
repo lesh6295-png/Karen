@@ -1,14 +1,9 @@
 ﻿log Main Script Started.
 waitui
-var int32 x 5678
-kbl load bin\kbl\body.kbl
-sprite body int:1 int:5
-say Ко-ле-со
-wait 1000
-sprite body int:1 int:6
-wait 1000
-sprite body int:1 int:4
-wait 10000
 say Привет!
-say Пока!
+var x 5678
+var y 32 global
+math q = x / y
+math w = x % y
+dump
 quit
