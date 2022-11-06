@@ -29,25 +29,17 @@ namespace Karen.Engine.Api
             string resultvar = (string)par[0];
             string source = (string)par[1];
 
-            if (!resultvar.StartsWith("_"))
-            {
-                throw new InvalidApiParamsException("Target variable name invalid.");
-            }
 
             Variable target = ((VariableContext)(((object[])par.Last())[0])).Get(resultvar.Substring(1), false) ?? ((VirtualMachine)(((object[])par.Last())[2])).globalHeap.Get(resultvar.Substring(1), false) ?? ((VariableContext)(((object[])par.Last())[0])).Get(resultvar.Substring(1), false, true);
 
-            if (source.StartsWith("_"))
+            Variable vsource = ((VariableContext)(((object[])par.Last())[0])).Get(source.Substring(1), false) ?? ((VirtualMachine)(((object[])par.Last())[2])).globalHeap.Get(source.Substring(1), false);
+            if (vsource == null)
             {
-                Variable vsource = ((VariableContext)(((object[])par.Last())[0])).Get(source.Substring(1), false) ?? ((VirtualMachine)(((object[])par.Last())[2])).globalHeap.Get(source.Substring(1), false);
-                if (vsource == null)
-                {
-                    throw new InvalidApiParamsException("Source variable name invalid.");
-                }
-                target.value = vsource.value;
+                target.value = Convert.ToInt32(source);
             }
             else
             {
-                target.value = Convert.ToInt32(source);
+                target.value = vsource.value;
             }
         }
 
@@ -63,36 +55,19 @@ namespace Karen.Engine.Api
                 throw new InvalidApiParamsException("Equals symbol dont found.");
             }
 
-            if (!resultvar.StartsWith("_"))
-            {
-                throw new InvalidApiParamsException("Target variable name invalid.");
-            }
 
-            Variable target = ((VariableContext)(((object[])par.Last())[0])).Get(resultvar.Substring(1), false) ?? ((VirtualMachine)(((object[])par.Last())[2])).globalHeap.Get(resultvar.Substring(1), false) ?? ((VariableContext)(((object[])par.Last())[0])).Get(resultvar.Substring(1), false, true);
+
+            Variable target = ((VariableContext)(((object[])par.Last())[0])).Get(resultvar, false) ?? ((VirtualMachine)(((object[])par.Last())[2])).globalHeap.Get(resultvar, false) ?? ((VariableContext)(((object[])par.Last())[0])).Get(resultvar, false, true);
             Variable a, b;
 
-            if (source1.StartsWith("_"))
+            a = ((VariableContext)(((object[])par.Last())[0])).Get(source1, false) ?? ((VirtualMachine)(((object[])par.Last())[2])).globalHeap.Get(source1, false);
+            if (a == null)
             {
-                a = ((VariableContext)(((object[])par.Last())[0])).Get(source1.Substring(1), false) ?? ((VirtualMachine)(((object[])par.Last())[2])).globalHeap.Get(source1.Substring(1), false);
-                if (a == null)
-                {
-                    throw new InvalidApiParamsException("Source variable name invalid.");
-                }
-            }
-            else
-            {
-                a = new Variable(Extensions.RandomString(),Convert.ToInt32(source1));
+                a = new Variable(Extensions.RandomString(), Convert.ToInt32(source1));
             }
 
-            if (source2.StartsWith("_"))
-            {
-                b = ((VariableContext)(((object[])par.Last())[0])).Get(source2.Substring(1), false) ?? ((VirtualMachine)(((object[])par.Last())[2])).globalHeap.Get(source2.Substring(1), false);
-                if (b == null)
-                {
-                    throw new InvalidApiParamsException("Source variable name invalid.");
-                }
-            }
-            else
+            b = ((VariableContext)(((object[])par.Last())[0])).Get(source2, false) ?? ((VirtualMachine)(((object[])par.Last())[2])).globalHeap.Get(source2, false);
+            if (b == null)
             {
                 b = new Variable(Extensions.RandomString(), Convert.ToInt32(source1));
             }
