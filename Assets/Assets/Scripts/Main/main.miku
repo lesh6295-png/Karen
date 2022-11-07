@@ -2,10 +2,10 @@
 waitui
 say Привет!
 var x 10
-var y 50
-if x > y else qwe to endqwe
-log X greater then Y
+var y 100
+if x == y else qwe to endqwe
+log X equals Y
 @qwe
-log X not greater then Y
+log X not equals Y
 @endqwe
 quit
