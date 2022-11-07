@@ -49,5 +49,10 @@ namespace Karen.Engine.Api
                     break;
             }
         }
+
+        public static async Task select(object?[]? par)
+        {
+
+        }
     }
 }
