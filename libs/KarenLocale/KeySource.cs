@@ -21,7 +21,7 @@ namespace Karen.Locale
             for (int i = 0; i < keys.Length; i++)
             {
                 if (keys[i].key == key)
-                    return keys[i].GetTranslate(true);
+                    return keys[i].GetTranslate();
             }
             return null;
         }
