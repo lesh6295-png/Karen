@@ -1,6 +1,7 @@
 ﻿log Main Script Started.
 waitui
-say Привет!
+locales load bin\locales\1.locale
+say hi
 var x 10
 var y 100
 if x == y else qwe to endqwe
