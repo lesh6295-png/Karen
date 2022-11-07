@@ -28,6 +28,8 @@ namespace Karen.Engine.Scripting
         VariableContext localContext;
         int activeline = 0;
         public List<Label> labels = new List<Label>();
+
+        public (string from, string to) ifskipper=new();
         public ScriptContext(VirtualMachine host)
         {
             this.host = host;
@@ -36,6 +38,11 @@ namespace Karen.Engine.Scripting
             Logger.Write($"New Script Context Thread: Guid: {Guid}; local variable context: {localContext.Guid}");
             api = Type.GetType("Karen.Engine.Api.Api", true);
             
+        }
+        public void SetIfSkip(string from, string to)
+        {
+            ifskipper.from = '@' + from;
+            ifskipper.to = to;
         }
         public void ToLabel(string labelname)
         {
@@ -125,13 +132,16 @@ namespace Karen.Engine.Scripting
                 if (codelines[activeline] == "")
                     continue;
                 string[] com = codelines[activeline].Split(' ', StringSplitOptions.RemoveEmptyEntries);
-                
+                if (com[0] == ifskipper.from)
+                {
+                    ToLabel(ifskipper.to);
+                }
                 if (com[0].StartsWith('@'))
                 {
                     //check if this is a label
                     continue;
                 }
-                MethodInfo apiendpoint = api.GetMethod(com[0], BindingFlags.Static | BindingFlags.Public);
+                MethodInfo apiendpoint = api.GetMethod(com[0], BindingFlags.Static | BindingFlags.Public) ?? api.GetMethod('_' + com[0], BindingFlags.Static | BindingFlags.Public);
                 if (apiendpoint == null)
                 {
                     throw new NullReferenceException("Method not found.");

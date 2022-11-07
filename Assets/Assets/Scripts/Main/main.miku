@@ -1,26 +1,11 @@
 ﻿log Main Script Started.
 waitui
 say Привет!
-
-
-
-addevent q
-log  Event Created
-wait 500
-wait 1000
-newsc 3 2
-
-log  Event Created
-wait 500
-callevent q
-wait 250
-log Event End?
-
-var x 5678
-var y 32 global
-to skipq
-math q = x / y
-@skipq
-math w = x % y
-dump
+var x 10
+var y 50
+if x > y else qwe to endqwe
+log X greater then Y
+@qwe
+log X not greater then Y
+@endqwe
 quit
