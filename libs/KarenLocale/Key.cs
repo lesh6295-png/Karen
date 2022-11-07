@@ -24,19 +24,13 @@ namespace Karen.Locale
                 return k;
             }
         }
-        public string GetTranslate(bool urldecode=false)
+        public string GetTranslate()
         {
             string result;
             if (translations.TryGetValue(Localization.Culture, out result))
-                if (urldecode)
-                    return HttpUtility.UrlDecode(result);
-                else
-                    return result;
+                    return result.FromHex();
             if (translations.TryGetValue(Localization.DefaultCulture, out result))
-                if (urldecode)
-                    return HttpUtility.UrlDecode(result);
-                else
-                    return result;
+                    return result.FromHex();
             return key;
         }
         public int GetLength()
