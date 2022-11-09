@@ -10,6 +10,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
+using Karen.Types;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
@@ -51,8 +52,31 @@ namespace Karen
             Singelton = this;
             InitializeComponent();
             IsReady = true;
+            Select();
         }
-
+        void Select()
+        {
+            select.ShowGridLines = false;
+            AddSelectButton("Да, Большой Босс!");
+            AddSelectButton("Нет, Витя АК лучше!");
+        }
+        void AddSelectButton(string description)
+        {
+            select.RowDefinitions.Add(new RowDefinition());
+            var but = new Button();
+            but.Name = "but"+ Extensions.RandomString(min: 1, max: 3);
+            var stackpanel = new StackPanel();
+            stackpanel.Name = "pan"+ Extensions.RandomString(min: 1, max: 3);
+           // stackpanel.VerticalAlignment = VerticalAlignment.Center;
+            stackpanel.HorizontalAlignment = HorizontalAlignment.Center;
+            select.VerticalAlignment = VerticalAlignment.Center;
+            but.Content = description;
+            but.Opacity =0.5;
+           // but.Margin = new Thickness(100, 0, 100, 0);
+            //stackpanel.Children.Add(but);
+            select.Children.Add(but);
+            Grid.SetRow(but, select.RowDefinitions.Count - 1);
+        }
         public async Task WriteText(string text, bool wait = true, bool clear = true, int delay = 20)
         {
             Next = true;
