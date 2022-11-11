@@ -25,6 +25,8 @@ namespace Karen
     {
         public static MainWindow Singelton;
         bool _hide = false;
+        int selectresult = 0;
+        bool inselect = false;
         public bool Next { get; private set; }
         public bool IsReady { get; private set; } = false;
         public bool HideWindow
@@ -52,19 +54,27 @@ namespace Karen
             Singelton = this;
             InitializeComponent();
             IsReady = true;
-            Select();
         }
-        void Select()
+        public async Task<int> Select(string[] names, int[] results)
         {
             select.ShowGridLines = false;
-            AddSelectButton("Да, Большой Босс!");
-            AddSelectButton("Нет, Витя АК лучше!");
+            inselect = true;
+            AddSelectButton("Да, Большой Босс!", 1);
+            AddSelectButton("Нет, Витя АК лучше!",2);
+            while (inselect)
+            {
+                await Task.Delay(70);
+            }
+
+            return selectresult;
         }
-        void AddSelectButton(string description)
+        void AddSelectButton(string description, int variantid)
         {
             select.RowDefinitions.Add(new RowDefinition());
             var but = new Button();
-            but.Name = "but"+ Extensions.RandomString(min: 1, max: 3);
+            but.ClickMode = ClickMode.Release;
+            but.Click += UnlockSelectMode;
+            but.Name = variantid.ToString();
             var stackpanel = new StackPanel();
             stackpanel.Name = "pan"+ Extensions.RandomString(min: 1, max: 3);
             stackpanel.HorizontalAlignment = HorizontalAlignment.Center;
@@ -74,6 +84,13 @@ namespace Karen
             select.Children.Add(but);
             Grid.SetRow(but, select.RowDefinitions.Count - 1);
         }
+
+        private void UnlockSelectMode(object sender, RoutedEventArgs e)
+        {
+            selectresult = Convert.ToInt32(((Button)sender).Name);
+            inselect = false;
+        }
+
         public async Task WriteText(string text, bool wait = true, bool clear = true, int delay = 20)
         {
             Next = true;
