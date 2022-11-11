@@ -67,13 +67,10 @@ namespace Karen
             but.Name = "but"+ Extensions.RandomString(min: 1, max: 3);
             var stackpanel = new StackPanel();
             stackpanel.Name = "pan"+ Extensions.RandomString(min: 1, max: 3);
-           // stackpanel.VerticalAlignment = VerticalAlignment.Center;
             stackpanel.HorizontalAlignment = HorizontalAlignment.Center;
             select.VerticalAlignment = VerticalAlignment.Center;
             but.Content = description;
             but.Opacity =0.5;
-           // but.Margin = new Thickness(100, 0, 100, 0);
-            //stackpanel.Children.Add(but);
             select.Children.Add(but);
             Grid.SetRow(but, select.RowDefinitions.Count - 1);
         }
