@@ -58,15 +58,22 @@ namespace Karen.Engine.Api
         {
             List<string> keys = new(), endpoints = new();
             List<int> id = new List<int>();
-            for(int i = 0; i < par.Length-1; i+=2)
+            for (int i = 0; i < par.Length - 1; i += 2)
             {
                 keys.Add((string)par[i]);
                 endpoints.Add((string)par[i + 1]);
                 id.Add(id.Count + 1);
             }
             var text = keys.Select((x) => { return SourceManager.ExtractTranslate(x); }).ToArray();
-            int result = await MainWindow.Singelton.Select(text, id.ToArray());
-            ((ScriptContext)(((object[])par.Last())[3])).ToLabel(endpoints[result-1]);
+            int result = 0;
+            //TODO: Update select behaviour with AUTO_TEST
+#if TESTING
+            if (App.AUTO_TEST)
+                result=1;
+#else
+            result = await MainWindow.Singelton.Select(text, id.ToArray());
+#endif
+            ((ScriptContext)(((object[])par.Last())[3])).ToLabel(endpoints[result - 1]);
         }
     }
 }
