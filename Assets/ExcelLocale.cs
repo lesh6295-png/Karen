@@ -5,6 +5,8 @@ using System.Text;
 using ExcelLibrary;
 using System.Threading.Tasks;
 using System.Diagnostics;
+using System.Web;
+using Karen.Types;
 using Karen.Locale;
 namespace Karen.Assets
 {
@@ -125,7 +127,7 @@ namespace Karen.Assets
                     {
                         if (w.Item1 == key)
                         {
-                            translation = w.Item2;
+                            translation = w.Item2.ToHex();
                             break;
                         }
                     }
