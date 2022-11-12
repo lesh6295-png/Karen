@@ -4,7 +4,7 @@ using Karen.Types;
 using System.Text;
 using System.Linq;
 using System.Collections;
-
+using System.Web;
 namespace Karen.Locale
 {
     public struct Key
@@ -28,9 +28,9 @@ namespace Karen.Locale
         {
             string result;
             if (translations.TryGetValue(Localization.Culture, out result))
-                return result;
+                    return result.FromHex();
             if (translations.TryGetValue(Localization.DefaultCulture, out result))
-                return result;
+                    return result.FromHex();
             return key;
         }
         public int GetLength()

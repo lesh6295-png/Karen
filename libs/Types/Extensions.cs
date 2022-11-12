@@ -43,6 +43,28 @@ namespace Karen.Types
             return newDirectoryInfo;
         }
 
+        public static string ToHex(this string s)
+        {
+            var sb = new StringBuilder();
 
+            var q = Encoding.Unicode.GetBytes(s);
+            for (int i = 0; i < q.Length; i++)
+            {
+                sb.Append(q[i].ToString("X2"));
+            }
+
+            return sb.ToString();
+        }
+
+        public static string FromHex(this string s)
+        {
+            var q = new byte[s.Length / 2];
+            for (var i = 0; i < q.Length; i++)
+            {
+                q[i] = Convert.ToByte(s.Substring(i * 2, 2), 16);
+            }
+
+            return Encoding.Unicode.GetString(q);
+        }
     }
 }

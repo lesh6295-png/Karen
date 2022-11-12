@@ -26,6 +26,20 @@ namespace Karen.Engine.Api
         {
             string text = par.TryExtractElement<object, string>("unk");
             MainWindow.Singelton.HideWindow = false;
+            await MainWindow.Singelton.WriteText(SourceManager.ExtractTranslate(text));
+#if TESTING
+            if (App.AUTO_TEST)
+                return;
+#endif
+            while (MainWindow.Singelton.Next)
+            {
+                await Task.Delay(100);
+            }
+        }
+        public static async Task print(object?[]? par)
+        {
+            string text = par.TryExtractElement<object, string>("unk");
+            MainWindow.Singelton.HideWindow = false;
             await MainWindow.Singelton.WriteText(text);
 #if TESTING
             if (App.AUTO_TEST)
@@ -36,7 +50,6 @@ namespace Karen.Engine.Api
                 await Task.Delay(100);
             }
         }
-
         public static async Task sprite(object?[]? par)
         {
             string type = par.TryExtractElement<object, string>("body");
