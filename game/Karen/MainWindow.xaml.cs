@@ -54,7 +54,6 @@ namespace Karen
             Singelton = this;
             InitializeComponent();
             IsReady = true;
-            Select(new string[] { "Big russian boss", "Oxxxymiron" }, new int[] { 1, 2 }).Wait();
         }
         public async Task<int> Select(string[] names, int[] results)
         {
@@ -62,8 +61,7 @@ namespace Karen
             {
                 throw new InvalidApiParamsException("Count of names and results are not equals");
             }
-            Dispatcher.Invoke(() => { nextBut.IsEnabled = false; textBox.IsEnabled = false; });
-            select.ShowGridLines = false;
+            Dispatcher.Invoke(() => { select.Visibility = Visibility.Visible; nextBut.Visibility = Visibility.Hidden; textBox.Visibility = Visibility.Hidden; });
             inselect = true;
             for(int i = 0; i < names.Length; i++)
             {
@@ -73,7 +71,7 @@ namespace Karen
             {
                 await Task.Delay(70);
             }
-            Dispatcher.Invoke(() => { select.RowDefinitions.Clear(); nextBut.IsEnabled = false; textBox.IsEnabled = false; });
+            Dispatcher.Invoke(() => { select.Visibility=Visibility.Hidden; select.Children.Clear(); select.RowDefinitions.Clear(); nextBut.Visibility = Visibility.Visible; textBox.Visibility = Visibility.Visible; });
             return selectresult;
         }
         void AddSelectButton(string description, int variantid)

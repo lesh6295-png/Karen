@@ -58,11 +58,11 @@ namespace Karen.Engine.Api
         {
             List<string> keys = new(), endpoints = new();
             List<int> id = new List<int>();
-            for(int i = 0; i < par.Length; i++)
+            for(int i = 0; i < par.Length-1; i+=2)
             {
                 keys.Add((string)par[i]);
                 endpoints.Add((string)par[i + 1]);
-                id.Add(i + 1);
+                id.Add(id.Count + 1);
             }
             var text = keys.Select((x) => { return SourceManager.ExtractTranslate(x); }).ToArray();
             int result = await MainWindow.Singelton.Select(text, id.ToArray());
