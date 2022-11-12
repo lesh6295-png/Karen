@@ -54,7 +54,7 @@ namespace Karen
             Singelton = this;
             InitializeComponent();
             IsReady = true;
-            Select(new string[] { "Big russian boss", "Oxxxymiron" }, new int[] { 1, 2 }).Wait();
+            
         }
         public async Task<int> Select(string[] names, int[] results)
         {
