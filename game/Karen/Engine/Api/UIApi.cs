@@ -1,6 +1,10 @@
 ﻿using System.Threading.Tasks;
 using Karen.Types;
 using Karen.KBL;
+using System.Collections.Generic;
+using System.Linq;
+using Karen.Engine.Scripting;
+using Karen.Locale;
 namespace Karen.Engine.Api
 {
     public static partial class Api
@@ -52,7 +56,17 @@ namespace Karen.Engine.Api
 
         public static async Task select(object?[]? par)
         {
-
+            List<string> keys = new(), endpoints = new();
+            List<int> id = new List<int>();
+            for(int i = 0; i < par.Length; i++)
+            {
+                keys.Add((string)par[i]);
+                endpoints.Add((string)par[i + 1]);
+                id.Add(i + 1);
+            }
+            var text = keys.Select((x) => { return SourceManager.ExtractTranslate(x); }).ToArray();
+            int result = await MainWindow.Singelton.Select(text, id.ToArray());
+            ((ScriptContext)(((object[])par.Last())[3])).ToLabel(endpoints[result-1]);
         }
     }
 }

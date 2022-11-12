@@ -54,18 +54,26 @@ namespace Karen
             Singelton = this;
             InitializeComponent();
             IsReady = true;
+            Select(new string[] { "Big russian boss", "Oxxxymiron" }, new int[] { 1, 2 }).Wait();
         }
         public async Task<int> Select(string[] names, int[] results)
         {
+            if (names.Length != results.Length)
+            {
+                throw new InvalidApiParamsException("Count of names and results are not equals");
+            }
+            Dispatcher.Invoke(() => { nextBut.IsEnabled = false; textBox.IsEnabled = false; });
             select.ShowGridLines = false;
             inselect = true;
-            AddSelectButton("Да, Большой Босс!", 1);
-            AddSelectButton("Нет, Витя АК лучше!",2);
+            for(int i = 0; i < names.Length; i++)
+            {
+                Dispatcher.Invoke(()=> { AddSelectButton(names[i], results[i]); });
+            }
             while (inselect)
             {
                 await Task.Delay(70);
             }
-
+            Dispatcher.Invoke(() => { select.RowDefinitions.Clear(); nextBut.IsEnabled = false; textBox.IsEnabled = false; });
             return selectresult;
         }
         void AddSelectButton(string description, int variantid)
@@ -74,7 +82,7 @@ namespace Karen
             var but = new Button();
             but.ClickMode = ClickMode.Release;
             but.Click += UnlockSelectMode;
-            but.Name = variantid.ToString();
+            but.Name = "n"+ variantid.ToString();
             var stackpanel = new StackPanel();
             stackpanel.Name = "pan"+ Extensions.RandomString(min: 1, max: 3);
             stackpanel.HorizontalAlignment = HorizontalAlignment.Center;
@@ -87,7 +95,7 @@ namespace Karen
 
         private void UnlockSelectMode(object sender, RoutedEventArgs e)
         {
-            selectresult = Convert.ToInt32(((Button)sender).Name);
+            selectresult = Convert.ToInt32(((Button)sender).Name.Substring(1));
             inselect = false;
         }
 

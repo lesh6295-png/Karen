@@ -16,7 +16,7 @@
             </Grid.RowDefinitions>
         </Grid>
         <TextBlock x:Name="textBox" Margin="0,382,0,0" Text="Sample Text!" TextWrapping="Wrap" VerticalAlignment="Top" Height="218" Foreground="Black" FontFamily="Comic Sans MS" />
-        <Button Margin="0,382,0,0" Opacity="0" Click="Button_Click"/>
+        <Button x:Name="nextBut" Margin="0,382,0,0" Opacity="0" Click="Button_Click"/>
         <!--<StackPanel x:Name="select" Margin="0.1,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="400" >
             <StackPanel.Resources>
                 <Style TargetType="{x:Type Button}">
