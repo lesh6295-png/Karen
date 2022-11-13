@@ -23,6 +23,7 @@ namespace Karen.Types
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             info.AddValue("name", this.name);
+            info.AddValue("value", value.ToString().ToHex());
         }
         public Variable()
         {
@@ -30,7 +31,12 @@ namespace Karen.Types
         }
         public Variable(SerializationInfo info, StreamingContext context)
         {
-
+            name = info.GetString("name");
+            value = info.GetString("value").FromHex();
+            int r;
+            if(int.TryParse(value, out r)){
+                value = r;
+            }
         }
     }
     /*public class Int32 : Variable
