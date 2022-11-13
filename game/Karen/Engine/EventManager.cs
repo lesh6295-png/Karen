@@ -6,23 +6,24 @@ using System.Threading.Tasks;
 using Karen.Types;
 namespace Karen.Engine
 {
-   public static class EventManager
+    [Serializable]
+    public class EventManager
     {
-        static Dictionary<string, KarenEvent> events = new();
+        Dictionary<string, KarenEvent> events = new();
         
-        public static void AddEvent(string name)
+        public void AddEvent(string name)
         {
             events.Add(name, new KarenEvent());
         }
-        public static void CallEvent(string name)
+        public void CallEvent(string name)
         {
             events.GetValueOrDefault(name).Invoke();
         }
-        public static void AddListerner(string name, Action action)
+        public void AddListerner(string name, Action action)
         {
             events.GetValueOrDefault(name).AddListerner(action);
         }
-        public static async Task Wait(string name)
+        public async Task Wait(string name)
         {
             await events.GetValueOrDefault(name)?.Wait();
         }

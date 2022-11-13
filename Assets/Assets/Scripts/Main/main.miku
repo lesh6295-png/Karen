@@ -1,4 +1,4 @@
-﻿log Main Script Started.
+log Main Script Started.
 waitui
 say КТО_ЛУЧШИЙ_РЕПЕР?
 select Oxxxymiron oxxxy BIG_RUSSIAN_BOSS boss Витя_АК pidor Young_P&H pimp
@@ -14,4 +14,5 @@ to qu
 @boss
 say Элитные_машины,_кучи_золота_вокруг
 @qu
+save
 quit
