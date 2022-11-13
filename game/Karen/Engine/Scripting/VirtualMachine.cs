@@ -11,12 +11,15 @@ namespace Karen.Engine.Scripting
     {
         public VariableContext globalHeap;
         public List<ScriptContext> threads;
+        public EventManager events;
         public VirtualMachine()
         {
             Logger.Write("Create virtual script machine...");
             globalHeap = new VariableContext();
             Logger.Write($"Global Heap Guid: {globalHeap.Guid}");
             threads = new List<ScriptContext>();
+
+            events = new();
         }
         /// <summary>
         /// Initializes new ScriptContext
