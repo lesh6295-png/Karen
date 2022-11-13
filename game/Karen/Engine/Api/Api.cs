@@ -16,8 +16,12 @@ namespace Karen.Engine.Api
         {
             ScriptContext nsc = new ScriptContext((VirtualMachine)(((object[])par.Last())[2]));
             nsc.LoadScriptFromByteArray(BinaryManager.Extract(Convert.ToInt32((string)par[0]), Convert.ToInt32((string)par[1])));
-                nsc.ExcecuteAsync();
-            }
+            nsc.ExcecuteAsync();
+        }
+        public static async Task save(object?[]? par)
+        {
+            StateController.Serialiaze();
+        }
         public static async Task to(object?[]? par)
         {
             ((ScriptContext)(((object[])par.Last())[3])).ToLabel((string)par[0]);
@@ -34,11 +38,11 @@ namespace Karen.Engine.Api
 
         public static async Task quit(object?[]? par)
         {
-            int code = par.TryExtractElement<object,int>(0, 0);
+            int code = par.TryExtractElement<object, int>(0, 0);
             Logger.Write($"QUIT: code: {code}");
             Environment.Exit(code);
         }
-        
+
 
         public static async Task _if(object?[]? par)
         {
@@ -89,7 +93,7 @@ namespace Karen.Engine.Api
                     break;
                 default:
                     throw new InvalidApiParamsException("Unknown if comparer.");
-                    
+
             }
             if (!istrue)
             {

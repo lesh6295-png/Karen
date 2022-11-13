@@ -8,4 +8,5 @@ log X equals Y
 @qwe
 log X not equals Y
 @endqwe
+save
 quit
