@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Karen.Engine.Scripting
 {
+    [Serializable]
     public class VirtualMachine
     {
         public VariableContext globalHeap;

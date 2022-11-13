@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using Karen.Types;
 namespace Karen.Engine.Scripting
 {
+    [Serializable]
     public class VariableContext
     {
 #if RELEASE

@@ -9,5 +9,14 @@ namespace Karen.Engine
 {
     public static class StateController
     {
+        public static async void Enable()
+        {
+
+        }
+
+        public static async void Serialaze()
+        {
+
+        }
     }
 }

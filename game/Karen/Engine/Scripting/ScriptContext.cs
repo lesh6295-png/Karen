@@ -9,6 +9,7 @@ using System.IO;
 using System.Reflection;
 namespace Karen.Engine.Scripting
 {
+    [Serializable]
     public class ScriptContext
     {
 #if RELEASE
