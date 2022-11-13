@@ -17,11 +17,8 @@ namespace Karen.Engine
 
         public static async void Serialiaze()
         {
-            BinaryFormatter f = new BinaryFormatter();
-            MemoryStream m = new MemoryStream();
-            f.Serialize(m, EngineStarter.VM);
-            m.Position = 0;
-            File.WriteAllBytes(Karen.Registry.RegController.GetKarenFolderPath() + "\\vm.pos", m.ToArray());
+            string m = System.Text.Json.JsonSerializer.Serialize<VirtualMachine>(EngineStarter.VM);
+            File.WriteAllText(Karen.Registry.RegController.GetKarenFolderPath() + "\\vm.pos", m);
         }
     }
 }
