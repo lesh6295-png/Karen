@@ -9,8 +9,25 @@
     <Grid>
         <Image x:Name="body" Margin="-10,-152,10,-274" Source="DefaultSprites/body.png"  Stretch="Fill" StretchDirection="Both" RenderTransformOrigin="0.5,0.5" ScrollViewer.VerticalScrollBarVisibility="Disabled" OpacityMask="White" />
         <Image x:Name="emotion" Margin="-10,-152,10,-274" Source="DefaultSprites/emotion.png" MouseDown="Move_MouseDown" Stretch="Fill" StretchDirection="Both" RenderTransformOrigin="0.5,0.5" ScrollViewer.VerticalScrollBarVisibility="Disabled"/>
-        <Rectangle x:Name="textBackground" HorizontalAlignment="Center" Height="218" Margin="0,382,0,0" Stroke="Black" VerticalAlignment="Top" Width="400" Fill="#7FFFFFFF"/>
+        <Rectangle x:Name="textBackground" HorizontalAlignment="Center" Height="218" Margin="0,382,0,0" Stroke="Black" VerticalAlignment="Top" Width="400" Fill="#7FFFFFFF">
+        </Rectangle>
+        <Grid x:Name="select" Height="218" Margin="0,382,0,0" Visibility="Hidden">
+            <Grid.RowDefinitions>
+            </Grid.RowDefinitions>
+        </Grid>
         <TextBlock x:Name="textBox" Margin="0,382,0,0" Text="Sample Text!" TextWrapping="Wrap" VerticalAlignment="Top" Height="218" Foreground="Black" FontFamily="Comic Sans MS" />
-        <Button Margin="0,382,0,0" Opacity="0" Click="Button_Click"></Button>
+        <Button x:Name="nextBut" Margin="0,382,0,0" Opacity="0" Click="Button_Click"/>
+        <!--<StackPanel x:Name="select" Margin="0.1,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="400" >
+            <StackPanel.Resources>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Margin" Value="0,10,0,0"/>
+                </Style>
+            </StackPanel.Resources>
+            <Button Background="Black" Content="1" />
+            <Button Background="Red" Content="3" />
+            <Button Background="Red" Content="3" />
+            <Button Background="White" Content="2" />
+            <Button Background="Red" Content="3" />
+        </StackPanel>-->
     </Grid>
 </Window>
