@@ -34,11 +34,11 @@ namespace Karen.Engine.Api
             {
                 case "load":
                     string path = par.TryExtractElement<object, string>("main.miku", 1);
-                    BinaryManager.LoadKBL(path);
+                    BinaryManager.Singelton.LoadKBL(path);
                     break;
                 case "unload":
                     int id = par.TryExtractElement<object, int>(1, 1);
-                    BinaryManager.UnloadKBL(id);
+                    BinaryManager.Singelton.UnloadKBL(id);
                     break;
             }
         }

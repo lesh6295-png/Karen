@@ -59,10 +59,10 @@ namespace Karen.Engine.Api
             switch (type)
             {
                 case "body":
-                    MainWindow.Singelton.SetBodySprite(BinaryManager.Extract(lib, file));
+                    MainWindow.Singelton.SetBodySprite(BinaryManager.Singelton.Extract(lib, file));
                     break;
                 case "emotion":
-                    MainWindow.Singelton.SetEmotionSprite(BinaryManager.Extract(lib, file));
+                    MainWindow.Singelton.SetEmotionSprite(BinaryManager.Singelton.Extract(lib, file));
                     break;
             }
         }

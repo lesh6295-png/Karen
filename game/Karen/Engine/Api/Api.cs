@@ -15,7 +15,7 @@ namespace Karen.Engine.Api
         public static async Task newsc(object?[]? par)
         {
             ScriptContext nsc = new ScriptContext((VirtualMachine)(((object[])par.Last())[2]));
-            nsc.LoadScriptFromByteArray(BinaryManager.Extract(Convert.ToInt32((string)par[0]), Convert.ToInt32((string)par[1])));
+            nsc.LoadScriptFromByteArray(BinaryManager.Singelton.Extract(Convert.ToInt32((string)par[0]), Convert.ToInt32((string)par[1])));
             nsc.ExcecuteAsync();
         }
         public static async Task save(object?[]? par)

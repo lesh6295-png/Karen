@@ -9,11 +9,15 @@ namespace Karen.KBL
     /// <summary>
     /// This class will be help you with controll all KBL and provide Load/Unload and Extract api
     /// </summary>
-    public static class BinaryManager
+    public  class BinaryManager
     {
-        static List<BinaryLibary> sources = new();
-
-        public static int LoadKBL(string path)
+         List<BinaryLibary> sources = new();
+        public static BinaryManager Singelton;
+        static BinaryManager()
+        {
+            Singelton = new();
+        }
+        public  int LoadKBL(string path)
         {
             //get short and absolute file name
             // if path="dir\main.miku"
@@ -41,7 +45,7 @@ namespace Karen.KBL
             sources.Add(news);
             return news.LibaryId;
         }
-        public static void UnloadKBL(int id)
+        public  void UnloadKBL(int id)
         {
             for (int i = 0; i < sources.Count; i++)
             {
@@ -51,7 +55,7 @@ namespace Karen.KBL
                 }
             }
         }
-        public static byte[] Extract(int libaryid, int fileid)
+        public  byte[] Extract(int libaryid, int fileid)
         {
             foreach (var q in sources)
             {
