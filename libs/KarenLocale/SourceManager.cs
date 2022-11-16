@@ -6,17 +6,21 @@ using System.Threading.Tasks;
 
 namespace Karen.Locale
 {
-    public static class SourceManager
+    public  class SourceManager
     {
-        static List<KeySource> sources = new();
-
-        public static int LoadSource(string path)
+        public static SourceManager Singelton;
+        static SourceManager()
+        {
+            Singelton = new();
+        }
+         List<KeySource> sources = new();
+        public  int LoadSource(string path)
         {
             KeySource news = new KeySource(path);
             sources.Add(news);
             return news.sourceid;
         }
-        public static void UnloadSource(int id)
+        public  void UnloadSource(int id)
         {
             for(int i = 0; i < sources.Count; i++)
             {
@@ -26,7 +30,7 @@ namespace Karen.Locale
                 }
             }
         }
-        public static string ExtractTranslate(string key, int sourceid = -1)
+        public  string ExtractTranslate(string key, int sourceid = -1)
         {
             if (sourceid != -1)
             {

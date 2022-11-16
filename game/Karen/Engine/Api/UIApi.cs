@@ -26,7 +26,7 @@ namespace Karen.Engine.Api
         {
             string text = par.TryExtractElement<object, string>("unk");
             MainWindow.Singelton.HideWindow = false;
-            await MainWindow.Singelton.WriteText(SourceManager.ExtractTranslate(text));
+            await MainWindow.Singelton.WriteText(SourceManager.Singelton.ExtractTranslate(text));
 #if TESTING
             if (App.AUTO_TEST)
                 return;
