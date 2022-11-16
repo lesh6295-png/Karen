@@ -5,38 +5,48 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.Json;
 using System.Runtime.Serialization;
+using System.Text.Json.Serialization;
+using MessagePack;
 namespace Karen.Types
 {
 
     [Serializable]
-    public class Variable : ISerializable
+    [MessagePackObject(keyAsPropertyName: true)]
+    public class Variable
     {
         public string name;
-        public dynamic value;
+        [IgnoreMember]
+        [JsonIgnore]
+         dynamic value;
+        [JsonIgnore]
+        [IgnoreMember]
+        public dynamic Value
+        {
+            get
+            {
+                return value;
+            }
+            set
+            {
+                this.value = value;
+                svalue = DynamicSerializator.ToString(value);
+            }
+        }
+        /// <summary>
+        /// Dont touch this filed.
+        /// </summary>
+        public string svalue;
         public Variable(string name, dynamic value)
         {
             this.name = name;
             this.value = value;
         }
 
-        public void GetObjectData(SerializationInfo info, StreamingContext context)
-        {
-            info.AddValue("name", this.name);
-            info.AddValue("value", value.ToString().ToHex());
-        }
         public Variable()
         {
 
-        }
-        public Variable(SerializationInfo info, StreamingContext context)
-        {
-            name = info.GetString("name");
-            value = info.GetString("value").FromHex();
-            int r;
-            if(int.TryParse(value, out r)){
-                value = r;
-            }
         }
     }
     /*public class Int32 : Variable

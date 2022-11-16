@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.IO;
 using Karen.Engine.Scripting;
 using System.Runtime.Serialization.Formatters.Binary;
+using MessagePack;
 namespace Karen.Engine
 {
     public static class StateController
@@ -15,10 +16,15 @@ namespace Karen.Engine
 
         }
 
+        public static async void SerialiazeJson()
+        {
+            string m = System.Text.Json.JsonSerializer.Serialize<VirtualMachine>(EngineStarter.VM, new System.Text.Json.JsonSerializerOptions { IncludeFields = true });
+            File.WriteAllText(Karen.Registry.RegController.GetKarenFolderPath() + "vm.pos", m);
+        }
         public static async void Serialiaze()
         {
-            string m = System.Text.Json.JsonSerializer.Serialize<VirtualMachine>(EngineStarter.VM);
-            File.WriteAllText(Karen.Registry.RegController.GetKarenFolderPath() + "vm.pos", m);
+            byte[] m = MessagePackSerializer.Serialize<VirtualMachine>(EngineStarter.VM);
+            File.WriteAllBytes(Karen.Registry.RegController.GetKarenFolderPath() + "vm.b", m);
         }
     }
 }

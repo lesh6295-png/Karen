@@ -3,14 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using MessagePack;
 namespace Karen.Engine.Scripting
 {
     [Serializable]
+    [MessagePackObject]
     public class VirtualMachine
     {
+        [Key(0)]
         public VariableContext globalHeap;
+        [Key(1)]
         public List<ScriptContext> threads;
+        [Key(2)]
         public EventManager events;
         public VirtualMachine()
         {

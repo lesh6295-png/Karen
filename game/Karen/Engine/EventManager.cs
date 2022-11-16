@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Karen.Types;
+using MessagePack;
 namespace Karen.Engine
 {
     [Serializable]
+    [MessagePackObject(keyAsPropertyName: true)]
     public class EventManager
     {
         Dictionary<string, KarenEvent> events = new();

@@ -74,22 +74,22 @@ namespace Karen.Engine.Api
             switch (operand)
             {
                 case ">":
-                    istrue = a.value > b.value;
+                    istrue = a.Value > b.Value;
                     break;
                 case "<":
-                    istrue = a.value < b.value;
+                    istrue = a.Value < b.Value;
                     break;
                 case ">=":
-                    istrue = a.value >= b.value;
+                    istrue = a.Value >= b.Value;
                     break;
                 case "<=":
-                    istrue = a.value <= b.value;
+                    istrue = a.Value <= b.Value;
                     break;
                 case "==":
-                    istrue = a.value == b.value;
+                    istrue = a.Value == b.Value;
                     break;
                 case "!=":
-                    istrue = a.value != b.value;
+                    istrue = a.Value != b.Value;
                     break;
                 default:
                     throw new InvalidApiParamsException("Unknown if comparer.");
