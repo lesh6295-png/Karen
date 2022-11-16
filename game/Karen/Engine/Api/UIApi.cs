@@ -77,7 +77,7 @@ namespace Karen.Engine.Api
                 endpoints.Add((string)par[i + 1]);
                 id.Add(id.Count + 1);
             }
-            var text = keys.Select((x) => { return SourceManager.ExtractTranslate(x); }).ToArray();
+            var text = keys.Select((x) => { return SourceManager.Singelton.ExtractTranslate(x); }).ToArray();
             int result = 0;
             //TODO: Update select behaviour with AUTO_TEST
 #if TESTING
