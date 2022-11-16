@@ -14,11 +14,11 @@ namespace Karen.Engine.Api
             {
                 case "load":
                     string path = par.TryExtractElement<object, string>("unk", 1);
-                    SourceManager.LoadSource(path);
+                    SourceManager.Singelton.LoadSource(path);
                     break;
                 case "unload":
                     int unloadid = par.TryExtractElement<object, int>(-1, 1);
-                    SourceManager.UnloadSource(unloadid);
+                    SourceManager.Singelton.UnloadSource(unloadid);
                     break;
                 default:
                     throw new InvalidApiParamsException("Unknown locales mode: " + mode);
