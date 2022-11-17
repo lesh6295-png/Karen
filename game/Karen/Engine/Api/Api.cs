@@ -20,7 +20,8 @@ namespace Karen.Engine.Api
         }
         public static async Task save(object?[]? par)
         {
-            StateController.Serialiaze();
+            StateController.SerialiazeVM();
+            StateController.SerialazeManagers();
         }
         public static async Task to(object?[]? par)
         {

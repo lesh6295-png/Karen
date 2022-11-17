@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Karen.Types;
+using MessagePack;
+using System.IO;
 namespace Karen.Locale
 {
-    public  class SourceManager
+    public  class SourceManager : IManagerSerializator
     {
         public static SourceManager Singelton;
         static SourceManager()
@@ -54,5 +56,23 @@ namespace Karen.Locale
 
             return key;
         }
+
+        public void Load()
+        {
+            byte[] raw = File.ReadAllBytes(targetfolder + "locales");
+            sources = MessagePackSerializer.Deserialize<List<KeySource>>(raw);
+        }
+
+        public void Save()
+        {
+            byte[] sl = MessagePackSerializer.Serialize<List<KeySource>>(sources, options: new MessagePackSerializerOptions(MessagePack.Resolvers.StandardResolverAllowPrivate.Instance));
+            File.WriteAllBytes(targetfolder + "locales", sl);
+        }
+
+        public void SetFolder(string folder)
+        {
+            targetfolder = folder;
+        }
+        string targetfolder = "";
     }
 }

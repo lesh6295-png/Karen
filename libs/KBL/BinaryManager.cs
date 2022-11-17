@@ -4,12 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using Karen.Types;
+using MessagePack;
 namespace Karen.KBL
 {
     /// <summary>
     /// This class will be help you with controll all KBL and provide Load/Unload and Extract api
     /// </summary>
-    public  class BinaryManager
+    public  class BinaryManager : IManagerSerializator
     {
          List<BinaryLibary> sources = new();
         public static BinaryManager Singelton;
@@ -66,5 +68,23 @@ namespace Karen.KBL
             }
             throw new Karen.Types.ObjectNotFoundException("Falled to extract bytes from KBL.");
         }
+
+        public void Load()
+        {
+            byte[] raw = File.ReadAllBytes(targetfolder + "kbl");
+            sources = MessagePackSerializer.Deserialize<List<BinaryLibary>>(raw);
+        }
+
+        public void Save()
+        {
+            byte[] sl = MessagePackSerializer.Serialize<List<BinaryLibary>>(sources, options: new MessagePackSerializerOptions(MessagePack.Resolvers.StandardResolverAllowPrivate.Instance));
+            File.WriteAllBytes(targetfolder + "kbl", sl);
+        }
+
+        public void SetFolder(string folder)
+        {
+            targetfolder = folder;
+        }
+        string targetfolder = "";
     }
 }
