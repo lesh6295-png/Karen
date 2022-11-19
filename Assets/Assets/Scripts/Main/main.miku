@@ -1,5 +1,7 @@
 log Main Script Started.
 waitui
+locales load bin\locales\1.locale
+
 say КТО_ЛУЧШИЙ_РЕПЕР?
 select Oxxxymiron oxxxy BIG_RUSSIAN_BOSS boss Витя_АК pidor Young_P&H pimp
 @oxxxy

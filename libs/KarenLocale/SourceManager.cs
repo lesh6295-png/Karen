@@ -54,7 +54,7 @@ namespace Karen.Locale
                 {
                     continue;
                 }
-                return w;
+                return w??key;
             }
 
             return key;
