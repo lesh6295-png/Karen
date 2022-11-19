@@ -15,6 +15,7 @@ namespace Karen.KBL
     {
          List<BinaryLibary> sources = new();
         public static BinaryManager Singelton;
+        Dictionary<int, string> kbls = new();
         static BinaryManager()
         {
             Singelton = new();
@@ -44,6 +45,7 @@ namespace Karen.KBL
                 endpoint = shortpath;
 
             BinaryLibary news = new BinaryLibary(endpoint);
+            kbls.Add(news.LibaryId, endpoint);
             sources.Add(news);
             return news.LibaryId;
         }
@@ -54,6 +56,7 @@ namespace Karen.KBL
                 if (sources[i].LibaryId == id)
                 {
                     sources.Remove(sources[i]);
+                    kbls.Remove(id);
                 }
             }
         }
@@ -72,12 +75,19 @@ namespace Karen.KBL
         public void Load()
         {
             byte[] raw = File.ReadAllBytes(targetfolder + "kbl");
-            sources = MessagePackSerializer.Deserialize<List<BinaryLibary>>(raw);
+            kbls = MessagePackSerializer.Deserialize<Dictionary<int,string>>(raw);
+            var k = kbls.Keys;
+            foreach (var q in k)
+            {
+                string s;
+                if (kbls.TryGetValue(q, out s))
+                    LoadKBL(s);
+            }
         }
 
         public void Save()
         {
-            byte[] sl = MessagePackSerializer.Serialize<List<BinaryLibary>>(sources, options: new MessagePackSerializerOptions(MessagePack.Resolvers.StandardResolverAllowPrivate.Instance));
+            byte[] sl = MessagePackSerializer.Serialize<Dictionary<int,string>>(kbls, options: new MessagePackSerializerOptions(MessagePack.Resolvers.StandardResolverAllowPrivate.Instance));
             File.WriteAllBytes(targetfolder + "kbl", sl);
         }
 

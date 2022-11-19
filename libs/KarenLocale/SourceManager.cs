@@ -31,9 +31,9 @@ namespace Karen.Locale
                 if (sources[i].sourceid == id)
                 {
                     sources.Remove(sources[i]);
+                    loaded.Remove(id);
                 }
             }
-            loaded.Remove(id);
         }
         public  string ExtractTranslate(string key, int sourceid = -1)
         {
