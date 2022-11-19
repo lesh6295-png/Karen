@@ -16,10 +16,12 @@ namespace Karen.Locale
             Singelton = new();
         }
          List<KeySource> sources = new();
+        Dictionary<int, string> loaded = new();
         public  int LoadSource(string path)
         {
             KeySource news = new KeySource(path);
             sources.Add(news);
+            loaded.Add(news.sourceid, path);
             return news.sourceid;
         }
         public  void UnloadSource(int id)
@@ -31,6 +33,7 @@ namespace Karen.Locale
                     sources.Remove(sources[i]);
                 }
             }
+            loaded.Remove(id);
         }
         public  string ExtractTranslate(string key, int sourceid = -1)
         {
@@ -60,12 +63,20 @@ namespace Karen.Locale
         public void Load()
         {
             byte[] raw = File.ReadAllBytes(targetfolder + "locales");
-            sources = MessagePackSerializer.Deserialize<List<KeySource>>(raw);
+            loaded = MessagePackSerializer.Deserialize<Dictionary<int,string>>(raw);
+
+            var k = loaded.Keys;
+            foreach(var q in k)
+            {
+                string s;
+                if (loaded.TryGetValue(q, out s))
+                    LoadSource(s);
+            }
         }
 
         public void Save()
         {
-            byte[] sl = MessagePackSerializer.Serialize<List<KeySource>>(sources, options: new MessagePackSerializerOptions(MessagePack.Resolvers.StandardResolverAllowPrivate.Instance));
+            byte[] sl = MessagePackSerializer.Serialize<Dictionary<int, string>>(loaded, options: new MessagePackSerializerOptions(MessagePack.Resolvers.StandardResolverAllowPrivate.Instance));
             File.WriteAllBytes(targetfolder + "locales", sl);
         }
 
