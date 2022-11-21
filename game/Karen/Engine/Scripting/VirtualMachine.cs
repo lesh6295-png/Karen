@@ -14,8 +14,6 @@ namespace Karen.Engine.Scripting
         public VariableContext globalHeap;
         [Key(1)]
         public List<ScriptContext> threads;
-        [Key(2)]
-        public EventManager events;
         public VirtualMachine()
         {
             Logger.Write("Create virtual script machine...");
@@ -23,7 +21,13 @@ namespace Karen.Engine.Scripting
             Logger.Write($"Global Heap Guid: {globalHeap.Guid}");
             threads = new List<ScriptContext>();
 
-            events = new();
+        }
+        /// <summary>
+        /// Start all ScriptContext in this VirtualMachine
+        /// </summary>
+        public void StartAllThread()
+        {
+            threads.ForEach((x) => { x.ExcecuteAsync(); });
         }
         /// <summary>
         /// Initializes new ScriptContext

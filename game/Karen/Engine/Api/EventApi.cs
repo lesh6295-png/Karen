@@ -10,15 +10,15 @@ namespace Karen.Engine.Api
     {
         public static async Task waitevent(object?[]? par)
         {
-            await ((EventManager)((object[])par.Last())[0]).Wait((string)par[0]);
+            await EventManager.Singelton.Wait((string)par[0]);
         }
         public static async Task callevent(object?[]? par)
         {
-             ((EventManager)((object[])par.Last())[0]).CallEvent((string)par[0]);
+            EventManager.Singelton.CallEvent((string)par[0]);
         }
         public static async Task addevent(object?[]? par)
         {
-             ((EventManager)((object[])par.Last())[0]).AddEvent((string)par[0]);
+            EventManager.Singelton.AddEvent((string)par[0]);
         }
     }
 }

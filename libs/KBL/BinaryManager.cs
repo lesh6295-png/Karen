@@ -20,7 +20,7 @@ namespace Karen.KBL
         {
             Singelton = new();
         }
-        public  int LoadKBL(string path)
+        public  int LoadKBL(string path,bool atl=true)
         {
             //get short and absolute file name
             // if path="dir\main.miku"
@@ -45,6 +45,7 @@ namespace Karen.KBL
                 endpoint = shortpath;
 
             BinaryLibary news = new BinaryLibary(endpoint);
+            if(atl)
             kbls.Add(news.LibaryId, endpoint);
             sources.Add(news);
             return news.LibaryId;
@@ -81,7 +82,7 @@ namespace Karen.KBL
             {
                 string s;
                 if (kbls.TryGetValue(q, out s))
-                    LoadKBL(s);
+                    LoadKBL(s,false);
             }
         }
 

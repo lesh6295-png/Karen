@@ -13,22 +13,16 @@ namespace Karen.Engine.Scripting
     [MessagePackObject(keyAsPropertyName: true)]
     public class ScriptContext
     {
-#if RELEASE
-#else
-        public
-#endif
-        string[] codelines;
+        public string[] codelines;
+        [IgnoreMember]
         Type api;
-
-        bool isLoad = false;
+        
+        public bool isLoad = false;
         public string Guid { get; private set; }
+        [IgnoreMember]
         VirtualMachine host;
-#if RELEASE
-#else
-        public
-#endif
-        VariableContext localContext;
-        int activeline = 0;
+        public VariableContext localContext;
+        public int activeline = 0;
         public List<Label> labels = new List<Label>();
 
         public (string from, string to) ifskipper=new();
@@ -43,7 +37,8 @@ namespace Karen.Engine.Scripting
         }
         public ScriptContext()
         {
-                
+            host = EngineStarter.VM;
+            api = Type.GetType("Karen.Engine.Api.Api", true);
         }
         public void SetIfSkip(string from, string to)
         {

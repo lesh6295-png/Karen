@@ -12,35 +12,45 @@ namespace Karen.Engine
 {
     public static class StateController
     {
-       static List<IManagerSerializator> managers=new();
-        public static async void Enable()
+
+        static bool saveex()
+        {
+            //TODO: rewrite this
+            return File.Exists(Karen.Registry.RegController.GetKarenFolderPath() + "vm");
+        }
+        static List<IManagerSerializator> managers = new();
+        public static bool Enable()
         {
             managers.Add(Karen.Locale.SourceManager.Singelton);
             managers.Add(Karen.KBL.BinaryManager.Singelton);
-
+            managers.Add(EventManager.Singelton);
             SetFolderManagers();
+            return saveex();
         }
-        public static async void SerialazeManagers()
+        public static void LoadSave()
         {
-            managers.ForEach((x) => {x.Save(); });
+            byte[] vm = File.ReadAllBytes(Karen.Registry.RegController.GetKarenFolderPath() + "vm");
+            VirtualMachine mach = MessagePackSerializer.Deserialize<VirtualMachine>(vm);
+            DeserialazeManagers();
+            EngineStarter.VM = mach;
+            mach.StartAllThread();
         }
-        public static async void DeserialazeManagers()
+        public static void SerialazeManagers()
         {
             managers.ForEach((x) => { x.Save(); });
         }
-        public static async void SetFolderManagers()
+        public static  void DeserialazeManagers()
+        {
+            managers.ForEach((x) => { x.Load(); });
+        }
+        public static  void SetFolderManagers()
         {
             managers.ForEach((x) => { x.SetFolder(Karen.Registry.RegController.GetKarenFolderPath()); });
         }
-        public static async void SerialiazeJson()
+        public static  void SerialiazeVM()
         {
-            string m = System.Text.Json.JsonSerializer.Serialize<VirtualMachine>(EngineStarter.VM, new System.Text.Json.JsonSerializerOptions { IncludeFields = true });
-            File.WriteAllText(Karen.Registry.RegController.GetKarenFolderPath() + "vm.pos", m);
-        }
-        public static async void SerialiazeVM()
-        {
-            byte[] m = MessagePackSerializer.Serialize<VirtualMachine>(EngineStarter.VM);
-            File.WriteAllBytes(Karen.Registry.RegController.GetKarenFolderPath() + "vm.b", m);
+            byte[] m = MessagePackSerializer.Serialize<VirtualMachine>(EngineStarter.VM, options: new MessagePackSerializerOptions(MessagePack.Resolvers.StandardResolverAllowPrivate.Instance));
+            File.WriteAllBytes(Karen.Registry.RegController.GetKarenFolderPath() + "vm", m);
         }
     }
 }

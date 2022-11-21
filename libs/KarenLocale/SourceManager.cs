@@ -17,10 +17,11 @@ namespace Karen.Locale
         }
          List<KeySource> sources = new();
         Dictionary<int, string> loaded = new();
-        public  int LoadSource(string path)
+        public  int LoadSource(string path, bool atl=true)
         {
             KeySource news = new KeySource(path);
             sources.Add(news);
+            if(atl)
             loaded.Add(news.sourceid, path);
             return news.sourceid;
         }
@@ -70,7 +71,7 @@ namespace Karen.Locale
             {
                 string s;
                 if (loaded.TryGetValue(q, out s))
-                    LoadSource(s);
+                    LoadSource(s,false);
             }
         }
 

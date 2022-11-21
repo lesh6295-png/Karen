@@ -24,6 +24,9 @@ namespace Karen.Engine.Api
         }
         public static async Task say(object?[]? par)
         {
+            //TODO: change this
+            await waitui(null);
+
             string text = par.TryExtractElement<object, string>("unk");
             MainWindow.Singelton.HideWindow = false;
             await MainWindow.Singelton.WriteText(SourceManager.Singelton.ExtractTranslate(text));
@@ -38,6 +41,11 @@ namespace Karen.Engine.Api
         }
         public static async Task print(object?[]? par)
         {
+
+            //TODO: change this
+            await waitui(null);
+
+
             string text = par.TryExtractElement<object, string>("unk");
             MainWindow.Singelton.HideWindow = false;
             await MainWindow.Singelton.WriteText(text);
@@ -52,6 +60,9 @@ namespace Karen.Engine.Api
         }
         public static async Task sprite(object?[]? par)
         {
+            //TODO: change this
+            await waitui(null);
+
             string type = par.TryExtractElement<object, string>("body");
             int lib = par.TryExtractElement<object, int>(1, 1);
             int file = par.TryExtractElement<object, int>(1, 2);
@@ -69,6 +80,11 @@ namespace Karen.Engine.Api
 
         public static async Task select(object?[]? par)
         {
+
+            //TODO: change this
+            await waitui(null);
+
+
             List<string> keys = new(), endpoints = new();
             List<int> id = new List<int>();
             for (int i = 0; i < par.Length - 1; i += 2)
