@@ -4,9 +4,12 @@ using Karen.Types;
 using System.Text;
 using System.Linq;
 using System.Collections;
-
+using System.Web;
+using MessagePack;
 namespace Karen.Locale
 {
+    [Serializable]
+    [MessagePackObject(keyAsPropertyName: true)]
     public struct Key
     {
         public string key;
@@ -28,9 +31,9 @@ namespace Karen.Locale
         {
             string result;
             if (translations.TryGetValue(Localization.Culture, out result))
-                return result;
+                    return result.FromHex();
             if (translations.TryGetValue(Localization.DefaultCulture, out result))
-                return result;
+                    return result.FromHex();
             return key;
         }
         public int GetLength()

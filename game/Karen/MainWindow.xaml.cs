@@ -10,6 +10,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
+using Karen.Types;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
@@ -24,6 +25,8 @@ namespace Karen
     {
         public static MainWindow Singelton;
         bool _hide = false;
+        int selectresult = 0;
+        bool inselect = false;
         public bool Next { get; private set; }
         public bool IsReady { get; private set; } = false;
         public bool HideWindow
@@ -51,6 +54,47 @@ namespace Karen
             Singelton = this;
             InitializeComponent();
             IsReady = true;
+        }
+        public async Task<int> Select(string[] names, int[] results)
+        {
+            if (names.Length != results.Length)
+            {
+                throw new InvalidApiParamsException("Count of names and results are not equals");
+            }
+            Dispatcher.Invoke(() => { select.Visibility = Visibility.Visible; nextBut.Visibility = Visibility.Hidden; textBox.Visibility = Visibility.Hidden; });
+            inselect = true;
+            for(int i = 0; i < names.Length; i++)
+            {
+                Dispatcher.Invoke(()=> { AddSelectButton(names[i], results[i]); });
+            }
+            while (inselect)
+            {
+                await Task.Delay(70);
+            }
+            Dispatcher.Invoke(() => { select.Visibility=Visibility.Hidden; select.Children.Clear(); select.RowDefinitions.Clear(); nextBut.Visibility = Visibility.Visible; textBox.Visibility = Visibility.Visible; });
+            return selectresult;
+        }
+        void AddSelectButton(string description, int variantid)
+        {
+            select.RowDefinitions.Add(new RowDefinition());
+            var but = new Button();
+            but.ClickMode = ClickMode.Release;
+            but.Click += UnlockSelectMode;
+            but.Name = "n"+ variantid.ToString();
+            var stackpanel = new StackPanel();
+            stackpanel.Name = "pan"+ Extensions.RandomString(min: 1, max: 3);
+            stackpanel.HorizontalAlignment = HorizontalAlignment.Center;
+            select.VerticalAlignment = VerticalAlignment.Center;
+            but.Content = description;
+            but.Opacity =0.5;
+            select.Children.Add(but);
+            Grid.SetRow(but, select.RowDefinitions.Count - 1);
+        }
+
+        private void UnlockSelectMode(object sender, RoutedEventArgs e)
+        {
+            selectresult = Convert.ToInt32(((Button)sender).Name.Substring(1));
+            inselect = false;
         }
 
         public async Task WriteText(string text, bool wait = true, bool clear = true, int delay = 20)

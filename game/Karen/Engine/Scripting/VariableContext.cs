@@ -1,4 +1,5 @@
-﻿// yes this code is bad
+﻿
+// yes this code is bad
 
 using System;
 using System.Collections.Generic;
@@ -8,8 +9,11 @@ using System.Threading.Tasks;
 
 
 using Karen.Types;
+using MessagePack;
 namespace Karen.Engine.Scripting
 {
+    [Serializable]
+    [MessagePackObject(keyAsPropertyName: true)]
     public class VariableContext
     {
 #if RELEASE
@@ -17,17 +21,17 @@ namespace Karen.Engine.Scripting
         public
 #endif
         List<Variable> variables = new();
-        public string Guid { get; private set; }
+        public Karen.Types.Guid Guid { get; private set; }
         public VariableContext()
         {
-            Guid = Extensions.RandomString();
+            Guid = new();
         }
         public Variable Get(string name, bool throwifnull = true, bool create = false)
         {
             foreach (var q in variables)
                 if (q.name == name)
                     return q;
-            if(throwifnull)
+            if (throwifnull)
                 throw new ObjectNotFoundException($"In {Guid} context variable with {name} dont exist.");
             if (create)
             {
@@ -37,11 +41,11 @@ namespace Karen.Engine.Scripting
             }
             return null;
         }
-        public void Add(Variable variable, bool checkname=false)
+        public void Add(Variable variable, bool checkname = false)
         {
             if (checkname)
             {
-                for(int i = 0; i < variables.Count; i++)
+                for (int i = 0; i < variables.Count; i++)
                 {
                     if (variables[i].name == variable.name)
                     {

@@ -3,12 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using MessagePack;
 namespace Karen.Engine.Scripting
 {
+    [Serializable]
+    [MessagePackObject]
     public class VirtualMachine
     {
+        [Key(0)]
         public VariableContext globalHeap;
+        [Key(1)]
         public List<ScriptContext> threads;
         public VirtualMachine()
         {
@@ -16,18 +20,26 @@ namespace Karen.Engine.Scripting
             globalHeap = new VariableContext();
             Logger.Write($"Global Heap Guid: {globalHeap.Guid}");
             threads = new List<ScriptContext>();
+
+        }
+        /// <summary>
+        /// Start all ScriptContext in this VirtualMachine
+        /// </summary>
+        public void StartAllThread()
+        {
+            threads.ForEach((x) => { x.ExcecuteAsync(); });
         }
         /// <summary>
         /// Initializes new ScriptContext
         /// </summary>
         /// <returns>New ScriptContext Guid</returns>
-        public string AddScriptThread()
+        public Karen.Types.Guid AddScriptThread()
         {
             ScriptContext scr = new ScriptContext(this);
             threads.Add(scr);
             return scr.Guid;
         }
-        internal ScriptContext GetScriptContext(string Guid)
+        internal ScriptContext GetScriptContext(Karen.Types.Guid Guid)
         {
             foreach(var scr in threads)
             {

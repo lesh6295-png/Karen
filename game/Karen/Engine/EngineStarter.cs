@@ -22,14 +22,22 @@ namespace Karen.Engine
             }
 
             AppDomain.CurrentDomain.UnhandledException += Logger.ExceptionLog;
-            WriteRegistry();
-            VM = new VirtualMachine();
-            int mainid = BinaryManager.LoadKBL("bin\\kbl\\main.kbl");
-            byte[] main = BinaryManager.Extract(mainid,1);
-            string mainthreadguid = VM.AddScriptThread();
-            ScriptContext maincon = VM.GetScriptContext(mainthreadguid);
-            maincon.LoadScriptFromByteArray(main);
-            maincon.ExcecuteAsync();
+
+            if (!StateController.Enable())
+            {
+                WriteRegistry();
+                VM = new VirtualMachine();
+                int mainid = BinaryManager.Singelton.LoadKBL("bin\\kbl\\main.kbl");
+                byte[] main = BinaryManager.Singelton.Extract(mainid, 1);
+                Karen.Types.Guid mainthreadguid = VM.AddScriptThread();
+                ScriptContext maincon = VM.GetScriptContext(mainthreadguid);
+                maincon.LoadScriptFromByteArray(main);
+                maincon.ExcecuteAsync();
+            }
+            else
+            {
+                StateController.LoadSave();
+            }
             while (true)
             {
                 Thread.Sleep(750);

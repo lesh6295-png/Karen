@@ -1,9 +1,21 @@
-﻿log Main Script Started.
+log Main Script Started.
 waitui
-say Привет!
-var x 5678
-var y 32 global
-math q = x / y
-math w = x % y
-dump
+locales load bin\locales\1.locale
+
+say КТО_ЛУЧШИЙ_РЕПЕР?
+select Oxxxymiron oxxxy BIG_RUSSIAN_BOSS boss Витя_АК pidor Young_P&H pimp
+@oxxxy
+say Ну_ты_даёшь
+to qu
+@pidor
+say АХ_ТЫ_ЁББАНЫЙ_АГЕНТ_АНТИХИККА
+to qu
+@pimp
+say пимп.
+to qu
+@boss
+say Элитные_машины,_кучи_золота_вокруг
+@qu
+save
+say Записано!
 quit

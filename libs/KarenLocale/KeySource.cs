@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
-
+using MessagePack;
 namespace Karen.Locale
 {
+    [Serializable]
+    [MessagePackObject(keyAsPropertyName: true)]
     public class KeySource
     {
         public int sourceid { get; private set; }
@@ -32,6 +34,13 @@ namespace Karen.Locale
                 return file.Length - address[fileindex];
             }
             return address[fileindex + 1] - address[fileindex];
+        }
+        /// <summary>
+        /// DONT USE THIS
+        /// </summary>
+        public KeySource()
+        {
+
         }
         public KeySource(string path)
         {
