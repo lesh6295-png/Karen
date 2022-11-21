@@ -35,11 +35,11 @@ namespace Karen.Engine.Api
             Variable vsource = ((VariableContext)(((object[])par.Last())[0])).Get(source.Substring(1), false) ?? ((VirtualMachine)(((object[])par.Last())[2])).globalHeap.Get(source.Substring(1), false);
             if (vsource == null)
             {
-                target.value = Convert.ToInt32(source);
+                target.Value = Convert.ToInt32(source);
             }
             else
             {
-                target.value = vsource.value;
+                target.Value = vsource.Value;
             }
         }
 
@@ -75,19 +75,19 @@ namespace Karen.Engine.Api
             switch (operand)
             {
                 case "+":
-                    target.value = a.value + b.value;
+                    target.Value = a.Value + b.Value;
                     break;
                 case "-":
-                    target.value = a.value - b.value;
+                    target.Value = a.Value - b.Value;
                     break;
                 case "*":
-                    target.value = a.value * b.value;
+                    target.Value = a.Value * b.Value;
                     break;
                 case "/":
-                    target.value = a.value / b.value;
+                    target.Value = a.Value / b.Value;
                     break;
                 case "%":
-                    target.value = a.value % b.value;
+                    target.Value = a.Value % b.Value;
                     break;
             }
         }

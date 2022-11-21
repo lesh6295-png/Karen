@@ -3,31 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using MessagePack;
 using Karen.Types;
 using System.IO;
 using System.Reflection;
 namespace Karen.Engine.Scripting
 {
     [Serializable]
+    [MessagePackObject(keyAsPropertyName: true)]
     public class ScriptContext
     {
-#if RELEASE
-#else
-        public
-#endif
-        string[] codelines;
+        public string[] codelines;
+        [IgnoreMember]
         Type api;
-
-        bool isLoad = false;
+        
+        public bool isLoad = false;
         public string Guid { get; private set; }
+        [IgnoreMember]
         VirtualMachine host;
-#if RELEASE
-#else
-        public
-#endif
-        VariableContext localContext;
-        int activeline = 0;
+        public VariableContext localContext;
+        public int activeline = 0;
         public List<Label> labels = new List<Label>();
 
         public (string from, string to) ifskipper=new();
@@ -39,6 +34,11 @@ namespace Karen.Engine.Scripting
             Logger.Write($"New Script Context Thread: Guid: {Guid}; local variable context: {localContext.Guid}");
             api = Type.GetType("Karen.Engine.Api.Api", true);
             
+        }
+        public ScriptContext()
+        {
+            host = EngineStarter.VM;
+            api = Type.GetType("Karen.Engine.Api.Api", true);
         }
         public void SetIfSkip(string from, string to)
         {

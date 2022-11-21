@@ -44,4 +44,12 @@ namespace Karen.Types
 
         }
     }
+
+    public class InvalidDynamicString : Exception
+    {
+        public InvalidDynamicString(string m) : base(m)
+        {
+
+        }
+    }
 }

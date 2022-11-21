@@ -2,8 +2,11 @@
 using System.IO;
 using System.Collections.Generic;
 using System.Linq;
+using MessagePack;
 namespace Karen.KBL
 {
+    [Serializable]
+    [MessagePackObject(keyAsPropertyName: true)]
     public class BinaryLibary
     {
         private int libaryId = 0;
@@ -16,7 +19,13 @@ namespace Karen.KBL
 
         public int LibaryId { get => libaryId; private set => libaryId = value; }
         public int Count { get => count; private set => count = value; }
+        /// <summary>
+        /// DONT USE THIS
+        /// </summary>
+        public BinaryLibary()
+        {
 
+        }
         public BinaryLibary(string libaryPath)
         {
             if (!File.Exists(libaryPath))
@@ -119,6 +128,8 @@ namespace Karen.KBL
     /// <summary>
     /// 20 bytes - size struct in lib
     /// </summary>
+    [Serializable]
+    [MessagePackObject(keyAsPropertyName: true)]
     public class BinaryItem
     {
         internal long address = 0, length = 0;

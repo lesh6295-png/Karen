@@ -9,9 +9,11 @@ using System.Threading.Tasks;
 
 
 using Karen.Types;
+using MessagePack;
 namespace Karen.Engine.Scripting
 {
     [Serializable]
+    [MessagePackObject(keyAsPropertyName: true)]
     public class VariableContext
     {
 #if RELEASE
