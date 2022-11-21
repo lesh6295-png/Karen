@@ -29,7 +29,7 @@ namespace Karen.Engine
                 VM = new VirtualMachine();
                 int mainid = BinaryManager.Singelton.LoadKBL("bin\\kbl\\main.kbl");
                 byte[] main = BinaryManager.Singelton.Extract(mainid, 1);
-                string mainthreadguid = VM.AddScriptThread();
+                Karen.Types.Guid mainthreadguid = VM.AddScriptThread();
                 ScriptContext maincon = VM.GetScriptContext(mainthreadguid);
                 maincon.LoadScriptFromByteArray(main);
                 maincon.ExcecuteAsync();

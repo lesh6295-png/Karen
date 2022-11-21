@@ -21,10 +21,10 @@ namespace Karen.Engine.Scripting
         public
 #endif
         List<Variable> variables = new();
-        public string Guid { get; private set; }
+        public Karen.Types.Guid Guid { get; private set; }
         public VariableContext()
         {
-            Guid = Extensions.RandomString();
+            Guid = new();
         }
         public Variable Get(string name, bool throwifnull = true, bool create = false)
         {

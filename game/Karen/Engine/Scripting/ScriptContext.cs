@@ -18,7 +18,7 @@ namespace Karen.Engine.Scripting
         Type api;
         
         public bool isLoad = false;
-        public string Guid { get; private set; }
+        public Karen.Types.Guid Guid { get; private set; }
         [IgnoreMember]
         VirtualMachine host;
         public VariableContext localContext;
@@ -29,7 +29,7 @@ namespace Karen.Engine.Scripting
         public ScriptContext(VirtualMachine host)
         {
             this.host = host;
-            Guid = Extensions.RandomString();
+            Guid = new();
             localContext = new VariableContext();
             Logger.Write($"New Script Context Thread: Guid: {Guid}; local variable context: {localContext.Guid}");
             api = Type.GetType("Karen.Engine.Api.Api", true);

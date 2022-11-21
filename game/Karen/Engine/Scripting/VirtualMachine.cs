@@ -33,13 +33,13 @@ namespace Karen.Engine.Scripting
         /// Initializes new ScriptContext
         /// </summary>
         /// <returns>New ScriptContext Guid</returns>
-        public string AddScriptThread()
+        public Karen.Types.Guid AddScriptThread()
         {
             ScriptContext scr = new ScriptContext(this);
             threads.Add(scr);
             return scr.Guid;
         }
-        internal ScriptContext GetScriptContext(string Guid)
+        internal ScriptContext GetScriptContext(Karen.Types.Guid Guid)
         {
             foreach(var scr in threads)
             {
