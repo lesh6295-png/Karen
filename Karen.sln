@@ -35,6 +35,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Workflows", "Workflows", "{
 		.github\workflows\tests.yml = .github\workflows\tests.yml
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeOptimizator", "libs\CodeOptimizator\CodeOptimizator.csproj", "{0F1F0F8A-FE04-4FC6-A765-366FE4C8FB10}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -102,6 +104,12 @@ Global
 		{8F8A411F-04BF-49D0-81ED-0A20454C9291}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8F8A411F-04BF-49D0-81ED-0A20454C9291}.Testing|Any CPU.ActiveCfg = Testing|Any CPU
 		{8F8A411F-04BF-49D0-81ED-0A20454C9291}.Testing|Any CPU.Build.0 = Testing|Any CPU
+		{0F1F0F8A-FE04-4FC6-A765-366FE4C8FB10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F1F0F8A-FE04-4FC6-A765-366FE4C8FB10}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F1F0F8A-FE04-4FC6-A765-366FE4C8FB10}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F1F0F8A-FE04-4FC6-A765-366FE4C8FB10}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F1F0F8A-FE04-4FC6-A765-366FE4C8FB10}.Testing|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F1F0F8A-FE04-4FC6-A765-366FE4C8FB10}.Testing|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -115,6 +123,7 @@ Global
 		{F9BB0744-B2AE-430C-8FCE-474D1CED7FB3} = {A61F6B3F-F176-4168-946B-2E64BC2D7DE4}
 		{021AF6B4-105F-4E40-9384-1D537A1DFDCC} = {A61F6B3F-F176-4168-946B-2E64BC2D7DE4}
 		{4EF9C717-E2DD-48E4-BD33-50371A58FE42} = {F0571027-1FA0-4E8C-9D99-8D1D011F572C}
+		{0F1F0F8A-FE04-4FC6-A765-366FE4C8FB10} = {F0571027-1FA0-4E8C-9D99-8D1D011F572C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6509DFC4-21A4-4AFD-B3E9-D62EBBF17653}
