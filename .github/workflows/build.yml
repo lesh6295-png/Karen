@@ -57,7 +57,7 @@ jobs:
 
 
     - name: dirs
-      run: dir \s
+      run: dir -s
       
     
     
