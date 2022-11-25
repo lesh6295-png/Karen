@@ -52,7 +52,7 @@ jobs:
     #- name: Build Testing Version
       #run: dotnet build --no-restore -c Testing /ConsoleLoggerParameters:Verbosity=Quiet
     - name: MSBuild
-      run: msbuild Karen.sln
+      run: msbuild Karen.sln -c:Configuration="Debug;Release;Testing"
 
 
 
