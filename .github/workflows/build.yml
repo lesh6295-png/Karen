@@ -60,7 +60,7 @@ jobs:
 
     - name: Compess all
       if: ${{inputs.UploadAll}}
-      run: tar.exe -c --lzma dump.zip
+      run: tar.exe -c -z dump.zip
     - name: Upload all
       if: ${{inputs.UploadAll}} 
       uses: actions/upload-artifact@v1
