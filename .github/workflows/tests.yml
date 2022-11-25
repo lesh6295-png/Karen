@@ -37,6 +37,6 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
-      run: msbuild Karen.sln /property:Configuration=Testing
+      run: dotnet msbuild /property:Configuration=Testing
     - name: Tests
-      run: dotnet test --no-restore --no-build -c Testing
+      run: dotnet test --no-build -c Testing
