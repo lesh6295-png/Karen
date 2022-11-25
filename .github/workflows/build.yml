@@ -60,7 +60,7 @@ jobs:
 
       
     - name: Upload all
-      if: ${{UploadAll}} 
+      if: ${{inputs.UploadAll}} 
       uses: actions/upload-artifact@v1
       with:
         name: Karen_Workflow_Dump_${{github.run_number}}_${{github.sha}}
