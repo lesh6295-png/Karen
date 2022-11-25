@@ -10,6 +10,8 @@ on:
     #branches: [ "master" ]
   workflow_dispatch:
   
+env:
+  VCTargetsPath:  $(MSBuildExtensionsPath32)\Microsoft.Cpp\v4.0\
 
 jobs:
   build:
