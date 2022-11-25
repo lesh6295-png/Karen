@@ -53,9 +53,9 @@ jobs:
       #run: dotnet build --no-restore -c Testing /ConsoleLoggerParameters:Verbosity=Quiet
     - name: MSBuild
       run: |
-        msbuild Karen.sln -c:Configuration=Debug
-        msbuild Karen.sln -c:Configuration=Release
-        msbuild Karen.sln -c:Configuration=Testing
+        msbuild Karen.sln /property:Configuration=Debug
+        msbuild Karen.sln /property:Configuration=Release
+        msbuild Karen.sln /property:Configuration=Testing
 
 
 
