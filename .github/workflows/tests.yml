@@ -37,6 +37,6 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
-      run: dotnet build --no-restore --verbosity quiet -c Testing
+      run: msbuild Karen.sln /property:Configuration=Testing
     - name: Tests
-      run: dotnet test --no-restore -c Testing
+      run: dotnet test --no-restore --no-build -c Testing
