@@ -22,6 +22,9 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "kblb", "Dev\kblb\kblb.csproj", "{F9BB0744-B2AE-430C-8FCE-474D1CED7FB3}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Assets", "Assets\Assets.csproj", "{021AF6B4-105F-4E40-9384-1D537A1DFDCC}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D435D5E2-8C4B-4340-9276-B60AED85C507} = {D435D5E2-8C4B-4340-9276-B60AED85C507}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KarenLocale", "libs\KarenLocale\KarenLocale.csproj", "{4EF9C717-E2DD-48E4-BD33-50371A58FE42}"
 EndProject
@@ -221,6 +224,7 @@ Global
 		{8F8A411F-04BF-49D0-81ED-0A20454C9291}.Testing|x86.ActiveCfg = Testing|Any CPU
 		{8F8A411F-04BF-49D0-81ED-0A20454C9291}.Testing|x86.Build.0 = Testing|Any CPU
 		{D435D5E2-8C4B-4340-9276-B60AED85C507}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{D435D5E2-8C4B-4340-9276-B60AED85C507}.Debug|Any CPU.Build.0 = Debug|Win32
 		{D435D5E2-8C4B-4340-9276-B60AED85C507}.Debug|x64.ActiveCfg = Debug|x64
 		{D435D5E2-8C4B-4340-9276-B60AED85C507}.Debug|x64.Build.0 = Debug|x64
 		{D435D5E2-8C4B-4340-9276-B60AED85C507}.Debug|x86.ActiveCfg = Debug|Win32

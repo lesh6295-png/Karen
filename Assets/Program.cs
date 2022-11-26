@@ -27,8 +27,9 @@ namespace Karen.Assets
 
             ExcelLocale q = new("locales.xlsx");
             q.ParceLocales();
-            
+            //copy bin dir
             Karen.Types.Extensions.CopyFilesRecursively(new DirectoryInfo("bin"), new DirectoryInfo($"../../../../bin/Karen/{args[0]}/net{netver}-windows"));
+
             Console.ReadLine();
         }
     }

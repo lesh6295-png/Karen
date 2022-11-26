@@ -23,7 +23,7 @@ on:
 
 
 jobs:
-  build:
+  window-build:
 
     runs-on: windows-latest
 
@@ -122,4 +122,11 @@ jobs:
       with:
         name: Karen_Testing_Net7.0_${{github.run_number}}_${{github.sha}}
         path: bin/Testing/net7.0-windows
-        
+  
+  upload-result:
+    runs-on: ubuntu-latest
+    needs: window-build
+    steps:
+      - name: Print test
+        run: ls
+
