@@ -87,7 +87,10 @@ jobs:
         path: dump.zip
     
 
-    
+    - uses: actions/upload-artifact@v2
+      with:
+        name: binf
+        path: bin
 
 
     - name: Upload Debug Net5.0
@@ -147,6 +150,11 @@ jobs:
       with:
         path: bin/
         key: cached-binarys
+
+
+    - uses: actions/download-artifact@v2
+      with:
+        name: binf
 
     - name: Print test
       run: ls
