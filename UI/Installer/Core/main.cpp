@@ -4,11 +4,7 @@
 #include<shellapi.h>
 namespace fs = std::filesystem;
 void cmd_execute(LPCWSTR command) {
-#if DEBUG
 	ShellExecute(NULL, NULL, L"cmd.exe",command, NULL, SW_SHOWNORMAL);
-#else
-	ShellExecute(NULL, NULL, L"cmd.exe", command, NULL, SW_HIDE);
-#endif
 }
 void download_temp() {
 	cmd_execute(L"/k curl -o temp\\1.bin ##TARGET-BUILD-URL##");
