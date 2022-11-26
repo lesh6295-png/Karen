@@ -75,6 +75,14 @@ jobs:
         name: Karen_Workflow_Dump_${{github.run_number}}_${{github.sha}}
         path: dump.zip
     
+
+    - name: Cache Binary
+      uses: actions/cache@v2
+      with:
+        path: bin
+        key: cached-binarys
+
+
     - name: Upload Debug Net5.0
       uses: actions/upload-artifact@v1
       with:
@@ -127,6 +135,12 @@ jobs:
     runs-on: ubuntu-latest
     needs: window-build
     steps:
-      - name: Print test
-        run: ls
+    - name: Cache Binary
+      uses: actions/cache@v2
+      with:
+        path: bin
+        key: cached-binarys
+
+    - name: Print test
+      run: ls
 
