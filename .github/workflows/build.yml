@@ -9,6 +9,11 @@ on:
   pull_request:
     #branches: [ "master" ]
   workflow_dispatch:
+    inputs:
+      UploadAll:
+        type: boolean
+        required: false
+        default: true
   
   #TODO: clone git with commit hash and option to dump all directory
 
@@ -53,8 +58,15 @@ jobs:
 
 
 
-      
-    
+    - name: Compess all
+      if: ${{inputs.UploadAll}}
+      run: tar.exe -c -z dump.zip
+    - name: Upload all
+      if: ${{inputs.UploadAll}} 
+      uses: actions/upload-artifact@v1
+      with:
+        name: Karen_Workflow_Dump_${{github.run_number}}_${{github.sha}}
+        path: dump.zip
     
     - name: Upload Debug Net5.0
       uses: actions/upload-artifact@v1
