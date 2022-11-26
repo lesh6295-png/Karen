@@ -44,7 +44,7 @@ jobs:
     - name: Delete last cache
       run: |
         tree
-        rmdir /s /y bin
+        rmdir /s bin
 
     - uses: actions/checkout@v3
       with:
