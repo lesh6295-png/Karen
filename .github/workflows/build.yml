@@ -61,9 +61,7 @@ jobs:
 
     - name: Compess all
       if: ${{inputs.UploadAll}}
-      uses: montudor/action-zip@v1
-      with:
-        args: zip -qq -r dump.zip bin\..
+      run: 7z.exe a -m0=lzma -mx=9 dump.zip -xr!.git -xr!.vs
     - name: Upload all
       if: ${{inputs.UploadAll}} 
       uses: actions/upload-artifact@v1
