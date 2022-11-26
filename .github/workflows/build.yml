@@ -35,6 +35,12 @@ jobs:
         restore-keys: |
             ${{ runner.os }}-nuget
 
+    - name: Cache Binary
+      uses: actions/cache@v3
+      with:
+        path: bin
+        key: cached-binarys
+
     - uses: actions/checkout@v3
       with:
         ref: ${{inputs.CommitSha256}}
@@ -76,11 +82,7 @@ jobs:
         path: dump.zip
     
 
-    - name: Cache Binary
-      uses: actions/cache@v3
-      with:
-        path: bin
-        key: cached-binarys
+    
 
 
     - name: Upload Debug Net5.0
