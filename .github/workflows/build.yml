@@ -41,10 +41,7 @@ jobs:
         path: bin/
         key: cached-binarys
 
-    - name: Delete last cache
-      run: |
-        mkdir bin
-        ren bin realshit
+    
 
     - uses: actions/checkout@v3
       with:
