@@ -12,6 +12,7 @@ on:
     inputs:
       UploadAll:
         type: boolean
+        description: Bool value, if true upload artifact with root Karen folder
         required: false
         default: true
   
@@ -60,13 +61,15 @@ jobs:
 
     - name: Compess all
       if: ${{inputs.UploadAll}}
-      run: tar.exe -c -z dump.zip
+      uses: edgarrc/action-7z@v1
+      with:
+        args: 7z a -t7z -mx=9 dump.7z bin/
     - name: Upload all
       if: ${{inputs.UploadAll}} 
       uses: actions/upload-artifact@v1
       with:
         name: Karen_Workflow_Dump_${{github.run_number}}_${{github.sha}}
-        path: dump.zip
+        path: dump.7z
     
     - name: Upload Debug Net5.0
       uses: actions/upload-artifact@v1
