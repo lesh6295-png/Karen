@@ -43,6 +43,7 @@ jobs:
 
     - name: Delete last cache
       run: |
+        mkdir bin
         ren bin realshit
 
     - uses: actions/checkout@v3
