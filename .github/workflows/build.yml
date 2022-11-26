@@ -42,7 +42,7 @@ jobs:
         key: cached-binarys
 
     - name: Delete last cache
-      run: del bin
+      run: rmdir -s -y bin
 
     - uses: actions/checkout@v3
       with:
