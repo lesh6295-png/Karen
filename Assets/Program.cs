@@ -12,7 +12,7 @@ namespace Karen.Assets
             if (args.Length >= 1)
             {
                 Console.WriteLine(args[0]);
-                string b = $"\\bin\\Karen\\{args[0]}\\net{netver}-windows\\";
+                string b = $"\\bin\\{args[0]}\\net{netver}-windows\\";
                 Environment.CurrentDirectory += b;
             }
             Directory.CreateDirectory("bin\\kbl");
