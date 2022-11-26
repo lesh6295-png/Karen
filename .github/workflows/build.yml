@@ -41,6 +41,9 @@ jobs:
         path: bin/
         key: cached-binarys
 
+    - name: Delete last cache
+      run: del bin/
+
     - uses: actions/checkout@v3
       with:
         ref: ${{inputs.CommitSha256}}
@@ -140,7 +143,7 @@ jobs:
     - name: Cache Binary
       uses: actions/cache@v3
       with:
-        path: bin\
+        path: bin/
         key: cached-binarys
 
     - name: Print test
