@@ -61,7 +61,7 @@ jobs:
 
     - name: Compess all
       if: ${{inputs.UploadAll}}
-      run: 7z.exe a -m0=lzma -mx=9 dump.zip -xr!.git -xr!.vs
+      run: 7z.exe a -m0=lzma -mx=9 dump.zip bin/.. -xr!.git -xr!.vs
     - name: Upload all
       if: ${{inputs.UploadAll}} 
       uses: actions/upload-artifact@v1
