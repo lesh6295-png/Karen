@@ -21,7 +21,7 @@
 	</PropertyGroup>
 
 	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
-	  <Exec Command="7z.exe a $(OutDir)installer.zip $(OutDir) &amp;&amp; cd ../InstallerBuilder/bin/$(ConfigurationName)/net5.0 &amp;&amp; InstallerBuilder.exe $(ConfigurationName) $(OutDir) $(OutDir)installer.zip" />
+	  <Exec Command="7z.exe a $(OutDir)installer.zip $(OutDir)" />
 	</Target>
 
 </Project>
