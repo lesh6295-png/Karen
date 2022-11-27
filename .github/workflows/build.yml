@@ -143,5 +143,5 @@ jobs:
         name: binf
 
     - name: Print test
-      run: ls
+      run: tree -fi
 
