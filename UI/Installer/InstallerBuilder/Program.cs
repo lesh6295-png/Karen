@@ -13,9 +13,15 @@ namespace Karen.InstallerBuilder
             Console.WriteLine("Start directory: "+Environment.CurrentDirectory);
             Environment.CurrentDirectory += "/../../../../../../bin";
             //delete last build result
-            if(Directory.Exists("Installer"))
-                Directory.Delete("Installer", true);
+            try
+            {
+                if (Directory.Exists("Installer"))
+                    Directory.Delete("Installer", true);
+            }
+            catch
+            {
 
+            }
             string path = $"Installer/{config}/{netver}";
             Directory.CreateDirectory(path+"/offline");
             Directory.CreateDirectory(path + "/local");
