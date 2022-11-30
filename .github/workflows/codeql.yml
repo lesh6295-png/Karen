@@ -18,9 +18,25 @@ on:
     - cron: '26 17 * * 4'
 
 jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+    - name: Setup .NET Core SDK
+      uses: actions/setup-dotnet@v3.0.3
+      
+    - name: Build
+      run: dotnet build -c Debug
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v3.1.1
+      with:
+        name: bins
+        path: bin/
   analyze:
     name: Analyze
     runs-on: ubuntu-latest
+    needs: build
     permissions:
       actions: read
       contents: read
@@ -66,8 +82,12 @@ jobs:
     # - run: |
     #   echo "Run, Build Application using script"
     #   ./location_of_script_within_repo/buildscript.sh
-    - name: Build
-      run: dotnet build -c Debug /p:EnableWindowsTargeting=true
+    - name: Download a Build Artifact
+      uses: actions/download-artifact@v3.0.1
+      with:
+        name: bins
+        
+        
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v2
       with:
