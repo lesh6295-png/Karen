@@ -81,5 +81,5 @@ jobs:
     - name: Upload CodeQl results
       uses: actions/upload-artifact@v3.1.1
       with:
-        path: results/
+        path: ../results/
         name: codeql-result
