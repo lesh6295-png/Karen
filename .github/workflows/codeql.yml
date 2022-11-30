@@ -75,7 +75,9 @@ jobs:
       uses: github/codeql-action/analyze@v2
       with:
         category: "/language:${{matrix.language}}"
-        
+      
+    - name: Filesystem
+      run: dir
     - name: Upload CodeQl results
       uses: actions/upload-artifact@v3.1.1
       with:
