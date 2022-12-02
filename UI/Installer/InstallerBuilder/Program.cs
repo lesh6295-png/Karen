@@ -8,6 +8,9 @@ namespace Karen.InstallerBuilder
     {
         static void Main(string[] args)
         {
+            #if TESTING
+            return;
+#endif
             string config = args[0];
            // string netver = args[1].Split('/').Last().Replace("\\","");
             Console.WriteLine("Start directory: "+Environment.CurrentDirectory);
