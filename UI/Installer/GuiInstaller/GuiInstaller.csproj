@@ -20,8 +20,4 @@
 		<RunPostBuildEvent>Always</RunPostBuildEvent>
 	</PropertyGroup>
 
-	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
-	  <Exec Command="7z.exe a $(OutDir)installer.zip $(OutDir)" />
-	</Target>
-
 </Project>

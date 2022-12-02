@@ -78,6 +78,9 @@ jobs:
         path: dump.zip
     
 
+    - name: Write branch data
+      run: echo ${{github.GITHUB_REF_NAME}} > bin/Installer/BranchConfig.ini
+
     - uses: actions/upload-artifact@v2
       with:
         name: binf

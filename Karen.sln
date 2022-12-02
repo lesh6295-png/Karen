@@ -44,11 +44,15 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Core", "UI\Installer\Core\C
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GuiInstaller", "UI\Installer\GuiInstaller\GuiInstaller.csproj", "{C0DEFB70-3AAE-41BA-AB95-B24F2FE13041}"
 	ProjectSection(ProjectDependencies) = postProject
-		{17441F15-0762-4E6A-BD0A-F47546C88D4B} = {17441F15-0762-4E6A-BD0A-F47546C88D4B}
 		{D435D5E2-8C4B-4340-9276-B60AED85C507} = {D435D5E2-8C4B-4340-9276-B60AED85C507}
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InstallerBuilder", "UI\Installer\InstallerBuilder\InstallerBuilder.csproj", "{17441F15-0762-4E6A-BD0A-F47546C88D4B}"
+	ProjectSection(ProjectDependencies) = postProject
+		{C0DEFB70-3AAE-41BA-AB95-B24F2FE13041} = {C0DEFB70-3AAE-41BA-AB95-B24F2FE13041}
+		{27551497-A0E1-4E1E-94B1-3E848CA4B3C3} = {27551497-A0E1-4E1E-94B1-3E848CA4B3C3}
+		{D435D5E2-8C4B-4340-9276-B60AED85C507} = {D435D5E2-8C4B-4340-9276-B60AED85C507}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

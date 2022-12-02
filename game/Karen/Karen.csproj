@@ -45,4 +45,8 @@
     <Resource Include="DefaultSprites\emotion.png" />
   </ItemGroup>
 
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="7z.exe a $(TargetDir)game.zip $(TargetDir) -xr!*.zip -xr!*.7z" />
+  </Target>
+
 </Project>
