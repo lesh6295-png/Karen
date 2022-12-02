@@ -8,7 +8,7 @@ namespace Karen.InstallerBuilder
     {
         static void Main(string[] args)
         {
-            #if TESTING
+#if TESTING
             return;
 #endif
             string config = args[0];
