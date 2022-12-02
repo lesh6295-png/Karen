@@ -1,4 +1,5 @@
-﻿using System;
+﻿//like a YandereDev
+using System;
 using System.Linq;
 using System.IO;
 using Karen.Types;
@@ -9,7 +10,7 @@ namespace Karen.InstallerBuilder
         static void Main(string[] args)
         {
 #if TESTING
-            return;
+            //return;
 #endif
             string config = args[0];
            // string netver = args[1].Split('/').Last().Replace("\\","");
@@ -62,7 +63,11 @@ namespace Karen.InstallerBuilder
             }
 
             //copy installer.exe
-            File.Copy($"installer-core/{config}/installer.exe", "Installer/installer.exe", true);
+            try
+            {
+                File.Copy($"installer-core/{config}/installer.exe", "Installer/installer.exe", true);
+            }
+            catch { }
             //string path = $"Installer/{config}/{netver}";
             //Directory.CreateDirectory(path+"/offline");
             //Directory.CreateDirectory(path + "/local");
