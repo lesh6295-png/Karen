@@ -149,7 +149,7 @@ jobs:
         name: binf
 
     - name: Upload Binarys
-      if: inputs.CommitSha256 == "" && github.event_name != 'pull_request'
+      if: inputs.CommitSha256 == '' && github.event_name != 'pull_request'
       uses: stefanzweifel/git-auto-commit-action@v4
       with:
         commit_message: Deploy last build
