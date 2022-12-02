@@ -18,9 +18,9 @@ namespace Karen.InstallerBuilder
             //delete last build result
             try
             {
-                if (Directory.Exists("Installer"))
-                    Directory.Delete("Installer", true);
-                Directory.CreateDirectory("Installer");
+                //if (Directory.Exists("Installer"))
+                //    Directory.Delete("Installer", true);
+                //Directory.CreateDirectory("Installer");
             }
             catch
             {
