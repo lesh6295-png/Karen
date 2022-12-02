@@ -84,7 +84,7 @@ jobs:
     - uses: actions/upload-artifact@v2
       with:
         name: binf
-        path: bin
+        path: bin/Installer
 
 
     - name: Upload Debug Net5.0
@@ -144,9 +144,12 @@ jobs:
       with:
         ref: ${{inputs.CommitSha256}}
 
-    - uses: actions/download-artifact@v2
+    - uses: actions/download-artifact@v3
       with:
         name: binf
+        path: Binarys/
+
+
 
     - name: Upload Binarys
       if: inputs.CommitSha256 == '' && github.event_name != 'pull_request'
