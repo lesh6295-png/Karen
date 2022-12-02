@@ -156,6 +156,8 @@ jobs:
       uses: stefanzweifel/git-auto-commit-action@v4
       with:
         commit_message: Deploy last build, build number - ${{github.run_number}}
+        commit_user_email: my.emailtounity@gmail.com
+        commit_author: Deploy Workflow
         commit_user_name: Deploy Binarys Job
 
     - name: Print test
