@@ -160,26 +160,26 @@ jobs:
      #   commit_author: Deploy Workflow
        # commit_user_name: Deploy Binarys Job
 
-    - name: To Installer folder
-      run: cd Binarys/
+    
 
     - name: Release
       uses: softprops/action-gh-release@v1
-      
+      if: inputs.CommitSha256 == '' && github.event_name != 'pull_request'
       with:
         tag_name: ${{github.run_number}}
+        target_commitish: ${{github.ref_name}}
         files: |
-          d5.bin
-          d6.bin
-          d7.bin
-          r5.bin
-          r6.bin
-          r7.bin
-          t5.bin
-          t6.bin
-          t7.bin
-          installer.exe
-          BranchConfig.ini
+          Binarys/d5.bin
+          Binarys/d6.bin
+          Binarys/d7.bin
+          Binarys/r5.bin
+          Binarys/r6.bin
+          Binarys/r7.bin
+          Binarys/t5.bin
+          Binarys/t6.bin
+          Binarys/t7.bin
+          Binarys/installer.exe
+          Binarys/BranchConfig.ini
 
 
 
