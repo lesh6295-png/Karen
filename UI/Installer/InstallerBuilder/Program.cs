@@ -80,11 +80,12 @@ namespace Karen.InstallerBuilder
                 if (x.Contains("Debug") && y.Contains("Release")) r = 1;
                 if (y.Contains("Testing") && (x.Contains("Debug") || x.Contains("Release"))) r = -1;
                 if (y.Contains("Debug") && x.Contains("Release")) r = -1;
-
+                if (r == 0) { 
                 if (x.Contains("5") && (y.Contains("6") || y.Contains("7"))) r = 1;
                 if (x.Contains("6") && y.Contains("7")) r = 1;
                 if (y.Contains("5") && (x.Contains("6") || x.Contains("7"))) r = -1;
                 if (y.Contains("6") && x.Contains("7")) r = -1;
+                }
                 return r;
             }
             //copy gui installer
