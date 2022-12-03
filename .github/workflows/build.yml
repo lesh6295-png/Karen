@@ -79,7 +79,7 @@ jobs:
     
 
     - name: Write branch data
-      run: echo "${{github.ref}}" > bin/Installer/BranchConfig.ini
+      run: echo "${{github.run_number}}" > bin/Installer/ReleaseConfig.ini
 
     - uses: actions/upload-artifact@v2
       with:
@@ -166,7 +166,7 @@ jobs:
       uses: softprops/action-gh-release@v1
       if: inputs.CommitSha256 == '' && github.event_name != 'pull_request'
       with:
-        tag_name: ${{github.run_number}}
+        tag_name: ${{github.ref_name}}-${{github.run_number}}
         target_commitish: ${{github.ref_name}}
         files: |
           Binarys/d5.bin
@@ -179,7 +179,7 @@ jobs:
           Binarys/t6.bin
           Binarys/t7.bin
           Binarys/installer.exe
-          Binarys/BranchConfig.ini
+          Binarys/ReleaseConfig.ini
 
 
 
