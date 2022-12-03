@@ -79,7 +79,7 @@ jobs:
     
 
     - name: Write branch data
-      run: echo "${{github.run_number}}" > bin/Installer/ReleaseConfig.ini
+      run: echo "${{github.ref_name}}-${{github.run_number}}" > bin/Installer/ReleaseConfig.ini
 
     - uses: actions/upload-artifact@v2
       with:
@@ -180,6 +180,7 @@ jobs:
           Binarys/t7.bin
           Binarys/installer.exe
           Binarys/ReleaseConfig.ini
+          Binarys/gui.zip
 
 
 

@@ -72,29 +72,25 @@ namespace Karen.InstallerBuilder
                 File.Copy($"installer-core/{config}/installer.exe", "Installer/installer.exe", true);
             }
             catch { }
-            //string path = $"Installer/{config}/{netver}";
-            //Directory.CreateDirectory(path+"/offline");
-            //Directory.CreateDirectory(path + "/local");
-            //Directory.CreateDirectory(path + "/minimal");
 
-            ////copy installer.exe
-            //File.Copy("installer-core/" + config + "/installer.exe", path + "/offline/installer.exe");
-            //File.Copy("installer-core/" + config + "/installer.exe", path + "/local/installer.exe");
-            //File.Copy("installer-core/" + config + "/installer.exe", path + "/minimal/installer.exe");
+            int CompareGuiBins(string x, string y)
+            {
+                int r = 0;
+                if (x.Contains("Testing") && (y.Contains("Debug") || y.Contains("Release"))) r = 1;
+                if (x.Contains("Debug") && y.Contains("Release")) r = 1;
+                if (y.Contains("Testing") && (x.Contains("Debug") || x.Contains("Release"))) r = -1;
+                if (y.Contains("Debug") && x.Contains("Release")) r = -1;
 
-            ////copy 1.bin
-            //File.Copy("InstallerTemp/" + config + "/"+netver+"/installer.zip", path + "/offline/1.bin");
-            //File.Copy("InstallerTemp/" + config + "/" + netver + "/installer.zip", path + "/local/1.bin");
-
-            ////todo: add copy raw karen to offline build
-
-
-            ////write config
-            //string globalr = Karen.Types.Extensions.RandomString(min: 10, max: 20).ToHex();
-            //File.WriteAllText(path + "/config.ini", globalr);
-            //File.WriteAllText(path + "/offline/config.ini", globalr);
-            //File.WriteAllText(path + "/local/config.ini", globalr);
-            //File.WriteAllText(path + "/minimal/config.ini", globalr);
+                if (x.Contains("5") && (y.Contains("6") || y.Contains("7"))) r = 1;
+                if (x.Contains("6") && y.Contains("7")) r = 1;
+                if (y.Contains("5") && (x.Contains("6") || x.Contains("7"))) r = -1;
+                if (y.Contains("6") && x.Contains("7")) r = -1;
+                return r;
+            }
+            //copy gui installer
+            string[] guis = Directory.GetFiles("InstallerTemp/", "gui.zip", SearchOption.AllDirectories);
+            guis.ToList().Sort(CompareGuiBins);
+            File.Copy(guis[0], "Installer/gui.zip", true);
         }
     }
 }
