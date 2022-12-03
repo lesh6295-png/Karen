@@ -68,7 +68,7 @@ int APIENTRY wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmd
 	if (res != fdrs) {
 		ssp = 5;
 	}
-	bool localinst = !fs::exists(p / "gui.bin")&& !fs::exists(p / "7zr.exe");
+	bool localinst = (!fs::exists(p / "gui.bin")&& !fs::exists(p / "7zr.exe"))|| (!fs::exists(p / "temp/gui.bin") && !fs::exists(p / "temp/7zr.exe"));
 	
 	if (localinst) {
 		download_gui();
