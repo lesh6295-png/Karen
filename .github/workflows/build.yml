@@ -166,8 +166,8 @@ jobs:
       run: |
         sudo apt install p7zip-full p7zip-rar
 
-  #  - name: Installer Archive Build
-  #    run: 
+    - name: Installer Archive Build
+      run: 7z a Binarys/Installer.zip Binarys/7zr.exe Binarys/installer.exe Binarys/ReleaseConfig.ini Binarys/gui.bin 
 
     - name: Release
       uses: softprops/action-gh-release@v1
@@ -185,9 +185,7 @@ jobs:
           Binarys/t5.bin
           Binarys/t6.bin
           Binarys/t7.bin
-          Binarys/installer.exe
-          Binarys/ReleaseConfig.ini
-          Binarys/gui.bin
+          Binarys/Installer.zip
 
 
 
