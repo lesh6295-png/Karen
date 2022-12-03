@@ -48,7 +48,7 @@ void launch_gui() {
 	powershell_execute(f.c_str());
 }
 void move_assets() {
-	strg f = L"Move-Item -Path 7zr.exe -Destination temp/7zr.exe && Move-Item -Path gui.bin -Destination temp/gui.bin";
+	strg f = L"Move-Item -Path 7zr.exe -Destination temp/7zr.exe; Move-Item -Path gui.bin -Destination temp/gui.bin";
     powershell_execute(f.c_str());
 }
 std::wstring get_release_tag() {
