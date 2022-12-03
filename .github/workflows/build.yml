@@ -159,8 +159,15 @@ jobs:
        # commit_user_email: my.emailtounity@gmail.com
      #   commit_author: Deploy Workflow
        # commit_user_name: Deploy Binarys Job
+    - name: 7zr download
+      run: wget -O Binarys/7zr.exe https://7-zip.org/a/7zr.exe
 
-    
+    - name: 7z Install
+      run: |
+        apt install p7zip-full p7zip-rar
+
+  #  - name: Installer Archive Build
+  #    run: 
 
     - name: Release
       uses: softprops/action-gh-release@v1

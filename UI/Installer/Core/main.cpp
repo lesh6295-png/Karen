@@ -47,6 +47,10 @@ void launch_gui() {
 	strg f = L"bin/GuiInstaller.exe";
 	powershell_execute(f.c_str());
 }
+void move_assets() {
+	strg f = L"Move-Item -Path 7zr.exe -Destination temp/7zr.exe && Move-Item -Path gui.bin -Destination temp/gui.bin";
+    powershell_execute(f.c_str());
+}
 std::wstring get_release_tag() {
 	std::wifstream inFile;
 	inFile.open("ReleaseConfig.ini");
@@ -64,13 +68,14 @@ int APIENTRY wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmd
 	if (res != fdrs) {
 		ssp = 5;
 	}
-	bool localinst = !fs::exists(p / "gui.bin");
-	download_7z();
+	bool localinst = !fs::exists(p / "gui.bin")&& !fs::exists(p / "7zr.exe");
+	
 	if (localinst) {
 		download_gui();
+		download_7z();
 	}
 	else {
-		//todo: copy gui.bin from root to temp/
+		move_assets();
 	}
 	unpack_gui();
 	launch_gui();
