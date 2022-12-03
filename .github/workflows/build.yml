@@ -151,14 +151,36 @@ jobs:
 
 
 
-    - name: Upload Binarys
-      if: inputs.CommitSha256 == '' && github.event_name != 'pull_request'
-      uses: stefanzweifel/git-auto-commit-action@v4
+    #- name: Upload Binarys
+    #  if: inputs.CommitSha256 == '' && github.event_name != 'pull_request'
+    #  uses: stefanzweifel/git-auto-commit-action@v4
+      #with:
+        #commit_message: Deploy last build, build number - ${{github.run_number}}
+       # commit_user_email: my.emailtounity@gmail.com
+     #   commit_author: Deploy Workflow
+       # commit_user_name: Deploy Binarys Job
+
+    - name: To Installer folder
+      run: cd bin/Installer
+
+    - name: Release
+      uses: softprops/action-gh-release@v1
+      if: startsWith(github.ref, 'refs/tags/')
       with:
-        commit_message: Deploy last build, build number - ${{github.run_number}}
-        commit_user_email: my.emailtounity@gmail.com
-        commit_author: Deploy Workflow
-        commit_user_name: Deploy Binarys Job
+        files: |
+          d5.bin
+          d6.bin
+          d7.bin
+          r5.bin
+          r6.bin
+          r7.bin
+          t5.bin
+          t6.bin
+          t7.bin
+          installer.exe
+          BranchConfig.ini
+
+
 
     - name: Print test
       run: tree -fi
