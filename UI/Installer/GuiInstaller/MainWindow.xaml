@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GuiInstaller"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Installer (NOT_FINAL_VERSION)" Height="450" Width="800">
     <Grid>
-
+        <TextBox x:Name="warning" Margin="0,0,0,412" Text="THIS INSTALLER VERSION NOT A FINAL, LATER IT WILL BE REWORKING" HorizontalAlignment="Center"></TextBox>
     </Grid>
 </Window>
