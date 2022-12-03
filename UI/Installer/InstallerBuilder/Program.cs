@@ -77,7 +77,7 @@ namespace Karen.InstallerBuilder
             //copy gui installer
             try {
                 string[] guis = Directory.GetFiles($"InstallerTemp/{config}/", "gui.bin", SearchOption.AllDirectories);
-                File.Copy(guis.Last(), "Installer/gui.zip", true);
+                File.Copy(guis.Last(), "Installer/gui.bin", true);
             }
             catch { }
             }
