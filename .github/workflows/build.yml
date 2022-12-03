@@ -180,7 +180,7 @@ jobs:
           Binarys/t7.bin
           Binarys/installer.exe
           Binarys/ReleaseConfig.ini
-          Binarys/gui.zip
+          Binarys/gui.bin
 
 
 

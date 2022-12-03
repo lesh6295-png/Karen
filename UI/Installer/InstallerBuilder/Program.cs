@@ -10,7 +10,7 @@ namespace Karen.InstallerBuilder
         static void Main(string[] args)
         {
 #if TESTING
-            //return;
+           return;
 #endif
             string config = args[0];
            // string netver = args[1].Split('/').Last().Replace("\\","");
@@ -75,7 +75,7 @@ namespace Karen.InstallerBuilder
 
             
             //copy gui installer
-            string[] guis = Directory.GetFiles($"InstallerTemp/{config}/", "gui.zip", SearchOption.AllDirectories);
+            string[] guis = Directory.GetFiles($"InstallerTemp/{config}/", "gui.bin", SearchOption.AllDirectories);
             File.Copy(guis.Last(), "Installer/gui.zip", true);
         }
     }
