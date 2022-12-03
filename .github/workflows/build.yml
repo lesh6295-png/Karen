@@ -12,9 +12,9 @@ on:
     inputs:
       UploadAll:
         type: boolean
-        description: Bool value, if true upload artifact with root Karen folder
+        description: Create dump
         required: false
-        default: true
+        default: false
       CommitSha256:
         type: string
         description: Commit hash string
