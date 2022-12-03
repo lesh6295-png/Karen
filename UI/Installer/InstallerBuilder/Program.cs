@@ -10,11 +10,11 @@ namespace Karen.InstallerBuilder
         static void Main(string[] args)
         {
 #if TESTING
-           return;
+            return;
 #endif
             string config = args[0];
-           // string netver = args[1].Split('/').Last().Replace("\\","");
-            Console.WriteLine("Start directory: "+Environment.CurrentDirectory);
+            // string netver = args[1].Split('/').Last().Replace("\\","");
+            Console.WriteLine("Start directory: " + Environment.CurrentDirectory);
             Environment.CurrentDirectory += "/../../../../../../bin";
             //delete last build result
             try
@@ -24,8 +24,8 @@ namespace Karen.InstallerBuilder
                 //Directory.CreateDirectory("Installer");
 
                 if (!Directory.Exists("Installer"))
-                //////    Directory.Delete("Installer", true);
-                Directory.CreateDirectory("Installer");
+                    //////    Directory.Delete("Installer", true);
+                    Directory.CreateDirectory("Installer");
             }
             catch
             {
@@ -33,7 +33,7 @@ namespace Karen.InstallerBuilder
             }
             //copy Karen archives binarys
             string[] karenbins = Directory.GetFiles("Karen/", "game.zip", SearchOption.AllDirectories);
-            foreach(var q in karenbins)
+            foreach (var q in karenbins)
             {
                 string shortname = "";
                 if (q.Contains("Debug"))
@@ -73,10 +73,13 @@ namespace Karen.InstallerBuilder
             }
             catch { }
 
-            
+
             //copy gui installer
-            string[] guis = Directory.GetFiles($"InstallerTemp/{config}/", "gui.bin", SearchOption.AllDirectories);
-            File.Copy(guis.Last(), "Installer/gui.zip", true);
-        }
+            try {
+                string[] guis = Directory.GetFiles($"InstallerTemp/{config}/", "gui.bin", SearchOption.AllDirectories);
+                File.Copy(guis.Last(), "Installer/gui.zip", true);
+            }
+            catch { }
+            }
     }
 }
