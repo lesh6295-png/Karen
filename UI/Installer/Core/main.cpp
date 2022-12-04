@@ -30,17 +30,17 @@ void powershell_execute(LPCWSTR command) {
 	CloseHandle(ShExecInfo.hProcess);
 }
 void download_gui() {
-	strg f = L"Invoke-WebRequest -OutFile temp/gui.bin https://github.com/lesh6295-png/Karen/releases/download/";
+	strg f = L"Invoke-WebRequest -OutFile gui.bin https://github.com/lesh6295-png/Karen/releases/download/";
 	strg fn = L"/gui.bin";
 	strg c = f + get_release_tag() + fn;
 	powershell_execute(c.c_str());
 }
 void download_7z() {
-	strg f = L"Invoke-WebRequest -OutFile temp/7zr.exe https://7-zip.org/a/7zr.exe";
+	strg f = L"Invoke-WebRequest -OutFile 7zr.exe https://7-zip.org/a/7zr.exe";
 	powershell_execute(f.c_str());
 }
 void unpack_gui() {
-	strg f = L"temp/7zr.exe e -obin temp/gui.bin";
+	strg f = L"7zr.exe e -obin gui.bin";
 	powershell_execute(f.c_str());
 }
 void launch_gui() {
@@ -61,21 +61,17 @@ std::wstring get_release_tag() {
 int APIENTRY wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLine, int nCmdShow)
 {
 	fs::path p = fs::current_path();
-	fs::create_directory(p / "temp");
 	fs::create_directory(p / "bin");
 	strg pa = lpCmdLine;
 	fndr res = pa.find(L"-sw");
 	if (res != fdrs) {
 		ssp = 5;
 	}
-	bool localinst = (!fs::exists(p / "gui.bin")&& !fs::exists(p / "7zr.exe"))|| (!fs::exists(p / "temp/gui.bin") && !fs::exists(p / "temp/7zr.exe"));
-	
+	bool localinst = fs::exists(p / "gui.bin")&& !fs::exists(p / "7zr.exe");
+	//TODO: CHANGE ASSETS LOCATION
 	if (localinst) {
 		download_gui();
 		download_7z();
-	}
-	else {
-		move_assets();
 	}
 	unpack_gui();
 	launch_gui();
