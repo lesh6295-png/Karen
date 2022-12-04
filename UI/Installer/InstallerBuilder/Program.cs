@@ -63,7 +63,7 @@ namespace Karen.InstallerBuilder
                 }
 
                 shortname += ".bin";
-                File.Move(q, $"Installer/{shortname}", true);
+                File.Copy(q, $"Installer/{shortname}", true);
             }
 
             //copy installer.exe
