@@ -61,9 +61,9 @@ jobs:
       run: dotnet --list-sdks
     - name: MSBuild
       run: |
-        msbuild Karen.sln /property:Configuration=Debug -m
-        msbuild Karen.sln /property:Configuration=Release /p:DebugSymbols=false /p:DebugType=None -m
-        msbuild Karen.sln /property:Configuration=Testing -m
+        msbuild Karen.sln /property:Configuration=Debug 
+        msbuild Karen.sln /property:Configuration=Release /p:DebugSymbols=false /p:DebugType=None 
+        msbuild Karen.sln /property:Configuration=Testing 
 
 
 
