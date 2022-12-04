@@ -21,7 +21,14 @@
 	</PropertyGroup>
 
 	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
-	  <Exec Command="7z.exe a $(OutDir)gui.bin $(OutDir) -xr!*.zip -xr!*.pdb" />
+	  <Exec Command="7z.exe a $(OutDir)gui.bin $(OutDir) -xr!*.bin -xr!*.pdb" />
 	</Target>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\..\..\libs\KarenLocale\KarenLocale.csproj" />
+	  <ProjectReference Include="..\..\..\libs\KBL\KBL.csproj" />
+	  <ProjectReference Include="..\..\..\libs\Registry\Registry.csproj" />
+	  <ProjectReference Include="..\..\..\libs\Types\Types.csproj" />
+	</ItemGroup>
 
 </Project>

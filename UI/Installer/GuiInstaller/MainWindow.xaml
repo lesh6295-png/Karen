@@ -7,6 +7,16 @@
         mc:Ignorable="d"
         Title="Installer (NOT_FINAL_VERSION)" Height="450" Width="800">
     <Grid>
-        <TextBox x:Name="warning" Margin="0,0,0,412" Text="THIS INSTALLER VERSION NOT A FINAL, LATER IT WILL BE REWORKING" HorizontalAlignment="Center"></TextBox>
+        <TextBlock x:Name="warning" HorizontalAlignment="Center" Text="THIS INSTALLER VERSION NOT A FINAL, LATER IT WILL BE REWORKING" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <TextBox x:Name="config" HorizontalAlignment="Right" Margin="0,49,10,0" Text="r7" TextWrapping="Wrap" VerticalAlignment="Top" Width="197"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,51,0,0" Text="Configuration" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <TextBox x:Name="path" HorizontalAlignment="Right" Margin="0,79,10,0" Text="C:\Karen\" TextWrapping="Wrap" VerticalAlignment="Top" Width="197"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,81,0,0" Text="Path" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <TextBox x:Name="email" HorizontalAlignment="Right" Margin="0,113,10,0" Text="your-email@gmail.com" TextWrapping="Wrap" VerticalAlignment="Top" Width="197"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,115,0,0" Text="Email" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <TextBox x:Name="release" HorizontalAlignment="Right" Margin="0,149,10,0" Text="add-installer-331" TextWrapping="Wrap" VerticalAlignment="Top" Width="197"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,151,0,0" Text="Release" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <ProgressBar x:Name="install_progress" HorizontalAlignment="Left" Height="31" Margin="20,0,0,35" VerticalAlignment="Bottom" Width="780" Maximum="5"/>
+        <Button x:Name="installbutton" Content="Install" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="141" Click="installbutton_Click"/>
     </Grid>
 </Window>

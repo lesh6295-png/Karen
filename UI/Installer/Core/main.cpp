@@ -40,16 +40,12 @@ void download_7z() {
 	powershell_execute(f.c_str());
 }
 void unpack_gui() {
-	strg f = L"7zr.exe e -obin gui.bin";
+	strg f = L".\\7zr.exe e -obin gui.bin";
 	powershell_execute(f.c_str());
 }
 void launch_gui() {
-	strg f = L"bin/GuiInstaller.exe";
+	strg f = L".\\bin/GuiInstaller.exe";
 	powershell_execute(f.c_str());
-}
-void move_assets() {
-	strg f = L"Move-Item -Path 7zr.exe -Destination temp/7zr.exe; Move-Item -Path gui.bin -Destination temp/gui.bin";
-    powershell_execute(f.c_str());
 }
 std::wstring get_release_tag() {
 	std::wifstream inFile;
