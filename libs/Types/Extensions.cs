@@ -31,6 +31,12 @@ namespace Karen.Types
                 return r;
             return defaultValue;
         }
+
+        public static string GetExePath()
+        {
+            return System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().CodeBase);
+        }
+
         public static DirectoryInfo CopyFilesRecursively(DirectoryInfo source, DirectoryInfo target)
         {
             var newDirectoryInfo = target.CreateSubdirectory(source.Name);

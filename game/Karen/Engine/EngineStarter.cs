@@ -21,6 +21,8 @@ namespace Karen.Engine
                 Environment.Exit(-2);
             }
 
+            Environment.CurrentDirectory = Karen.Types.Extensions.GetExePath();
+            Logger.Write($"Active working directory: {Environment.CurrentDirectory}");
             AppDomain.CurrentDomain.UnhandledException += Logger.ExceptionLog;
 
             if (!StateController.Enable())
