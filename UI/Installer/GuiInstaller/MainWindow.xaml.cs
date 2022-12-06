@@ -25,6 +25,7 @@ namespace GuiInstaller
     {
         public MainWindow()
         {
+            config.Text = App.branchName;
             InitializeComponent();
         }
 

@@ -13,5 +13,14 @@ namespace GuiInstaller
     /// </summary>
     public partial class App : Application
     {
+        public static string branchName = "";
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            if (e.Args.Length > 0)
+            {
+                branchName = e.Args[0];
+            }
+            base.OnStartup(e);
+        }
     }
 }

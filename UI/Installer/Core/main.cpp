@@ -44,7 +44,7 @@ void unpack_gui() {
 	powershell_execute(f.c_str());
 }
 void launch_gui() {
-	strg f = L".\\bin/GuiInstaller.exe";
+	strg f = L".\\bin/GuiInstaller.exe "+get_release_tag();
 	powershell_execute(f.c_str());
 }
 std::wstring get_release_tag() {
@@ -64,7 +64,6 @@ int APIENTRY wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmd
 		ssp = 5;
 	}
 	bool localinst = fs::exists(p / "gui.bin")&& !fs::exists(p / "7zr.exe");
-	//TODO: CHANGE ASSETS LOCATION
 	if (localinst) {
 		download_gui();
 		download_7z();
