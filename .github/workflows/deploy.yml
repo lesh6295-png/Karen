@@ -25,7 +25,7 @@ jobs:
     - name: Build
       run: msbuild Karen.sln /property:Configuration=Release /p:DebugSymbols=false /p:DebugType=None 
     - name: IO
-      run: dir /s
+      run: dir -s
     - name: Write Release Info
       run: echo "stable-${{github.run_number}}" > bin/Installer/ReleaseConfig.ini
 
