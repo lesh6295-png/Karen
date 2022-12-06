@@ -1,4 +1,3 @@
-﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31321.278
@@ -53,6 +52,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InstallerBuilder", "UI\Inst
 		{27551497-A0E1-4E1E-94B1-3E848CA4B3C3} = {27551497-A0E1-4E1E-94B1-3E848CA4B3C3}
 		{D435D5E2-8C4B-4340-9276-B60AED85C507} = {D435D5E2-8C4B-4340-9276-B60AED85C507}
 	EndProjectSection
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeOptimizator", "libs\CodeOptimizator\CodeOptimizator.csproj", "{0F1F0F8A-FE04-4FC6-A765-366FE4C8FB10}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -289,6 +289,12 @@ Global
 		{17441F15-0762-4E6A-BD0A-F47546C88D4B}.Testing|x64.Build.0 = Testing|Any CPU
 		{17441F15-0762-4E6A-BD0A-F47546C88D4B}.Testing|x86.ActiveCfg = Debug|Any CPU
 		{17441F15-0762-4E6A-BD0A-F47546C88D4B}.Testing|x86.Build.0 = Debug|Any CPU
+		{0F1F0F8A-FE04-4FC6-A765-366FE4C8FB10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F1F0F8A-FE04-4FC6-A765-366FE4C8FB10}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F1F0F8A-FE04-4FC6-A765-366FE4C8FB10}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F1F0F8A-FE04-4FC6-A765-366FE4C8FB10}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F1F0F8A-FE04-4FC6-A765-366FE4C8FB10}.Testing|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F1F0F8A-FE04-4FC6-A765-366FE4C8FB10}.Testing|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -306,6 +312,7 @@ Global
 		{D435D5E2-8C4B-4340-9276-B60AED85C507} = {C88E2174-6753-4D0A-9570-3A341559C467}
 		{C0DEFB70-3AAE-41BA-AB95-B24F2FE13041} = {C88E2174-6753-4D0A-9570-3A341559C467}
 		{17441F15-0762-4E6A-BD0A-F47546C88D4B} = {C88E2174-6753-4D0A-9570-3A341559C467}
+		{0F1F0F8A-FE04-4FC6-A765-366FE4C8FB10} = {F0571027-1FA0-4E8C-9D99-8D1D011F572C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6509DFC4-21A4-4AFD-B3E9-D62EBBF17653}
