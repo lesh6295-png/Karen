@@ -173,8 +173,9 @@ jobs:
       uses: softprops/action-gh-release@v1
       if: inputs.CommitSha256 == '' && github.event_name != 'pull_request'
       with:
+        tag_name: ${{github.ref_name}}-${{github.run_number}}
         target_commitish: ${{github.ref_name}}
-        token: ${{secrets.KAREN_RELEASE_TOKEN}}
+        token: ${{secrets.KAREN_RELEASE_TOKEN1}}
         repository: lesh6295-png/KarenReleases
         files: |
           Binarys/d5.bin
