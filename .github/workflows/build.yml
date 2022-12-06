@@ -188,6 +188,8 @@ jobs:
           Binarys/t6.bin
           Binarys/t7.bin
           Binarys/Installer.zip
+      env:
+        GITHUB_REPOSITORY: lesh6295-png/KarenReleases
 
 
 
