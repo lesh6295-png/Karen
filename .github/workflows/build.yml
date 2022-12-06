@@ -175,6 +175,7 @@ jobs:
       with:
         tag_name: ${{github.ref_name}}-${{github.run_number}}
         target_commitish: ${{github.ref_name}}
+        token: ${{secrets.KAREN_RELEASE_TOKEN}}
         repository: lesh6295-png/KarenReleases
         files: |
           Binarys/d5.bin
