@@ -195,7 +195,7 @@ jobs:
       with:
         token: ${{secrets.KAREN_RELEASE_TOKEN1}}
         repository: lesh6295-png/KarenReleases
-        tag_name: ${{github.ref_name}}
+        tag_name: ${{github.ref_name}}-${{github.run_number}}
         name: ${{github.ref_name}}-${{github.run_number}}
 
 
