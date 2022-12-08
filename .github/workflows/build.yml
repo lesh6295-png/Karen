@@ -197,7 +197,17 @@ jobs:
         repository: lesh6295-png/KarenReleases
         tag_name: ${{github.ref_name}}-${{github.run_number}}
         name: ${{github.ref_name}}-${{github.run_number}}
-
+        files: |
+          Binarys/d5.bin
+          Binarys/d6.bin
+          Binarys/d7.bin
+          Binarys/r5.bin
+          Binarys/r6.bin
+          Binarys/r7.bin
+          Binarys/t5.bin
+          Binarys/t6.bin
+          Binarys/t7.bin
+          Binarys/Installer.zip
 
 
     - name: Print test
