@@ -169,27 +169,32 @@ jobs:
     - name: Installer Archive Build
       run: 7z a Binarys/Installer.zip Binarys/7zr.exe Binarys/installer.exe Binarys/ReleaseConfig.ini Binarys/gui.bin 
 
-    - name: Release
+    #- name: Release
+    #  uses: softprops/action-gh-release@v1
+    #  if: inputs.CommitSha256 == '' && github.event_name != 'pull_request'
+    #  with:
+    #    tag_name: ${{github.ref_name}}-${{github.run_number}}
+    #    target_commitish: ${{github.ref_name}}
+    #    token: ${{secrets.KAREN_RELEASE_TOKEN1}}
+    #    repository: lesh6295-png/KarenReleases
+    #    files: |
+    #      Binarys/d5.bin
+    #      Binarys/d6.bin
+    #      Binarys/d7.bin
+    #      Binarys/r5.bin
+    #      Binarys/r6.bin
+    #      Binarys/r7.bin
+    #      Binarys/t5.bin
+    #      Binarys/t6.bin
+    #      Binarys/t7.bin
+    #      Binarys/Installer.zip
+    #  env:
+    #    GITHUB_REPOSITORY: lesh6295-png/KarenReleases
+    - name: TestRelease
       uses: softprops/action-gh-release@v1
-      if: inputs.CommitSha256 == '' && github.event_name != 'pull_request'
       with:
-        tag_name: ${{github.ref_name}}-${{github.run_number}}
-        target_commitish: ${{github.ref_name}}
         token: ${{secrets.KAREN_RELEASE_TOKEN1}}
         repository: lesh6295-png/KarenReleases
-        files: |
-          Binarys/d5.bin
-          Binarys/d6.bin
-          Binarys/d7.bin
-          Binarys/r5.bin
-          Binarys/r6.bin
-          Binarys/r7.bin
-          Binarys/t5.bin
-          Binarys/t6.bin
-          Binarys/t7.bin
-          Binarys/Installer.zip
-      env:
-        GITHUB_REPOSITORY: lesh6295-png/KarenReleases
 
 
 
