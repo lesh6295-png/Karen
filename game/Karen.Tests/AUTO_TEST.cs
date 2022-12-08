@@ -52,7 +52,17 @@ namespace Karen.Tests
              }*/
             if (karenGame.ExitCode != 0)
             {
-                Assert.Fail($"Unknown fall: Exit code: {karenGame.ExitCode}");
+                string err;
+                try
+                {
+                    err = File.ReadAllText("lasterror.log");
+                    
+                }
+                catch
+                {
+                    err = "Falled to get error log :(";
+                }
+                Assert.Fail($"Unknown fall: Exit code: {karenGame.ExitCode}\nError log: {err}");
             }
             Assert.Pass("Karen AUTO_TEST pass!");
         }

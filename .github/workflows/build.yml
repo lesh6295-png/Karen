@@ -151,14 +151,7 @@ jobs:
 
 
 
-    #- name: Upload Binarys
-    #  if: inputs.CommitSha256 == '' && github.event_name != 'pull_request'
-    #  uses: stefanzweifel/git-auto-commit-action@v4
-      #with:
-        #commit_message: Deploy last build, build number - ${{github.run_number}}
-       # commit_user_email: my.emailtounity@gmail.com
-     #   commit_author: Deploy Workflow
-       # commit_user_name: Deploy Binarys Job
+    
     - name: 7zr download
       run: wget -O Binarys/7zr.exe https://7-zip.org/a/7zr.exe
 
@@ -169,28 +162,9 @@ jobs:
     - name: Installer Archive Build
       run: 7z a Binarys/Installer.zip Binarys/7zr.exe Binarys/installer.exe Binarys/ReleaseConfig.ini Binarys/gui.bin 
 
-    #- name: Release
-    #  uses: softprops/action-gh-release@v1
-    #  if: inputs.CommitSha256 == '' && github.event_name != 'pull_request'
-    #  with:
-    #    tag_name: ${{github.ref_name}}-${{github.run_number}}
-    #    target_commitish: ${{github.ref_name}}
-    #    token: ${{secrets.KAREN_RELEASE_TOKEN1}}
-    #    repository: lesh6295-png/KarenReleases
-    #    files: |
-    #      Binarys/d5.bin
-    #      Binarys/d6.bin
-    #      Binarys/d7.bin
-    #      Binarys/r5.bin
-    #      Binarys/r6.bin
-    #      Binarys/r7.bin
-    #      Binarys/t5.bin
-    #      Binarys/t6.bin
-    #      Binarys/t7.bin
-    #      Binarys/Installer.zip
-    #  env:
-    #    GITHUB_REPOSITORY: lesh6295-png/KarenReleases
-    - name: TestRelease
+    
+    - name: Release
+      if: inputs.CommitSha256 =='' &&github.event_name!='pull_request'
       uses: softprops/action-gh-release@v1
       with:
         token: ${{secrets.KAREN_RELEASE_TOKEN1}}
