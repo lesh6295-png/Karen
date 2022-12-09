@@ -32,6 +32,10 @@ namespace GuiInstaller
         private void installbutton_Click(object sender, RoutedEventArgs e)
         {
             string url = "https://github.com/lesh6295-png/Karen/releases/download/" + release.Text + "/" + config.Text + ".bin";
+            if (!release.Text.Contains("stable"))
+            {
+                url = url.Replace("Karen", "KarenRelease");
+            }
             string temp = Karen.Registry.RegController.GetKarenFolderPath() + "/temp.bin";
             try
             {

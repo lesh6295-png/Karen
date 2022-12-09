@@ -9,6 +9,7 @@
 #define fndr std::wstring::size_type
 #define fdrs std::wstring::npos
 int ssp = 0;
+bool ir = false;
 namespace fs = std::filesystem;
 std::wstring get_release_tag();
 void cmd_execute(LPCWSTR command) {
@@ -29,11 +30,25 @@ void powershell_execute(LPCWSTR command) {
 	WaitForSingleObject(ShExecInfo.hProcess, INFINITE);
 	CloseHandle(ShExecInfo.hProcess);
 }
-void download_gui() {
+void download_gui_stable() {
 	strg f = L"Invoke-WebRequest -OutFile gui.bin https://github.com/lesh6295-png/Karen/releases/download/";
 	strg fn = L"/gui.bin";
 	strg c = f + get_release_tag() + fn;
 	powershell_execute(c.c_str());
+}
+void download_gui_release() {
+	strg f = L"Invoke-WebRequest -OutFile gui.bin https://github.com/lesh6295-png/KarenRelease/releases/download/";
+	strg fn = L"/gui.bin";
+	strg c = f + get_release_tag() + fn;
+	powershell_execute(c.c_str());
+}
+void download_gui() {
+	if (ir) {
+		download_gui_stable();
+	}
+	else {
+		download_gui_release();
+	}
 }
 void download_7z() {
 	strg f = L"Invoke-WebRequest -OutFile 7zr.exe https://7-zip.org/a/7zr.exe";
@@ -62,6 +77,10 @@ int APIENTRY wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmd
 	fndr res = pa.find(L"-sw");
 	if (res != fdrs) {
 		ssp = 5;
+	}
+	res = get_release_tag().find(L"stable");
+	if (res != fdrs) {
+		ir = true;
 	}
 	bool localinst = fs::exists(p / "gui.bin")&& !fs::exists(p / "7zr.exe");
 	if (localinst) {
