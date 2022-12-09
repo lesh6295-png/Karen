@@ -66,6 +66,8 @@ jobs:
     # - run: |
     #   echo "Run, Build Application using script"
     #   ./location_of_script_within_repo/buildscript.sh
+    - name: Remove Installer Core
+      run: dotnet sln remove UI\Installer\Core\Core.vcxproj
     - name: Build
       run: dotnet build -c Debug
   
