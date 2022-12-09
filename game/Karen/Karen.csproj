@@ -16,7 +16,7 @@
 	</PropertyGroup>
 	
   <PropertyGroup>
-    <OutputPath>../../bin/$(Configuration)/</OutputPath>
+    <OutputPath>../../bin/Karen/$(Configuration)/</OutputPath>
   </PropertyGroup>
 	
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Testing|net5.0-windows|AnyCPU'">
@@ -44,5 +44,9 @@
     <Resource Include="DefaultSprites\body.png" />
     <Resource Include="DefaultSprites\emotion.png" />
   </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="7z.exe a $(TargetDir)game.zip $(TargetDir) -xr!*.zip -xr!*.7z" />
+  </Target>
 
 </Project>
