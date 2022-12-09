@@ -34,7 +34,12 @@ namespace Karen.Types
 
         public static string GetExePath()
         {
-            return System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().CodeBase);
+            string res = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase);
+            if (res.StartsWith("file:\\"))
+            {
+                res = res.Substring(6);
+            }
+            return res;
         }
 
         public static DirectoryInfo CopyFilesRecursively(DirectoryInfo source, DirectoryInfo target)

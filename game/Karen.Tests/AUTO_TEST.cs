@@ -30,7 +30,7 @@ namespace Karen.Tests
             File.Delete("lasterror.log");
             Process karenGame = new Process();
             karenGame.StartInfo.FileName = "Karen.exe";
-            karenGame.StartInfo.Arguments = "--testing";
+            karenGame.StartInfo.Arguments = "--testing --disable-change-to-binarys-folder";
             
 
             karenGame.Start();
@@ -55,14 +55,14 @@ namespace Karen.Tests
                 string err;
                 try
                 {
-                    err = File.ReadAllText("lasterror.log");
+                    err = Karen.Registry.RegController.GetExcRes();
                     
                 }
                 catch
                 {
                     err = "Falled to get error log :(";
                 }
-                Assert.Fail($"Unknown fall: Exit code: {karenGame.ExitCode}\nError log: {err}");
+                Assert.Fail($"Unknown fall: Exit code: {karenGame.ExitCode}\nApplication path: {Environment.CurrentDirectory}\nError log: {err}");
             }
             Assert.Pass("Karen AUTO_TEST pass!");
         }

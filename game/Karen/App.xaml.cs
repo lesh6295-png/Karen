@@ -20,6 +20,7 @@ namespace Karen
         public static bool AUTO_TEST = false;
 #endif
         public static bool LeaveLogs = false;
+        public static bool ChangeDir = true;
         protected override void OnStartup(StartupEventArgs e)
         {
 #if TESTING
@@ -28,6 +29,9 @@ namespace Karen
 #endif
             if (e.Args.Contains("--leave-logs"))
                 LeaveLogs = true;
+            if (e.Args.Contains("--disable-change-to-binarys-folder"))
+                ChangeDir=false;
+            
             //Create dedicated thread to engine
             Engine = new Thread(()=> { EngineStarter.Start(); });
             Engine.Start();
