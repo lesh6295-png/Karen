@@ -108,7 +108,7 @@ namespace Karen
             {
                 Dispatcher.Invoke(() => { textBox.Text += sym; });
 #if TESTING
-                if (App.AUTO_TEST)
+                if (Config.AUTO_TEST)
                     continue;
 #endif
                 if (wait)
