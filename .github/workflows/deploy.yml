@@ -51,7 +51,9 @@ jobs:
       - name: 7z install
         run: sudo apt install p7zip-full p7zip-rar
       - name: 7zr download
-        run: wget -O Binarys/7zr.exe https://7-zip.org/a/7zr.exe
+        run: wget -O 7zr.exe https://7-zip.org/a/7zr.exe
+      - name: IO
+        run: ls -r
       - name: Pack
         run: 7z a Installer.zip 7zr.exe installer.exe ReleaseConfig.ini gui.bin
       - name: Release
