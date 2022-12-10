@@ -24,13 +24,13 @@ namespace Karen.Tests
 #endif
 
             TestContext.Progress.WriteLine($"Start AUTO_TEST\nWorking path: {Environment.CurrentDirectory}");
-            string exepath = $"\\..\\..\\..\\..\\..\\bin\\Testing\\{Environment.CurrentDirectory.Split("\\").Last()}";
+            string exepath = $"\\..\\..\\..\\..\\..\\bin\\Karen\\Testing\\{Environment.CurrentDirectory.Split("\\").Last()}";
             Environment.CurrentDirectory += exepath;
             TestContext.Progress.WriteLine($"Karen path: {Environment.CurrentDirectory}");
             File.Delete("lasterror.log");
             Process karenGame = new Process();
             karenGame.StartInfo.FileName = "Karen.exe";
-            karenGame.StartInfo.Arguments = "--testing";
+            karenGame.StartInfo.Arguments = "--testing --disable-change-to-binarys-folder";
             
 
             karenGame.Start();
@@ -52,7 +52,17 @@ namespace Karen.Tests
              }*/
             if (karenGame.ExitCode != 0)
             {
-                Assert.Fail($"Unknown fall: Exit code: {karenGame.ExitCode}");
+                string err;
+                try
+                {
+                    err = Karen.Registry.RegController.GetExcRes();
+                    
+                }
+                catch
+                {
+                    err = "Falled to get error log :(";
+                }
+                Assert.Fail($"Unknown fall: Exit code: {karenGame.ExitCode}\nApplication path: {Environment.CurrentDirectory}\nError log: {err}");
             }
             Assert.Pass("Karen AUTO_TEST pass!");
         }

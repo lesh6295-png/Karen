@@ -1,10 +1,9 @@
 name: Deploy
-
 on:
-  push:
-    branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
+    push:
+      branches: [ "master" ]
+    pull_request:
+      branches: [ "master" ]
 
 jobs:
 
@@ -19,11 +18,14 @@ jobs:
         dotnet-version: 7.x
 
     - name: Setup MSBuild.exe
-      uses: microsoft/setup-msbuild@v1.0.2
+      uses: microsoft/setup-msbuild@v1.1
     - name: Restore
       run: dotnet restore
     - name: Build
-      run: msbuild Karen.sln /property:Configuration=Release /p:DebugSymbols=false /p:DebugType=None 
+      run: |
+        msbuild Karen.sln /property:Configuration=Debug 
+        msbuild Karen.sln /property:Configuration=Release /p:DebugSymbols=false /p:DebugType=None 
+        msbuild Karen.sln /property:Configuration=Testing 
     - name: IO
       run: dir -s
     - name: Write Release Info
@@ -44,14 +46,14 @@ jobs:
         with:
           name: binf
           path: Binarys/
-      - name: Change Directory
-        run: cd Binarys/
       - name: 7z install
         run: sudo apt install p7zip-full p7zip-rar
       - name: 7zr download
         run: wget -O Binarys/7zr.exe https://7-zip.org/a/7zr.exe
+      - name: IO
+        run: ls -r
       - name: Pack
-        run: 7z a Installer.zip 7zr.exe installer.exe ReleaseConfig.ini gui.bin
+        run: 7z a Binarys/Installer.zip Binarys/7zr.exe Binarys/installer.exe Binarys/ReleaseConfig.ini Binarys/gui.bin
       - name: Release
         uses: softprops/action-gh-release@v1
         if: github.event_name != 'pull_request'
@@ -59,5 +61,5 @@ jobs:
           tag_name: stable-${{github.run_number}}
           target_commitish: ${{github.ref_name}}
           files: |
-            r7.bin
-            Installer.zip
+            Binarys/r7.bin
+            Binarys/Installer.zip

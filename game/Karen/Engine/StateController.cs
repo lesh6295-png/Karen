@@ -21,6 +21,10 @@ namespace Karen.Engine
         static List<IManagerSerializator> managers = new();
         public static bool Enable()
         {
+#if TESTING
+            return false;
+#endif
+            AutoSerializer();
             managers.Add(Karen.Locale.SourceManager.Singelton);
             managers.Add(Karen.KBL.BinaryManager.Singelton);
             managers.Add(EventManager.Singelton);
@@ -37,20 +41,35 @@ namespace Karen.Engine
         }
         public static void SerialazeManagers()
         {
+#if TESTING
+            return;
+#endif
             managers.ForEach((x) => { x.Save(); });
         }
-        public static  void DeserialazeManagers()
+        public static void DeserialazeManagers()
         {
             managers.ForEach((x) => { x.Load(); });
         }
-        public static  void SetFolderManagers()
+        public static void SetFolderManagers()
         {
             managers.ForEach((x) => { x.SetFolder(Karen.Registry.RegController.GetKarenFolderPath()); });
         }
-        public static  void SerialiazeVM()
+        public static void SerialiazeVM()
         {
+#if TESTING
+            return;
+#endif
             byte[] m = MessagePackSerializer.Serialize<VirtualMachine>(EngineStarter.VM, options: new MessagePackSerializerOptions(MessagePack.Resolvers.StandardResolverAllowPrivate.Instance));
             File.WriteAllBytes(Karen.Registry.RegController.GetKarenFolderPath() + "vm", m);
+        }
+        public static async void AutoSerializer(int delay = 10 * 60 * 1000)
+        {
+            while (true)
+            {
+                await Task.Delay(delay);
+                SerialiazeVM();
+                SerialazeManagers();
+            }
         }
     }
 }

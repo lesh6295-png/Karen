@@ -99,9 +99,9 @@ namespace Karen.Engine.Api
 #if TESTING
             if (App.AUTO_TEST)
                 result=1;
-#else
-            result = await MainWindow.Singelton.Select(text, id.ToArray());
+            else
 #endif
+            result = await MainWindow.Singelton.Select(text, id.ToArray());
             ((ScriptContext)(((object[])par.Last())[3])).ToLabel(endpoints[result - 1]);
         }
     }

@@ -22,31 +22,10 @@ namespace Karen.KBL
         }
         public  int LoadKBL(string path,bool atl=true)
         {
-            //get short and absolute file name
-            // if path="dir\main.miku"
-            string shortpath = path.Replace(@"\\", "\\").Split('\\').LastOrDefault();
-            //shortpath="main.miku"
-            string absolutepath = "";
-            try
-            {
-                absolutepath = Path.GetFullPath(path);
-            }
-            catch
-            {
-                absolutepath = null;
-            }
-            //absolutepath="C:\ProjectFolder\dir222\dir\main.miku"
 
-            //select which path will be used
-            string endpoint = path;
-            if (absolutepath != null && File.Exists(absolutepath))
-                endpoint = absolutepath;
-            if (shortpath != null && File.Exists(shortpath))
-                endpoint = shortpath;
-
-            BinaryLibary news = new BinaryLibary(endpoint);
+            BinaryLibary news = new BinaryLibary(path);
             if(atl)
-            kbls.Add(news.LibaryId, endpoint);
+            kbls.Add(news.LibaryId, path);
             sources.Add(news);
             return news.LibaryId;
         }

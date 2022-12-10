@@ -1,0 +1,34 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+
+		<UseWPF>true</UseWPF>
+		<Configurations>Debug;Release;Testing</Configurations>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(MSBuildAssemblyVersion)'=='17.0'">
+		<TargetFrameworks>net5.0-windows;net6.0-windows;net7.0-windows</TargetFrameworks>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(MSBuildAssemblyVersion)'=='16.0'">
+		<TargetFrameworks>net5.0-windows</TargetFrameworks>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<OutputPath>../../../bin/InstallerTemp/$(Configuration)/</OutputPath>
+		<RunPostBuildEvent>Always</RunPostBuildEvent>
+	</PropertyGroup>
+
+	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
+	  <Exec Command="7z.exe a $(OutDir)gui.bin $(OutDir) -xr!*.bin -xr!*.pdb" />
+	</Target>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\..\..\libs\KarenLocale\KarenLocale.csproj" />
+	  <ProjectReference Include="..\..\..\libs\KBL\KBL.csproj" />
+	  <ProjectReference Include="..\..\..\libs\Registry\Registry.csproj" />
+	  <ProjectReference Include="..\..\..\libs\Types\Types.csproj" />
+	</ItemGroup>
+
+</Project>
