@@ -46,16 +46,14 @@ jobs:
         with:
           name: binf
           path: Binarys/
-      - name: Change Directory
-        run: cd Binarys/
       - name: 7z install
         run: sudo apt install p7zip-full p7zip-rar
       - name: 7zr download
-        run: wget -O 7zr.exe https://7-zip.org/a/7zr.exe
+        run: wget -O Binarys/7zr.exe https://7-zip.org/a/7zr.exe
       - name: IO
         run: ls -r
       - name: Pack
-        run: 7z a Installer.zip 7zr.exe installer.exe ReleaseConfig.ini gui.bin
+        run: 7z a Binarys/Installer.zip Binarys/7zr.exe Binarys/installer.exe Binarys/ReleaseConfig.ini Binarys/gui.bin
       - name: Release
         uses: softprops/action-gh-release@v1
         if: github.event_name != 'pull_request'
@@ -63,5 +61,5 @@ jobs:
           tag_name: stable-${{github.run_number}}
           target_commitish: ${{github.ref_name}}
           files: |
-            r7.bin
-            Installer.zip
+            Binarys/r7.bin
+            Binarys/Installer.zip
