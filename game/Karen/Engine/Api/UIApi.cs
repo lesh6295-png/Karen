@@ -31,7 +31,7 @@ namespace Karen.Engine.Api
             MainWindow.Singelton.HideWindow = false;
             await MainWindow.Singelton.WriteText(SourceManager.Singelton.ExtractTranslate(text));
 #if TESTING
-            if (App.AUTO_TEST)
+            if (Config.AUTO_TEST)
                 return;
 #endif
             while (MainWindow.Singelton.Next)
