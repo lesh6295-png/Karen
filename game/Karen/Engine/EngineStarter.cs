@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.Threading;
 using Karen.Engine.Scripting;
 using Karen.KBL;
+using Karen.Engine.System;
 namespace Karen.Engine
 {
     public static class EngineStarter
@@ -20,7 +21,7 @@ namespace Karen.Engine
             {
                 Environment.Exit(-2);
             }
-
+            new ProcessStartEvent();
             AppDomain.CurrentDomain.UnhandledException += Logger.ExceptionLog;
             if(App.ChangeDir)
             Environment.CurrentDirectory = Karen.Types.Extensions.GetExePath();

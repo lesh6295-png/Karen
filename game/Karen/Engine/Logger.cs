@@ -15,7 +15,7 @@ namespace Karen.Engine
         static FileStream log;
         static Logger()
         {
-            if (!App.LeaveLogs)
+            if (!Config.LeaveLogs)
             {
                 //TODO: REWRITE TO File.Exists
                 try

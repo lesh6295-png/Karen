@@ -50,7 +50,7 @@ namespace Karen.Engine.Api
             MainWindow.Singelton.HideWindow = false;
             await MainWindow.Singelton.WriteText(text);
 #if TESTING
-            if (App.AUTO_TEST)
+            if (Config.AUTO_TEST)
                 return;
 #endif
             while (MainWindow.Singelton.Next)
@@ -97,7 +97,7 @@ namespace Karen.Engine.Api
             int result = 0;
             //TODO: Update select behaviour with AUTO_TEST
 #if TESTING
-            if (App.AUTO_TEST)
+            if (Config.AUTO_TEST)
                 result=1;
             else
 #endif

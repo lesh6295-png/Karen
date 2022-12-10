@@ -22,12 +22,16 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "kblb", "Dev\kblb\kblb.cspro
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Assets", "Assets\Assets.csproj", "{021AF6B4-105F-4E40-9384-1D537A1DFDCC}"
 	ProjectSection(ProjectDependencies) = postProject
+		{0F1F0F8A-FE04-4FC6-A765-366FE4C8FB10} = {0F1F0F8A-FE04-4FC6-A765-366FE4C8FB10}
 		{D435D5E2-8C4B-4340-9276-B60AED85C507} = {D435D5E2-8C4B-4340-9276-B60AED85C507}
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KarenLocale", "libs\KarenLocale\KarenLocale.csproj", "{4EF9C717-E2DD-48E4-BD33-50371A58FE42}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Karen", "game\Karen\Karen.csproj", "{27551497-A0E1-4E1E-94B1-3E848CA4B3C3}"
+	ProjectSection(ProjectDependencies) = postProject
+		{021AF6B4-105F-4E40-9384-1D537A1DFDCC} = {021AF6B4-105F-4E40-9384-1D537A1DFDCC}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Karen.Tests", "game\Karen.Tests\Karen.Tests.csproj", "{8F8A411F-04BF-49D0-81ED-0A20454C9291}"
 EndProject

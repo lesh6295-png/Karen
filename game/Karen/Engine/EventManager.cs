@@ -26,6 +26,11 @@ namespace Karen.Engine
         {
             events.Add(name, new KarenEvent());
         }
+        public void TryAddEvent(string name)
+        {
+            if (events.ContainsKey(name)) return;
+            events.Add(name, new KarenEvent());
+        }
         public void CallEvent(string name)
         {
             events.GetValueOrDefault(name).Invoke();

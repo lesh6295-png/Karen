@@ -30,7 +30,7 @@ namespace Karen.Engine.Api
         public static async Task wait(object?[]? par)
         {
 #if TESTING
-            if (App.AUTO_TEST)
+            if (Config.AUTO_TEST)
                 return;
 #endif
             int time = Convert.ToInt32(par[0]);
