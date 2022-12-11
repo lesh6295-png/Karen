@@ -3,6 +3,12 @@ waitui
 locales load bin\locales\1.locale
 
 say КТО_ЛУЧШИЙ_РЕПЕР?
+
+hide_window
+wait 2000
+show_window
+
+
 select Oxxxymiron oxxxy BIG_RUSSIAN_BOSS boss Витя_АК pidor Young_P&H pimp
 @oxxxy
 say Ну_ты_даёшь

@@ -48,7 +48,7 @@ namespace Karen.Engine
         {
             byte[] listraw = File.ReadAllBytes(targetfolder + "events");
             var list = MessagePackSerializer.Deserialize<List<string>>(listraw);
-            list.ForEach((x) => { events.Add(x, new()); });
+            list.ForEach((x) => { TryAddEvent(x); });
         }
 
         public void Save()

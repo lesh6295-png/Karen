@@ -9,6 +9,16 @@ namespace Karen.Engine.Api
 {
     public static partial class Api
     {
+        public static async Task show_window(object?[]? par)
+        {
+            await waitui(null);
+            MainWindow.Singelton.HideWindow = false;
+        }
+        public static async Task hide_window(object?[]? par)
+        {
+            await waitui(null);
+            MainWindow.Singelton.HideWindow = true;
+        }
         public static async Task waitui(object?[]? par)
         {
             //wait for mainwindow add himself in singelton filed

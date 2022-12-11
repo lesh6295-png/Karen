@@ -24,6 +24,8 @@ namespace Karen.Engine
 #if TESTING
             return false;
 #endif
+            if (Config.IgnoreSave)
+                return false;
             AutoSerializer();
             managers.Add(Karen.Locale.SourceManager.Singelton);
             managers.Add(Karen.KBL.BinaryManager.Singelton);
@@ -44,6 +46,8 @@ namespace Karen.Engine
 #if TESTING
             return;
 #endif
+            if (Config.IgnoreSave)
+                return;
             managers.ForEach((x) => { x.Save(); });
         }
         public static void DeserialazeManagers()
@@ -59,6 +63,8 @@ namespace Karen.Engine
 #if TESTING
             return;
 #endif
+            if (Config.IgnoreSave)
+                return;
             byte[] m = MessagePackSerializer.Serialize<VirtualMachine>(EngineStarter.VM, options: new MessagePackSerializerOptions(MessagePack.Resolvers.StandardResolverAllowPrivate.Instance));
             File.WriteAllBytes(Karen.Registry.RegController.GetKarenFolderPath() + "vm", m);
         }

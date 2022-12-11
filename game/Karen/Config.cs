@@ -28,6 +28,9 @@ namespace Karen
                     case "--process-event-delay":
                         ProcessUpdateDelay = Convert.ToInt32(q[i++]);
                         break;
+                    case "--ignore-save":
+                        IgnoreSave = true;
+                        break;
                 }
             }
         }
@@ -36,6 +39,7 @@ namespace Karen
 #endif
         public static bool LeaveLogs = false;
         public static bool ChangeDir = true;
+        public static bool IgnoreSave = false;
         public static int ProcessUpdateDelay = 850;
     }
 }
