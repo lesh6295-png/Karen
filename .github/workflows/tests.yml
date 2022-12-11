@@ -36,9 +36,10 @@ jobs:
 
     - name: Restore dependencies
       run: dotnet restore
-    - name: Remove C++ Installer Core
-      run: dotnet sln remove UI\Installer\Core\Core.vcxproj
     - name: Build
-      run: dotnet msbuild /property:Configuration=Testing
+      run: |
+        msbuild Karen.sln /property:Configuration=Debug 
+        msbuild Karen.sln /property:Configuration=Release /p:DebugSymbols=false /p:DebugType=None 
+        msbuild Karen.sln /property:Configuration=Testing 
     - name: Tests
       run: dotnet test --no-build -c Testing

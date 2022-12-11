@@ -10,12 +10,12 @@ using System.Linq;
 using System.Diagnostics;
 namespace Karen.Engine.Api
 {
-    public  static partial class Api
+    public static partial class Api
     {
         public static async Task dump(object?[]? par)
         {
-                    string dump = JsonSerializer.Serialize(((object[])par.Last())[2], typeof(VirtualMachine), new JsonSerializerOptions { IncludeFields = true, WriteIndented = true });
-                    File.WriteAllText("vm_dump.json", dump);
+            string dump = JsonSerializer.Serialize(((object[])par.Last())[2], typeof(VirtualMachine), new JsonSerializerOptions { IncludeFields = true, WriteIndented = true });
+            File.WriteAllText("vm_dump.json", dump);
         }
         public static async Task log(object?[]? message)
         {
