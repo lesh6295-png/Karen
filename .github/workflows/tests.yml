@@ -42,6 +42,6 @@ jobs:
         msbuild Karen.sln /property:Configuration=Release /p:DebugSymbols=false /p:DebugType=None 
         msbuild Karen.sln /property:Configuration=Testing 
     - name: IO
-      run: dir -s
+      run: tree /f /a
     - name: Tests
       run: dotnet test --no-build -c Testing
