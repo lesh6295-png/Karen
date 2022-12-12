@@ -32,6 +32,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Assets\ScriptingEventParams">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Assets\Scripts\Main\async.miku">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -39,6 +42,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Assets\Scripts\Main\main.miku">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Assets\Scripts\Main\randomevent.miku">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Assets\Sprites\Body\body1.png">
