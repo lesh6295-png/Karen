@@ -44,4 +44,4 @@ jobs:
     - name: IO
       run: tree /f /a
     - name: Tests
-      run: dotnet test  -c Testing
+      run: dotnet test --no-build -c Testing
