@@ -18,7 +18,7 @@ namespace Karen
                         LeaveLogs = true;
                         break;
                     case "--disable-change-to-binarys-folder":
-                        ChangeDir = true;
+                        ChangeDir = false;
                         break;
 #if TESTING
                     case "--testing":

@@ -30,7 +30,7 @@ namespace Karen.Tests
             File.Delete("lasterror.log");
             Process karenGame = new Process();
             karenGame.StartInfo.FileName = "Karen.exe";
-            karenGame.StartInfo.Arguments = "--testing --ignore-save";
+            karenGame.StartInfo.Arguments = "--testing --ignore-save --disable-change-to-binarys-folder";
             
 
             karenGame.Start();
