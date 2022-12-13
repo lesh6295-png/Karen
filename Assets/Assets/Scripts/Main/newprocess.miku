@@ -1,3 +1,4 @@
 ﻿show_window
-say RandomEvent!
+say NewProcessEvent!
 hide_window
+quit

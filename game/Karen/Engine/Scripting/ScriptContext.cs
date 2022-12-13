@@ -24,7 +24,7 @@ namespace Karen.Engine.Scripting
         public VariableContext localContext;
         public int activeline = 0;
         public List<Label> labels = new List<Label>();
-
+        public bool KillAfterEnd { get; set; } = true;
         public (string from, string to) ifskipper=new();
         public ScriptContext(VirtualMachine host)
         {
@@ -105,24 +105,6 @@ namespace Karen.Engine.Scripting
             codelines = final.ToArray();
             isLoad = true;
         }
-        [Obsolete("Use async version")]
-        public void Excecute()
-        {
-            if (!isLoad)
-                return;
-           
-            for(int i = 0; i < codelines.Length; i++)
-            {
-                string[] com = codelines[i].Split(' ', StringSplitOptions.RemoveEmptyEntries);
-                MethodInfo apiendpoint = api.GetMethod(com[0]);
-                if (apiendpoint == null)
-                {
-                    throw new NullReferenceException("Method not found.");
-                }
-                object[] a = com.Skip(1).Cast<object>().ToArray();
-                ((Task)apiendpoint.Invoke(null, new object[] { a })).Wait();
-            }
-        }
         public async void ExcecuteAsync()
         {
             if(!isLoad)
@@ -151,6 +133,12 @@ namespace Karen.Engine.Scripting
                 a.Add((object)(new object[] {localContext, Guid, host, this }));
                 await (Task)apiendpoint.Invoke(null, new object[] { a.ToArray() }) ;
             }
+            if (KillAfterEnd)
+                Kill();
+        }
+        void Kill()
+        {
+            host.DeleteScriptThread(Guid);
         }
         List<object> SVP(List<object> input)
         {

@@ -2,26 +2,6 @@ log Main Script Started.
 waitui
 locales load bin\locales\1.locale
 
-say КТО_ЛУЧШИЙ_РЕПЕР?
+say Привет!
 
 hide_window
-wait 2000
-show_window
-
-
-select Oxxxymiron oxxxy BIG_RUSSIAN_BOSS boss Витя_АК pidor Young_P&H pimp
-@oxxxy
-say Ну_ты_даёшь
-to qu
-@pidor
-say АХ_ТЫ_ЁББАНЫЙ_АГЕНТ_АНТИХИККА
-to qu
-@pimp
-say пимп.
-to qu
-@boss
-say Элитные_машины,_кучи_золота_вокруг
-@qu
-save
-say Записано!
-quit

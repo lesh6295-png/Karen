@@ -21,6 +21,7 @@ namespace Karen.Engine.Scripting
             Logger.Write($"Global Heap Guid: {globalHeap.Guid}");
             threads = new List<ScriptContext>();
 
+            new Karen.Engine.SEManager(this);
         }
         /// <summary>
         /// Start all ScriptContext in this VirtualMachine
@@ -38,6 +39,10 @@ namespace Karen.Engine.Scripting
             ScriptContext scr = new ScriptContext(this);
             threads.Add(scr);
             return scr.Guid;
+        }
+        public void DeleteScriptThread(Types.Guid guid)
+        {
+            threads.Remove(GetScriptContext(guid));
         }
         internal ScriptContext GetScriptContext(Karen.Types.Guid Guid)
         {
