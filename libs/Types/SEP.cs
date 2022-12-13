@@ -32,6 +32,7 @@ namespace Karen.Types
     public enum ScriptingEvent : byte
     {
         Process=0,
-        Random=1
+        Random=1,
+        Startup=2
     }
 }
