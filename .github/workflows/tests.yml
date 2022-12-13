@@ -44,4 +44,6 @@ jobs:
     - name: IO
       run: tree /f /a
     - name: Tests
-      run: dotnet test --no-build -c Testing
+      run: |
+        dotnet sln remove UI\Installer\Core\Core.vcxproj UI\Installer\GuiInstaller\GuiInstaller.csproj UI\Installer\InstallerBuilder\InstallerBuilder.csproj
+        dotnet test -c Testing
