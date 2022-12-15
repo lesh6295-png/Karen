@@ -22,6 +22,7 @@ namespace Karen
             
             //Create dedicated thread to engine
             Engine = new Thread(()=> { EngineStarter.Start(); });
+            Engine.Name = "karen_game";
             Engine.Start();
             
             base.OnStartup(e);

@@ -25,6 +25,8 @@ namespace Karen.Engine
 
         private void Process(string exeName)
         {
+            if (!EngineStarter.VM.AllowHideWindow)
+                return;
             foreach (var q in events)
             {
                 if (q.type == ScriptingEvent.Process)
