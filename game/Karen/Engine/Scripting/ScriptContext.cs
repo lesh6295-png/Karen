@@ -25,6 +25,7 @@ namespace Karen.Engine.Scripting
         public int activeline = 0;
         public List<Label> labels = new List<Label>();
         public bool KillAfterEnd { get; set; } = true;
+        public bool Freeze { get; set; } = false;
         public (string from, string to) ifskipper=new();
         public ScriptContext(VirtualMachine host)
         {
@@ -112,6 +113,12 @@ namespace Karen.Engine.Scripting
             PreExcecute();
             for (; activeline < codelines.Length; activeline++)
             {
+                if (Freeze)
+                {
+                    activeline--;
+                    continue;
+                }
+
                 if (codelines[activeline] == "")
                     continue;
                 string[] com = codelines[activeline].Split(' ', StringSplitOptions.RemoveEmptyEntries);

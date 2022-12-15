@@ -1,5 +1,5 @@
 ﻿using System;
-
+using System.IO;
 using Microsoft.Win32;
 
 using Karen.Types;
@@ -74,5 +74,8 @@ namespace Karen.Registry
         {
             return (string)RootKaren().GetValue("FATAL_EXCEPTION");
         }
+
+
+        
     }
 }

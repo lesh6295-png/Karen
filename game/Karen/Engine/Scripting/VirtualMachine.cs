@@ -14,6 +14,8 @@ namespace Karen.Engine.Scripting
         public VariableContext globalHeap;
         [Key(1)]
         public List<ScriptContext> threads;
+        [Key(2)]
+        public bool AllowHideWindow = true;
         public VirtualMachine()
         {
             Logger.Write("Create virtual script machine...");

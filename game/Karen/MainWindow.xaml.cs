@@ -118,9 +118,17 @@ namespace Karen
 
         protected override void OnClosing(CancelEventArgs e)
         {
-            Hide();
-            Next = false;
-            e.Cancel = true;
+            if (Engine.EngineStarter.VM.AllowHideWindow)
+            {
+                Hide();
+                Next = false;
+                e.Cancel = true;
+            }
+            else
+            {
+                e.Cancel = true;
+                MessageBox.Show("Ты не можешь меня игнорировать!");
+            }
         }
 
         void Move_MouseDown(object sender, MouseButtonEventArgs e)

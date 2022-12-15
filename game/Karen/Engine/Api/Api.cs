@@ -12,6 +12,14 @@ namespace Karen.Engine.Api
 {
     public static partial class Api
     {
+        public static async Task DISABLE_HIDE(object?[]? par)
+        {
+            ((VirtualMachine)((object[])par.Last())[2]).AllowHideWindow = false;
+        }
+        public static async Task ENABLE_HIDE(object?[]? par)
+        {
+            ((VirtualMachine)((object[])par.Last())[2]).AllowHideWindow = true;
+        }
         public static async Task newsc(object?[]? par)
         {
             ScriptContext nsc = new ScriptContext((VirtualMachine)(((object[])par.Last())[2]));

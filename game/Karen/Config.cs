@@ -31,6 +31,9 @@ namespace Karen
                     case "--ignore-save":
                         IgnoreSave = true;
                         break;
+                    case "--autoload":
+                        Autoload = true;
+                        break;
                 }
             }
         }
@@ -39,6 +42,7 @@ namespace Karen
 #endif
         public static bool LeaveLogs = false;
         public static bool ChangeDir = true;
+        public static bool Autoload = false;
         public static bool IgnoreSave = false;
         public static int ProcessUpdateDelay = 850;
     }
