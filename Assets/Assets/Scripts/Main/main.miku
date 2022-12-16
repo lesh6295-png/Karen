@@ -1,27 +1,20 @@
 log Main Script Started.
 waitui
 locales load bin\locales\1.locale
-
-say Привет!
-
-
+DISABLE_HIDE
+say hi
+hide_window
+to q
+log Start One Millioon Cycle
 var i 0
-@event
-
-torand e1 e2 e3
-@e1
-log 1
-to calc
-@e2
-log 2
-to calc
-@e3
-log 3
-@calc
+@cycle
 math i = i + 1
-if i < 10 else end to q
-to event
-
-@end
+if i < 1000000 else stop to q
+to cycle
+@stop
+log Cycle finish!
 @q
+show_window
+say Cycle
+ENABLE_HIDE
 hide_window

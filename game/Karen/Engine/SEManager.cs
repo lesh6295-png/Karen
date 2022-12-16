@@ -55,20 +55,23 @@ namespace Karen.Engine
                 {
                     if (new Random().Next() > 500000000)
                         return;
-                    byte[] rawcode;
-                    try
+                    if (string.IsNullOrWhiteSpace(q.otherParams) || exeName == q.otherParams)
                     {
-                        rawcode = BinaryManager.Singelton.Extract(q.kblId, q.kblPos);
-                    }
-                    catch (Karen.Types.ObjectNotFoundException e)
-                    {
-                        BinaryManager.Singelton.LoadKBL(q.kblPath);
-                        rawcode = BinaryManager.Singelton.Extract(q.kblId, q.kblPos);
-                    }
+                        byte[] rawcode;
+                        try
+                        {
+                            rawcode = BinaryManager.Singelton.Extract(q.kblId, q.kblPos);
+                        }
+                        catch (Karen.Types.ObjectNotFoundException e)
+                        {
+                            BinaryManager.Singelton.LoadKBL(q.kblPath);
+                            rawcode = BinaryManager.Singelton.Extract(q.kblId, q.kblPos);
+                        }
 
-                    ScriptContext c = m.GetScriptContext(m.AddScriptThread());
-                    c.LoadScriptFromByteArray(rawcode);
-                    c.ExcecuteAsync();
+                        ScriptContext c = m.GetScriptContext(m.AddScriptThread());
+                        c.LoadScriptFromByteArray(rawcode);
+                        c.ExcecuteAsync();
+                    }
                 }
             }
         }

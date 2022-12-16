@@ -51,6 +51,9 @@
     <None Update="Assets\Scripts\Main\newprocess.miku">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Assets\Scripts\Main\notepad1.miku">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Assets\Scripts\Main\randomevent.miku">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

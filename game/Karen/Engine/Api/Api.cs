@@ -38,7 +38,7 @@ namespace Karen.Engine.Api
         public static async Task torand(object?[]? par)
         {
             int ran = Types.Extensions.r.Next(1,par.Length) - 1;
-            //Logger.Write($"torand command: ran:{ran} par_length:{par.Length} par_length_f:{par.Length - 1}");
+            //Logger.Write($"torand command: ran:{ran} par_length:{par.Length} par_length_f:{par.Length - 1}");    //maybe i add testing api for this
             string endpoint = (string)par[ran];
             ((ScriptContext)(((object[])par.Last())[3])).ToLabel(endpoint);
         }

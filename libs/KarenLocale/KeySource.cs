@@ -25,7 +25,7 @@ namespace Karen.Locale
                 if (keys[i].key == key)
                     return keys[i].GetTranslate();
             }
-            return null;
+            return key;
         }
         long GetLength(int fileindex)
         {

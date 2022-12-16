@@ -34,6 +34,12 @@ namespace Karen
                     case "--autoload":
                         Autoload = true;
                         break;
+                    case "--locale":
+                        i++;
+                        Karen.Engine.Logger.Write($"Old locale: {Karen.Locale.Localization.Culture}, new locale: {q[i]}");
+                        Karen.Locale.Localization.Culture = q[i];
+
+                        break;
                 }
             }
         }
