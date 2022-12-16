@@ -22,7 +22,29 @@ namespace Karen.Engine
             ProcessStartEvent.Singelton.NewProcess += Process;
             events = MessagePackSerializer.Deserialize<List<SEP>>(File.ReadAllBytes("bin\\sep.bin"));
         }
+        void Autoload()
+        {
+            foreach(var q in events)
+            {
+                if (q.type == ScriptingEvent.Startup)
+                {
+                    byte[] rawcode;
+                    try
+                    {
+                        rawcode = BinaryManager.Singelton.Extract(q.kblId, q.kblPos);
+                    }
+                    catch (Karen.Types.ObjectNotFoundException e)
+                    {
+                        BinaryManager.Singelton.LoadKBL(q.kblPath);
+                        rawcode = BinaryManager.Singelton.Extract(q.kblId, q.kblPos);
+                    }
 
+                    ScriptContext c = m.GetScriptContext(m.AddScriptThread());
+                    c.LoadScriptFromByteArray(rawcode);
+                    c.ExcecuteAsync();
+                }
+            }
+        }
         private void Process(string exeName)
         {
             if (!EngineStarter.VM.AllowHideWindow)

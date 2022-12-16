@@ -18,14 +18,14 @@ namespace Karen.Engine.Scripting
         Type api;
         
         public bool isLoad = false;
-        public Karen.Types.Guid Guid { get; private set; }
+        public Karen.Types.Guid Guid ;
         [IgnoreMember]
         VirtualMachine host;
         public VariableContext localContext;
         public int activeline = 0;
         public List<Label> labels = new List<Label>();
-        public bool KillAfterEnd { get; set; } = true;
-        public bool Freeze { get; set; } = false;
+        public bool KillAfterEnd  = true;
+        public bool Freeze  = false;
         public (string from, string to) ifskipper=new();
         public ScriptContext(VirtualMachine host)
         {
@@ -38,8 +38,9 @@ namespace Karen.Engine.Scripting
         }
         public ScriptContext()
         {
-            host = EngineStarter.VM;
             api = Type.GetType("Karen.Engine.Api.Api", true);
+            Task.Factory.StartNew(() => { Task.Delay(100).Wait(); host = EngineStarter.VM;  });
+            
         }
         public void SetIfSkip(string from, string to)
         {
@@ -118,6 +119,8 @@ namespace Karen.Engine.Scripting
                     activeline--;
                     continue;
                 }
+                if (host == null)
+                    host = EngineStarter.VM;
 
                 if (codelines[activeline] == "")
                     continue;
@@ -150,6 +153,7 @@ namespace Karen.Engine.Scripting
         List<object> SVP(List<object> input)
         {
             List<object> res = new ();
+            res.Capacity = input.Count;
             foreach(var q in input)
             {
                 string s = (string)q;

@@ -4,4 +4,24 @@ locales load bin\locales\1.locale
 
 say Привет!
 
+
+var i 0
+@event
+
+torand e1 e2 e3
+@e1
+log 1
+to calc
+@e2
+log 2
+to calc
+@e3
+log 3
+@calc
+math i = i + 1
+if i < 10 else end to q
+to event
+
+@end
+@q
 hide_window

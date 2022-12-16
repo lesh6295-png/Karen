@@ -18,12 +18,14 @@ namespace Karen.Engine.Scripting
         public bool AllowHideWindow = true;
         public VirtualMachine()
         {
-            Logger.Write("Create virtual script machine...");
-            globalHeap = new VariableContext();
-            Logger.Write($"Global Heap Guid: {globalHeap.Guid}");
-            threads = new List<ScriptContext>();
+                Logger.Write("Create virtual script machine...");
+                globalHeap = new VariableContext();
+                Logger.Write($"Global Heap Guid: {globalHeap.Guid}");
+                threads = new List<ScriptContext>();
+            
 
-            new Karen.Engine.SEManager(this);
+                new Karen.Engine.SEManager(this);
+            
         }
         /// <summary>
         /// Start all ScriptContext in this VirtualMachine
