@@ -71,7 +71,7 @@ namespace Karen.Engine
 #if TESTING
             return;
 #endif
-            if (Config.IgnoreSave)
+            if (Config.IgnoreSave || (EngineStarter.VM==null))
                 return;
             byte[] m = MessagePackSerializer.Serialize<VirtualMachine>(EngineStarter.VM, options: new MessagePackSerializerOptions(MessagePack.Resolvers.StandardResolverAllowPrivate.Instance));
             File.WriteAllBytes(Karen.Registry.RegController.GetKarenFolderPath() + "vm", m);

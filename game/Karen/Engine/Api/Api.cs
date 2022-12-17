@@ -54,6 +54,7 @@ namespace Karen.Engine.Api
 
         public static async Task quit(object?[]? par)
         {
+            ((ScriptContext)(((object[])par.Last())[3])).activeline++; //increment activeline, its need because after load context starts from 'quit' command, and process die
             int code = par.TryExtractElement<object, int>(0, 0);
             Logger.Write($"QUIT: code: {code}");
             Environment.Exit(code);

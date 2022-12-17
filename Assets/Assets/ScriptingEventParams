@@ -1,3 +1,4 @@
 ﻿bin\kbl\main.kbl 3 3 Random 0.005
 bin\kbl\main.kbl 3 4 Process !space!wwww
 bin\kbl\main.kbl 3 5 Process notepad
+bin\kbl\main.kbl 3 6 Startup true

@@ -3,3 +3,4 @@ locales load_unsafe bin\locales\4.locale
 say notepad_1
 say notepad_2
 hide_window
+quit

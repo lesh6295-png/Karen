@@ -32,7 +32,10 @@ namespace Karen.Engine.Scripting
         /// </summary>
         public void StartAllThread()
         {
-            threads.ForEach((x) => { x.ExcecuteAsync(); });
+            for (int i = 0; i < threads.Count; i++)
+            {
+                threads[i].ExcecuteAsync();
+            }
         }
         /// <summary>
         /// Initializes new ScriptContext

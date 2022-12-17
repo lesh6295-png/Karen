@@ -148,7 +148,7 @@ namespace Karen.Engine.Scripting
         }
         void Kill()
         {
-            host.DeleteScriptThread(Guid);
+            (host??EngineStarter.VM).DeleteScriptThread(Guid);
         }
         List<object> SVP(List<object> input)
         {

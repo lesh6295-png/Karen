@@ -22,8 +22,10 @@ namespace Karen.Engine
             ProcessStartEvent.Singelton.NewProcess += Process;
             events = MessagePackSerializer.Deserialize<List<SEP>>(File.ReadAllBytes("bin\\sep.bin"));
         }
-        void Autoload()
+        public void Autoload()
         {
+            //todo: add check for used gui when autoload
+            //если в СЕП стартапом помечено нескольео .мику файлов, которые используют окно и разговаривают с пользователям, то они будут прерывать друг друга
             foreach(var q in events)
             {
                 if (q.type == ScriptingEvent.Startup)
@@ -47,16 +49,18 @@ namespace Karen.Engine
         }
         private void Process(string exeName)
         {
+            if (EngineStarter.VM==null)
+                return;
             if (!EngineStarter.VM.AllowHideWindow)
                 return;
             foreach (var q in events)
             {
                 if (q.type == ScriptingEvent.Process)
                 {
-                    if (new Random().Next() > 500000000)
-                        return;
                     if (string.IsNullOrWhiteSpace(q.otherParams) || exeName == q.otherParams)
                     {
+                        if (new Random().Next() > 500000000)
+                            return;
                         byte[] rawcode;
                         try
                         {

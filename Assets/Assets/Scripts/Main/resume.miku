@@ -1,0 +1,17 @@
+﻿show_window
+DISABLE_HIDE
+locales load_unsafe bin\locales\5.locale
+torand firstret sempai
+@firstret
+say resume_1_1
+say resume_1_2
+say resume_1_3
+to end
+@sempai
+say resume_2_1
+say resume_2_2
+say resume_2_3
+to end
+@end
+ENABLE_HIDE
+hide_window

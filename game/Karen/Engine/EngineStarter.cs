@@ -41,6 +41,7 @@ namespace Karen.Engine
             else
             {
                 StateController.LoadSave();
+                SEManager.Singelton.Autoload();
             }
             while (true)
             {
