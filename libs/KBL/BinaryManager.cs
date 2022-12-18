@@ -28,6 +28,22 @@ namespace Karen.KBL
             sources.Add(news);
             return news.LibaryId;
         }
+        public int LoadKBLUnsafe(string path, bool atl = true)
+        {
+            //TODO: REWORK THIS AND SourceManager TO CHECK IF NEED FILE ALREADY UPLOAD
+            try
+            {
+                BinaryLibary news = new BinaryLibary(path);
+                if (atl)
+                    kbls.Add(news.LibaryId, path);
+                sources.Add(news);
+                return news.LibaryId;
+            }
+            catch
+            {
+                return -1;
+            }
+        }
         public  void UnloadKBL(int id)
         {
             for (int i = 0; i < sources.Count; i++)

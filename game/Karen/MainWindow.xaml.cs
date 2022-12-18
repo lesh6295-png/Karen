@@ -44,7 +44,7 @@ namespace Karen
                 }
                 else
                 {
-                    Dispatcher.Invoke(() => { this.Show(); textBox.Text = ""; });
+                    Dispatcher.Invoke(() => { this.Show(); });
                 }
             }
         }
@@ -63,15 +63,15 @@ namespace Karen
             }
             Dispatcher.Invoke(() => { select.Visibility = Visibility.Visible; nextBut.Visibility = Visibility.Hidden; textBox.Visibility = Visibility.Hidden; });
             inselect = true;
-            for(int i = 0; i < names.Length; i++)
+            for (int i = 0; i < names.Length; i++)
             {
-                Dispatcher.Invoke(()=> { AddSelectButton(names[i], results[i]); });
+                Dispatcher.Invoke(() => { AddSelectButton(names[i], results[i]); });
             }
             while (inselect)
             {
                 await Task.Delay(70);
             }
-            Dispatcher.Invoke(() => { select.Visibility=Visibility.Hidden; select.Children.Clear(); select.RowDefinitions.Clear(); nextBut.Visibility = Visibility.Visible; textBox.Visibility = Visibility.Visible; });
+            Dispatcher.Invoke(() => { select.Visibility = Visibility.Hidden; select.Children.Clear(); select.RowDefinitions.Clear(); nextBut.Visibility = Visibility.Visible; textBox.Visibility = Visibility.Visible; });
             return selectresult;
         }
         void AddSelectButton(string description, int variantid)
@@ -80,13 +80,13 @@ namespace Karen
             var but = new Button();
             but.ClickMode = ClickMode.Release;
             but.Click += UnlockSelectMode;
-            but.Name = "n"+ variantid.ToString();
+            but.Name = "n" + variantid.ToString();
             var stackpanel = new StackPanel();
-            stackpanel.Name = "pan"+ Extensions.RandomString(min: 1, max: 3);
+            stackpanel.Name = "pan" + Extensions.RandomString(min: 1, max: 3);
             stackpanel.HorizontalAlignment = HorizontalAlignment.Center;
             select.VerticalAlignment = VerticalAlignment.Center;
             but.Content = description;
-            but.Opacity =0.5;
+            but.Opacity = 0.5;
             select.Children.Add(but);
             Grid.SetRow(but, select.RowDefinitions.Count - 1);
         }
@@ -100,20 +100,23 @@ namespace Karen
         public async Task WriteText(string text, bool wait = true, bool clear = true, int delay = 20)
         {
             Next = true;
-            if (clear)
+            Dispatcher.Invoke(async () =>
             {
-                Dispatcher.Invoke(() => { textBox.Text = ""; });
-            }
-            foreach (char sym in text)
-            {
-                Dispatcher.Invoke(() => { textBox.Text += sym; });
+                if (clear)
+                {
+                    textBox.Text = "";
+                }
+                foreach (char sym in text)
+                {
+                    textBox.Text += sym;
 #if TESTING
                 if (Config.AUTO_TEST)
                     continue;
 #endif
-                if (wait)
-                    await Task.Delay(delay);
-            }
+                    if (wait)
+                        await Task.Delay(delay);
+                }
+            }).Wait();
         }
 
         protected override void OnClosing(CancelEventArgs e)
@@ -135,7 +138,7 @@ namespace Karen
         {
             if (e.ChangedButton == MouseButton.Left)
             {
-                 this.DragMove();
+                this.DragMove();
             }
         }
 
@@ -143,30 +146,14 @@ namespace Karen
         {
             Next = false;
         }
-        public void SetBodySprite(byte[] arr)
+        public void SetBodySprite(int kbl,int file)
         {
-            Dispatcher.Invoke(() => { body.Source = LoadImage(arr); });
+            Dispatcher.Invoke(() => { body.Source = Karen.Engine.Cache.GetSprite(kbl,file); });
         }
-        public void SetEmotionSprite(byte[] arr)
+        public void SetEmotionSprite(int kbl, int file)
         {
-            Dispatcher.Invoke(() => { emotion.Source = LoadImage(arr); });
+            Dispatcher.Invoke(() => { emotion.Source = Karen.Engine.Cache.GetSprite(kbl, file); });
         }
-        static BitmapImage LoadImage(byte[] arr)
-        {
-            if (arr == null || arr.Length == 0) return null;
-            var image = new BitmapImage();
-            using (var mem = new MemoryStream(arr))
-            {
-                mem.Position = 0;
-                image.BeginInit();
-                image.CreateOptions = BitmapCreateOptions.PreservePixelFormat;
-                image.CacheOption = BitmapCacheOption.OnLoad;
-                image.UriSource = null;
-                image.StreamSource = mem;
-                image.EndInit();
-            }
-            image.Freeze();
-            return image;
-        }
+        
     }
 }

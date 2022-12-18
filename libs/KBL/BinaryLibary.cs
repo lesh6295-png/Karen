@@ -122,7 +122,7 @@ namespace Karen.KBL
 
         ~BinaryLibary()
         {
-            file.Close();
+            file?.Close();
         }
     }
     /// <summary>

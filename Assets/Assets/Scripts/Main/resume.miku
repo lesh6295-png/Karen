@@ -1,16 +1,25 @@
 ﻿show_window
 DISABLE_HIDE
 locales load_unsafe bin\locales\5.locale
+kbl load_unsafe bin\kbl\body.kbl
+kbl load_unsafe bin\kbl\face.kbl
 torand firstret sempai
 @firstret
+sprite body 1 6
+sprite emotion 2 14
 say resume_1_1
 say resume_1_2
+sprite emotion 2 17
 say resume_1_3
 to end
 @sempai
+sprite body 1 5
+sprite emotion 2 9
 say resume_2_1
+sprite body 1 4
+sprite emotion 2 2
 say resume_2_2
-say resume_2_3
+say resume_2_3 true
 to end
 @end
 ENABLE_HIDE

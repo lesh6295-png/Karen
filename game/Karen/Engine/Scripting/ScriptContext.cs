@@ -130,7 +130,7 @@ namespace Karen.Engine.Scripting
                     ToLabel(ifskipper.to);
                 }
                 if (com[0].StartsWith('@'))
-                {
+                { 
                     //check if this is a label
                     continue;
                 }

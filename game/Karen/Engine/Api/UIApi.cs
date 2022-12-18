@@ -38,8 +38,10 @@ namespace Karen.Engine.Api
             await waitui(null);
 
             string text = par.TryExtractElement<object, string>("unk");
+            bool sc = global::System.Convert.ToBoolean(par.TryExtractElement<object, string>("false", 1));
             MainWindow.Singelton.HideWindow = false;
-            await MainWindow.Singelton.WriteText(SourceManager.Singelton.ExtractTranslate(text));
+            string buf = sc ? " " : "";
+            await MainWindow.Singelton.WriteText(buf+SourceManager.Singelton.ExtractTranslate(text), clear:!sc);
 #if TESTING
             if (Config.AUTO_TEST)
                 return;
@@ -74,16 +76,16 @@ namespace Karen.Engine.Api
             await waitui(null);
 
             string type = par.TryExtractElement<object, string>("body");
-            int lib = par.TryExtractElement<object, int>(1, 1);
-            int file = par.TryExtractElement<object, int>(1, 2);
+            int lib = global::System.Convert.ToInt32(par.TryExtractElement<object, string>("1", 1));
+            int file = global::System.Convert.ToInt32(par.TryExtractElement<object, string>("1", 2));
             //WAIT INIS BEFORE CALL
             switch (type)
             {
                 case "body":
-                    MainWindow.Singelton.SetBodySprite(BinaryManager.Singelton.Extract(lib, file));
+                    MainWindow.Singelton.SetBodySprite(lib, file);
                     break;
                 case "emotion":
-                    MainWindow.Singelton.SetEmotionSprite(BinaryManager.Singelton.Extract(lib, file));
+                    MainWindow.Singelton.SetEmotionSprite(lib, file);
                     break;
             }
         }

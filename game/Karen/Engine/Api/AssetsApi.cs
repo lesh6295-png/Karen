@@ -37,11 +37,20 @@ namespace Karen.Engine.Api
         public static async Task kbl(object?[]? par)
         {
             string type = par.TryExtractElement<object, string>("unk");
+            string path;
             switch (type)
             {
                 case "load":
-                    string path = par.TryExtractElement<object, string>("main.miku", 1);
+                    path = par.TryExtractElement<object, string>("main.miku", 1);
                     BinaryManager.Singelton.LoadKBL(path);
+                    break;
+                case "load_unsafe":
+                    path = par.TryExtractElement<object, string>("main.miku", 1);
+                    int q = BinaryManager.Singelton.LoadKBLUnsafe(path);
+                    if (q == -1)
+                    {
+                        Logger.Write("Locales unsafe load falied!");
+                    }
                     break;
                 case "unload":
                     int id = par.TryExtractElement<object, int>(1, 1);
