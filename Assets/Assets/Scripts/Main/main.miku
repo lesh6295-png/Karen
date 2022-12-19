@@ -1,20 +1,46 @@
-log Main Script Started.
 waitui
 locales load bin\locales\1.locale
+locales load bin\locales\2.locale
+kbl load bin\kbl\face.kbl
+kbl load bin\kbl\body.kbl
 DISABLE_HIDE
-say hi
-hide_window
-to q
-log Start One Millioon Cycle
-var i 0
-@cycle
-math i = i + 1
-if i < 1000000 else stop to q
-to cycle
-@stop
-log Cycle finish!
-@q
-show_window
-say Cycle
+sprite body 1 6
+sprite emotion 2 14
+say hi_hi
+say hi_who_i
+say hi_virt true
+say hi_now_live
+sprite emotion 2 17
+say hi_if_you_age
+select hi_age agree hi_dont_age disagree
+@agree
+~ todo: add point to karen_simpaty
+sprite body 1 5
+sprite emotion 2 8
+say hi_happy
+say hi_good_com
+to kn
+@disagree
+sprite body 1 5
+sprite emotion 2 13
+say hi_but
+sprite body 1 6
+sprite emotion 2 10
+say hi_del
+to kn
+@kn
+sprite body 1 6
+sprite emotion 2 17
+say hi_problem
+say hi_try_to_leave
+select hi_where where hi_and and
+@where
+sprite emotion 2 10
+say hi_its_personal
+to end_hi
+@and
+say hi_find_other
+to end_hi
+@end_hi
 ENABLE_HIDE
 hide_window
