@@ -41,7 +41,7 @@ namespace Karen.Engine
                     CachedObject q = obj[i];
                     if (DateTime.Now - q.lastAppeal > ObjectLiveTime)
                     {
-                        obj[i] = null;
+                        obj.Remove(q);
                     }
                 }
                 GC.Collect();
