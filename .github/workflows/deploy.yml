@@ -1,9 +1,11 @@
 name: Deploy
 on:
     push:
+      paths-ignore: 
+        - "*.yml"
+        - "*.md"
       branches: [ "master" ]
-    pull_request:
-      branches: [ "master" ]
+
 
 jobs:
 
