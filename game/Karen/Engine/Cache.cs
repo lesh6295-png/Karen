@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.IO;
 using System.Windows.Media.Imaging;
@@ -26,6 +27,12 @@ namespace Karen.Engine
             CachedSprite news = new CachedSprite(kblId, fileId);
             obj.Add(news);
             return news.Sprite;
+        }
+        public static void PreloadSprite(int kblId, int fileId)
+        {
+            Thread l = new Thread(() => { CachedSprite spr = new CachedSprite(kblId, fileId); obj.Add(spr); });
+            l.Name = "preload_thread";
+            l.Start();
         }
         static Cache()
         {

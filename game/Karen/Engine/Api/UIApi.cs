@@ -50,6 +50,7 @@ namespace Karen.Engine.Api
             {
                 await Task.Delay(100);
             }
+
         }
         public static async Task print(object?[]? par)
         {
@@ -81,6 +82,9 @@ namespace Karen.Engine.Api
             //WAIT INIS BEFORE CALL
             switch (type)
             {
+                case "preload":
+                    Cache.PreloadSprite(lib, file);
+                    break;
                 case "body":
                     MainWindow.Singelton.SetBodySprite(lib, file);
                     break;

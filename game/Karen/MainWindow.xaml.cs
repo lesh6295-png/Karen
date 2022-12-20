@@ -144,6 +144,7 @@ namespace Karen
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            Dispatcher.Invoke(() => { textBox.Text = ""; });
             Next = false;
         }
         public void SetBodySprite(int kbl,int file)
