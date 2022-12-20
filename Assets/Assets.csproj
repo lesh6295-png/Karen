@@ -63,6 +63,9 @@
     <None Update="Assets\Scripts\Process\cmd.miku">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Assets\Scripts\Process\registry.miku">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Assets\Sprites\Body\body1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
