@@ -28,6 +28,9 @@ namespace Karen
                     case "--process-event-delay":
                         ProcessUpdateDelay = Convert.ToInt32(q[i++]);
                         break;
+                    case "--sep-random":
+                        SEPRandomDelay = Convert.ToInt32(q[i++]);
+                        break;
                     case "--ignore-save":
                         IgnoreSave = true;
                         break;
@@ -51,5 +54,6 @@ namespace Karen
         public static bool Autoload = false;
         public static bool IgnoreSave = false;
         public static int ProcessUpdateDelay = 850;
+        public static int SEPRandomDelay = 5000;
     }
 }

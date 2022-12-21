@@ -1,10 +1,10 @@
+DISABLE_HIDE
 waitui
 locales load bin\locales\1.locale
 locales load bin\locales\2.locale
 kbl load bin\kbl\face.kbl
 kbl load bin\kbl\process.kbl
 kbl load bin\kbl\body.kbl
-DISABLE_HIDE
 sprite body 1 6
 sprite emotion 2 14
 say hi_hi

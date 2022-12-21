@@ -1,4 +1,5 @@
-﻿show_window
+﻿WAIT_HIDE
+show_window
 locales load_unsafe bin\locales\4.locale
 kbl load_unsafe bin\kbl\body.kbl
 kbl load_unsafe bin\kbl\face.kbl

@@ -21,6 +21,44 @@ namespace Karen.Engine
             Singelton = this;
             ProcessStartEvent.Singelton.NewProcess += Process;
             events = MessagePackSerializer.Deserialize<List<SEP>>(File.ReadAllBytes("bin\\sep.bin"));
+            Random();
+        }
+        async void Random()
+        {
+            List<SEP> rnd = new();
+            foreach (var q in events)
+                if (q.type == ScriptingEvent.Random)
+                    rnd.Add(q);
+            
+            int i = 0;
+            while (true)
+            {
+                await Task.Delay(Config.SEPRandomDelay);
+                var q = rnd[i % rnd.Count]; 
+                if (i / 10 == rnd.Count && i % rnd.Count == 0)
+                    i = 0;
+                i++;
+                
+                double pos = double.Parse(q.otherParams, global::System.Globalization.CultureInfo.InvariantCulture);
+                double res = Types.Extensions.r.NextDouble();
+                if (res <= pos)
+                {
+                    byte[] rawcode;
+                    try
+                    {
+                        rawcode = BinaryManager.Singelton.Extract(q.kblId, q.kblPos);
+                    }
+                    catch (Karen.Types.ObjectNotFoundException e)
+                    {
+                        BinaryManager.Singelton.LoadKBL(q.kblPath);
+                        rawcode = BinaryManager.Singelton.Extract(q.kblId, q.kblPos);
+                    }
+
+                    ScriptContext c = m.GetScriptContext(m.AddScriptThread());
+                    c.LoadScriptFromByteArray(rawcode);
+                    c.ExcecuteAsync();
+                }
+            }
         }
         public void Autoload()
         {

@@ -2,3 +2,4 @@
 -libid 2 -libpath bin\kbl\face.kbl -dir Assets\Sprites\Face\
 -libid 3 -config Assets\Scripts\Main\buildconfig -libpath bin\kbl\main.kbl -dir Assets\Scripts\Main\
 -libid 4 -config Assets\Scripts\Process\buildconfig -libpath bin\kbl\process.kbl -dir Assets\Scripts\Process\
+-libid 5 -config Assets\Scripts\Random\buildconfig -libpath bin\kbl\random.kbl -dir Assets\Scripts\Random\

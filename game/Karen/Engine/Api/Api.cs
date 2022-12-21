@@ -12,6 +12,13 @@ namespace Karen.Engine.Api
 {
     public static partial class Api
     {
+        public static async Task WAIT_HIDE(object?[]? par)
+        {
+            while (!((VirtualMachine)((object[])par.Last())[2]).AllowHideWindow)
+            {
+                await Task.Delay(50);
+            }
+        }
         public static async Task DISABLE_HIDE(object?[]? par)
         {
             ((VirtualMachine)((object[])par.Last())[2]).AllowHideWindow = false;
