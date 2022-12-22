@@ -1,6 +1,7 @@
 ﻿bin\kbl\main.kbl 3 4 Process !space!wwww
 bin\kbl\main.kbl 3 5 Process notepad
 bin\kbl\main.kbl 3 6 Startup true
-bin\kbl\process.kbl 4 1 Process cmd
 bin\kbl\process.kbl 4 2 Process regedit
+bin\kbl\process.kbl 4 1 Process cmd
 bin\kbl\random.kbl 5 1 Random 0.005
+bin\kbl\process.kbl 4 3 Process chrome

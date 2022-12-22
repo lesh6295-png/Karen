@@ -60,6 +60,9 @@
     <None Update="Assets\Scripts\Process\buildconfig">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Assets\Scripts\Process\chrome.miku">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Assets\Scripts\Process\cmd.miku">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
