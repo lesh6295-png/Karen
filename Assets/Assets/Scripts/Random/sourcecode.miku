@@ -1,0 +1,15 @@
+﻿WAIT_HIDE
+show_window
+DISABLE_HIDE
+locales load_unsafe bin\locales\6.locale
+kbl load_unsafe bin\kbl\body.kbl
+kbl load_unsafe bin\kbl\face.kbl
+sprite body 1 5
+sprite emotion 2 11
+sprite preload 2 9
+say source_code_1
+say source_code_2
+sprite emotion 2 9
+say source_code_3
+ENABLE_HIDE
+hide_window

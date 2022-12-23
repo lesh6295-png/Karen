@@ -69,7 +69,7 @@ namespace Karen.Engine.Api
             b = ((VariableContext)(((object[])par.Last())[0])).Get(source2, false) ?? ((VirtualMachine)(((object[])par.Last())[2])).globalHeap.Get(source2, false);
             if (b == null)
             {
-                b = new Variable(Extensions.RandomString(), Convert.ToInt32(source1));
+                b = new Variable(Extensions.RandomString(), Convert.ToInt32(source2));
             }
 
             switch (operand)

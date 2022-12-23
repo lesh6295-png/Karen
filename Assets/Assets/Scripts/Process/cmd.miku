@@ -1,0 +1,16 @@
+﻿WAIT_HIDE
+show_window
+locales load_unsafe bin\locales\4.locale
+kbl load_unsafe bin\kbl\body.kbl
+kbl load_unsafe bin\kbl\face.kbl
+sprite body 1 4
+sprite emotion 2 4
+say cmd_1
+sprite body 1 6
+sprite emotion 2 14
+say cmd_2
+say cmd_3
+sprite body 1 5
+sprite emotion 2 8
+say cmd_4
+hide_window

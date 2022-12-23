@@ -1,0 +1,5 @@
+﻿show_window
+DISABLE_HIDE
+say NewProcessEvent!
+ENABLE_HIDE
+hide_window

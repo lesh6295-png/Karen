@@ -25,6 +25,21 @@ namespace Karen.Locale
             loaded.Add(news.sourceid, path);
             return news.sourceid;
         }
+        public int LoadSourceUnsafe(string path, bool atl = true)
+        {
+            try
+            {
+                KeySource news = new KeySource(path);
+                sources.Add(news);
+                if (atl)
+                    loaded.Add(news.sourceid, path);
+                return news.sourceid;
+            }
+            catch
+            {
+                return -1;
+            }
+        }
         public  void UnloadSource(int id)
         {
             for(int i = 0; i < sources.Count; i++)

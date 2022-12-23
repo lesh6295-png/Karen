@@ -12,6 +12,21 @@ namespace Karen.Engine.Api
 {
     public static partial class Api
     {
+        public static async Task WAIT_HIDE(object?[]? par)
+        {
+            while (!((VirtualMachine)((object[])par.Last())[2]).AllowHideWindow)
+            {
+                await Task.Delay(50);
+            }
+        }
+        public static async Task DISABLE_HIDE(object?[]? par)
+        {
+            ((VirtualMachine)((object[])par.Last())[2]).AllowHideWindow = false;
+        }
+        public static async Task ENABLE_HIDE(object?[]? par)
+        {
+            ((VirtualMachine)((object[])par.Last())[2]).AllowHideWindow = true;
+        }
         public static async Task newsc(object?[]? par)
         {
             ScriptContext nsc = new ScriptContext((VirtualMachine)(((object[])par.Last())[2]));
@@ -27,10 +42,17 @@ namespace Karen.Engine.Api
         {
             ((ScriptContext)(((object[])par.Last())[3])).ToLabel((string)par[0]);
         }
+        public static async Task torand(object?[]? par)
+        {
+            int ran = Types.Extensions.r.Next(1,par.Length) - 1;
+            //Logger.Write($"torand command: ran:{ran} par_length:{par.Length} par_length_f:{par.Length - 1}");    //maybe i add testing api for this
+            string endpoint = (string)par[ran];
+            ((ScriptContext)(((object[])par.Last())[3])).ToLabel(endpoint);
+        }
         public static async Task wait(object?[]? par)
         {
 #if TESTING
-            if (App.AUTO_TEST)
+            if (Config.AUTO_TEST)
                 return;
 #endif
             int time = Convert.ToInt32(par[0]);
@@ -39,6 +61,7 @@ namespace Karen.Engine.Api
 
         public static async Task quit(object?[]? par)
         {
+            ((ScriptContext)(((object[])par.Last())[3])).activeline++; //increment activeline, its need because after load context starts from 'quit' command, and process die
             int code = par.TryExtractElement<object, int>(0, 0);
             Logger.Write($"QUIT: code: {code}");
             Environment.Exit(code);

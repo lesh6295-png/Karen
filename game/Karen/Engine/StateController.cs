@@ -24,13 +24,23 @@ namespace Karen.Engine
 #if TESTING
             return false;
 #endif
+            if (Config.IgnoreSave)
+                return false;
             AutoSerializer();
+            AppDomain.CurrentDomain.ProcessExit += SerializeBeforeQuit;
             managers.Add(Karen.Locale.SourceManager.Singelton);
             managers.Add(Karen.KBL.BinaryManager.Singelton);
             managers.Add(EventManager.Singelton);
             SetFolderManagers();
             return saveex();
         }
+
+        private static void SerializeBeforeQuit(object sender, EventArgs e)
+        {
+            SerialiazeVM();
+            SerialazeManagers();
+        }
+
         public static void LoadSave()
         {
             byte[] vm = File.ReadAllBytes(Karen.Registry.RegController.GetKarenFolderPath() + "vm");
@@ -44,6 +54,8 @@ namespace Karen.Engine
 #if TESTING
             return;
 #endif
+            if (Config.IgnoreSave)
+                return;
             managers.ForEach((x) => { x.Save(); });
         }
         public static void DeserialazeManagers()
@@ -59,10 +71,12 @@ namespace Karen.Engine
 #if TESTING
             return;
 #endif
+            if (Config.IgnoreSave || (EngineStarter.VM==null))
+                return;
             byte[] m = MessagePackSerializer.Serialize<VirtualMachine>(EngineStarter.VM, options: new MessagePackSerializerOptions(MessagePack.Resolvers.StandardResolverAllowPrivate.Instance));
             File.WriteAllBytes(Karen.Registry.RegController.GetKarenFolderPath() + "vm", m);
         }
-        public static async void AutoSerializer(int delay = 10 * 60 * 1000)
+        public static async void AutoSerializer(int delay = 60 * 1000)
         {
             while (true)
             {

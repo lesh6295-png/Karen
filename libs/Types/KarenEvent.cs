@@ -29,7 +29,7 @@ namespace Karen.Types
         }
         public void Invoke()
         {
-            Event.Invoke();
+            Event?.Invoke();
         }
     }
 }

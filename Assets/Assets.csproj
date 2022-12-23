@@ -18,6 +18,10 @@
     <Folder Include="Assets\Sprites\Body\" />
     <Folder Include="Assets\Sprites\Face\" />
   </ItemGroup>
+		
+  <ItemGroup>
+    <PackageReference Include="MessagePack" Version="2.4.59" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\libs\KarenLocale\KarenLocale.csproj" />
@@ -32,13 +36,43 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Assets\Scripts\Main\async.miku">
+    <None Update="Assets\ScriptingEventParams">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Assets\Scripts\Main\buildconfig">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Assets\Scripts\Main\main.miku">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Assets\Scripts\Main\newprocess.miku">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Assets\Scripts\Main\notepad1.miku">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Assets\Scripts\Main\randomevent.miku">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Assets\Scripts\Main\resume.miku">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Assets\Scripts\Process\buildconfig">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Assets\Scripts\Process\chrome.miku">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Assets\Scripts\Process\cmd.miku">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Assets\Scripts\Process\registry.miku">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Assets\Scripts\Random\buildconfig">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Assets\Scripts\Random\sourcecode.miku">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Assets\Sprites\Body\body1.png">

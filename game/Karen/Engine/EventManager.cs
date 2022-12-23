@@ -26,6 +26,11 @@ namespace Karen.Engine
         {
             events.Add(name, new KarenEvent());
         }
+        public void TryAddEvent(string name)
+        {
+            if (events.ContainsKey(name)) return;
+            events.Add(name, new KarenEvent());
+        }
         public void CallEvent(string name)
         {
             events.GetValueOrDefault(name).Invoke();
@@ -43,7 +48,7 @@ namespace Karen.Engine
         {
             byte[] listraw = File.ReadAllBytes(targetfolder + "events");
             var list = MessagePackSerializer.Deserialize<List<string>>(listraw);
-            list.ForEach((x) => { events.Add(x, new()); });
+            list.ForEach((x) => { TryAddEvent(x); });
         }
 
         public void Save()

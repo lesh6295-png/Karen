@@ -10,7 +10,7 @@ namespace Karen.Locale
     public static class Localization
     {
         static string targetCulture = "";
-        static string defaultCulture = "en";
+        static string defaultCulture = "en-US";
         public static string Culture
         {
             get

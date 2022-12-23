@@ -20,14 +20,29 @@ namespace Karen.KBL
         {
             Singelton = new();
         }
-        public  int LoadKBL(string path,bool atl=true)
+        public int LoadKBL(string path,bool atl=true)
         {
-
             BinaryLibary news = new BinaryLibary(path);
             if(atl)
             kbls.Add(news.LibaryId, path);
             sources.Add(news);
             return news.LibaryId;
+        }
+        public int LoadKBLUnsafe(string path, bool atl = true)
+        {
+            //TODO: REWORK THIS AND SourceManager TO CHECK IF NEED FILE ALREADY UPLOAD
+            try
+            {
+                BinaryLibary news = new BinaryLibary(path);
+                if (atl)
+                    kbls.Add(news.LibaryId, path);
+                sources.Add(news);
+                return news.LibaryId;
+            }
+            catch
+            {
+                return -1;
+            }
         }
         public  void UnloadKBL(int id)
         {
@@ -51,7 +66,22 @@ namespace Karen.KBL
             }
             throw new Karen.Types.ObjectNotFoundException("Falled to extract bytes from KBL.");
         }
-
+        /// <summary>
+        /// Find kbl with id, return false if no one found
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public bool Contains(int id)
+        {
+            foreach(var q in sources)
+            {
+                if (q.LibaryId == id)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
         public void Load()
         {
             byte[] raw = File.ReadAllBytes(targetfolder + "kbl");

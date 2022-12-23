@@ -18,15 +18,18 @@ namespace Karen.Assets
             Directory.CreateDirectory("bin\\kbl");
             Directory.CreateDirectory("bin\\locales");
             Console.WriteLine(Environment.CurrentDirectory);
+            //build kbls
             string[] libs = File.ReadAllLines("liblist.txt");
             foreach(string s in libs)
             {
                 Console.WriteLine(s);
                 new Karen.KBL.LibaryBuilder(s.Split(" "));
             }
-
+            //build locales
             ExcelLocale q = new("locales.xlsx");
             q.ParceLocales();
+            //build SEP
+            SEPBuilder.Process();
             //copy bin dir
             Karen.Types.Extensions.CopyFilesRecursively(new DirectoryInfo("bin"), new DirectoryInfo($"../../../../bin/Karen/{args[0]}/net{netver}-windows"));
 

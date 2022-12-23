@@ -9,6 +9,16 @@ namespace Karen.Engine.Api
 {
     public static partial class Api
     {
+        public static async Task show_window(object?[]? par)
+        {
+            await waitui(null);
+            MainWindow.Singelton.HideWindow = false;
+        }
+        public static async Task hide_window(object?[]? par)
+        {
+            await waitui(null);
+            MainWindow.Singelton.HideWindow = true;
+        }
         public static async Task waitui(object?[]? par)
         {
             //wait for mainwindow add himself in singelton filed
@@ -28,16 +38,19 @@ namespace Karen.Engine.Api
             await waitui(null);
 
             string text = par.TryExtractElement<object, string>("unk");
+            bool sc = global::System.Convert.ToBoolean(par.TryExtractElement<object, string>("false", 1));
             MainWindow.Singelton.HideWindow = false;
-            await MainWindow.Singelton.WriteText(SourceManager.Singelton.ExtractTranslate(text));
+            string buf = sc ? " " : "";
+            await MainWindow.Singelton.WriteText(buf+SourceManager.Singelton.ExtractTranslate(text), clear:!sc);
 #if TESTING
-            if (App.AUTO_TEST)
+            if (Config.AUTO_TEST)
                 return;
 #endif
             while (MainWindow.Singelton.Next)
             {
                 await Task.Delay(100);
             }
+
         }
         public static async Task print(object?[]? par)
         {
@@ -50,7 +63,7 @@ namespace Karen.Engine.Api
             MainWindow.Singelton.HideWindow = false;
             await MainWindow.Singelton.WriteText(text);
 #if TESTING
-            if (App.AUTO_TEST)
+            if (Config.AUTO_TEST)
                 return;
 #endif
             while (MainWindow.Singelton.Next)
@@ -64,16 +77,19 @@ namespace Karen.Engine.Api
             await waitui(null);
 
             string type = par.TryExtractElement<object, string>("body");
-            int lib = par.TryExtractElement<object, int>(1, 1);
-            int file = par.TryExtractElement<object, int>(1, 2);
+            int lib = global::System.Convert.ToInt32(par.TryExtractElement<object, string>("1", 1));
+            int file = global::System.Convert.ToInt32(par.TryExtractElement<object, string>("1", 2));
             //WAIT INIS BEFORE CALL
             switch (type)
             {
+                case "preload":
+                    Cache.PreloadSprite(lib, file);
+                    break;
                 case "body":
-                    MainWindow.Singelton.SetBodySprite(BinaryManager.Singelton.Extract(lib, file));
+                    MainWindow.Singelton.SetBodySprite(lib, file);
                     break;
                 case "emotion":
-                    MainWindow.Singelton.SetEmotionSprite(BinaryManager.Singelton.Extract(lib, file));
+                    MainWindow.Singelton.SetEmotionSprite(lib, file);
                     break;
             }
         }
@@ -97,7 +113,7 @@ namespace Karen.Engine.Api
             int result = 0;
             //TODO: Update select behaviour with AUTO_TEST
 #if TESTING
-            if (App.AUTO_TEST)
+            if (Config.AUTO_TEST)
                 result=1;
             else
 #endif

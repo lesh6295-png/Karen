@@ -8,7 +8,7 @@ namespace Karen.Types
 {
     public static class Extensions
     {
-        static Random r = new Random();
+        public static Random r = new Random();
         public static string RandomString(int min=5, int max = 14)
         {
             string lib = "0987654321qwertyuioplkjhgfdsazxcvbnmQWERTYUIOPLKJHGFDAZXCVBNM";

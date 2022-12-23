@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.Threading;
 using Karen.Engine.Scripting;
 using Karen.KBL;
+using Karen.Engine.System;
 namespace Karen.Engine
 {
     public static class EngineStarter
@@ -20,9 +21,9 @@ namespace Karen.Engine
             {
                 Environment.Exit(-2);
             }
-
+            new ProcessStartEvent();
             AppDomain.CurrentDomain.UnhandledException += Logger.ExceptionLog;
-            if(App.ChangeDir)
+            if(Config.ChangeDir)
             Environment.CurrentDirectory = Karen.Types.Extensions.GetExePath();
             Logger.Write($"Active working directory: {Environment.CurrentDirectory}");
 
@@ -40,6 +41,7 @@ namespace Karen.Engine
             else
             {
                 StateController.LoadSave();
+                SEManager.Singelton.Autoload();
             }
             while (true)
             {

@@ -18,13 +18,14 @@ namespace Karen.Engine.Scripting
         Type api;
         
         public bool isLoad = false;
-        public Karen.Types.Guid Guid { get; private set; }
+        public Karen.Types.Guid Guid ;
         [IgnoreMember]
         VirtualMachine host;
         public VariableContext localContext;
         public int activeline = 0;
         public List<Label> labels = new List<Label>();
-
+        public bool KillAfterEnd  = true;
+        public bool Freeze  = false;
         public (string from, string to) ifskipper=new();
         public ScriptContext(VirtualMachine host)
         {
@@ -37,8 +38,9 @@ namespace Karen.Engine.Scripting
         }
         public ScriptContext()
         {
-            host = EngineStarter.VM;
             api = Type.GetType("Karen.Engine.Api.Api", true);
+            Task.Factory.StartNew(() => { Task.Delay(100).Wait(); host = EngineStarter.VM;  });
+            
         }
         public void SetIfSkip(string from, string to)
         {
@@ -105,24 +107,6 @@ namespace Karen.Engine.Scripting
             codelines = final.ToArray();
             isLoad = true;
         }
-        [Obsolete("Use async version")]
-        public void Excecute()
-        {
-            if (!isLoad)
-                return;
-           
-            for(int i = 0; i < codelines.Length; i++)
-            {
-                string[] com = codelines[i].Split(' ', StringSplitOptions.RemoveEmptyEntries);
-                MethodInfo apiendpoint = api.GetMethod(com[0]);
-                if (apiendpoint == null)
-                {
-                    throw new NullReferenceException("Method not found.");
-                }
-                object[] a = com.Skip(1).Cast<object>().ToArray();
-                ((Task)apiendpoint.Invoke(null, new object[] { a })).Wait();
-            }
-        }
         public async void ExcecuteAsync()
         {
             if(!isLoad)
@@ -130,6 +114,14 @@ namespace Karen.Engine.Scripting
             PreExcecute();
             for (; activeline < codelines.Length; activeline++)
             {
+                if (Freeze)
+                {
+                    activeline--;
+                    continue;
+                }
+                if (host == null)
+                    host = EngineStarter.VM;
+
                 if (codelines[activeline] == "")
                     continue;
                 string[] com = codelines[activeline].Split(' ', StringSplitOptions.RemoveEmptyEntries);
@@ -138,7 +130,7 @@ namespace Karen.Engine.Scripting
                     ToLabel(ifskipper.to);
                 }
                 if (com[0].StartsWith('@'))
-                {
+                { 
                     //check if this is a label
                     continue;
                 }
@@ -151,10 +143,17 @@ namespace Karen.Engine.Scripting
                 a.Add((object)(new object[] {localContext, Guid, host, this }));
                 await (Task)apiendpoint.Invoke(null, new object[] { a.ToArray() }) ;
             }
+            if (KillAfterEnd)
+                Kill();
+        }
+        void Kill()
+        {
+            (host??EngineStarter.VM).DeleteScriptThread(Guid);
         }
         List<object> SVP(List<object> input)
         {
             List<object> res = new ();
+            res.Capacity = input.Count;
             foreach(var q in input)
             {
                 string s = (string)q;

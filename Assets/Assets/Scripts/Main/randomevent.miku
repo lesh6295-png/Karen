@@ -1,0 +1,6 @@
+﻿WAIT_HIDE
+show_window
+DISABLE_HIDE
+say RandomEvent!
+ENABLE_HIDE
+hide_window

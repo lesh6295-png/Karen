@@ -25,8 +25,9 @@ namespace GuiInstaller
     {
         public MainWindow()
         {
-            config.Text = App.branchName;
             InitializeComponent();
+
+            release.Text = App.branchName;
         }
 
         private void installbutton_Click(object sender, RoutedEventArgs e)

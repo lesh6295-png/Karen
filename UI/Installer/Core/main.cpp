@@ -70,7 +70,7 @@ std::wstring get_release_tag() {
 	return strStream.str();
 }
 int APIENTRY wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLine, int nCmdShow)
-{
+{ 
 	fs::path p = fs::current_path();
 	fs::create_directory(p / "bin");
 	strg pa = lpCmdLine;

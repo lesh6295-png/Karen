@@ -22,7 +22,7 @@ namespace Karen.Tests
             Assert.Fail("Testing configuration required!");
             return;
 #endif
-
+            //if you can read this, то знайте: я в рот ебал эти блядские тесты, ломающиюся после каждого нового коммита, такими темпами я их удалю нахуй
             TestContext.Progress.WriteLine($"Start AUTO_TEST\nWorking path: {Environment.CurrentDirectory}");
             string exepath = $"\\..\\..\\..\\..\\..\\bin\\Karen\\Testing\\{Environment.CurrentDirectory.Split("\\").Last()}";
             Environment.CurrentDirectory += exepath;
@@ -30,7 +30,7 @@ namespace Karen.Tests
             File.Delete("lasterror.log");
             Process karenGame = new Process();
             karenGame.StartInfo.FileName = "Karen.exe";
-            karenGame.StartInfo.Arguments = "--testing --disable-change-to-binarys-folder";
+            karenGame.StartInfo.Arguments = "--testing --ignore-save --disable-change-to-binarys-folder";
             
 
             karenGame.Start();
