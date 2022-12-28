@@ -34,6 +34,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Karen", "game\Karen\Karen.c
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Karen.Tests", "game\Karen.Tests\Karen.Tests.csproj", "{8F8A411F-04BF-49D0-81ED-0A20454C9291}"
+	ProjectSection(ProjectDependencies) = postProject
+		{0F1F0F8A-FE04-4FC6-A765-366FE4C8FB10} = {0F1F0F8A-FE04-4FC6-A765-366FE4C8FB10}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Workflows", "Workflows", "{E5E50A5F-F2F1-4E5A-A4C8-2A2D4C6510F7}"
 	ProjectSection(SolutionItems) = preProject
