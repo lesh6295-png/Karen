@@ -15,6 +15,7 @@ namespace Karen.CO
         }
         public static string get36sys(int value)
         {
+            if (value == 0) return "0";
             int nc = Convert.ToInt32(Math.Round(Math.Log(value + 1, 36), MidpointRounding.ToPositiveInfinity));
             int nd = value, i = 0;
             char[] r = new char[nc];

@@ -35,13 +35,24 @@ namespace Karen.Tests
 
             karenGame.Start();
             TestContext.Progress.WriteLine($"Process started with {karenGame.Id} id.");
-            while (!karenGame.WaitForExit(750))
+
+            bool tr = true;
+            async void w20m()
+            {
+                await Task.Delay(20 * 60 * 1000);
+                tr = false;
+            }
+            w20m();
+            while (!karenGame.WaitForExit(750) && tr)
             {
                 karenGame.Refresh();
                 Task.Delay(50).Wait();
             }
             karenGame.Refresh();
-            TestContext.Progress.WriteLine($"Stop code: {karenGame.ExitCode}");
+            if (tr == true)
+                TestContext.Progress.WriteLine($"Stop code: {karenGame.ExitCode}");
+            else
+                TestContext.Progress.WriteLine("Process stopped by time");
 #if TESTING
             TestContext.Progress.WriteLine(Karen.Registry.RegController.GetExcRes());
 #endif
